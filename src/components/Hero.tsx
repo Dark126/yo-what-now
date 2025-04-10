@@ -34,7 +34,7 @@ const Hero = () => {
           <div className="relative animate-zoom-in">
             <div className="aspect-square rounded-full bg-leaf-100 absolute top-0 right-0 w-4/5 -z-10"></div>
             <div className="aspect-square rounded-full bg-spice-100 absolute bottom-0 left-0 w-4/5 -z-10"></div>
-            <img alt="Assorted Spices" className="rounded-2xl shadow-xl object-cover aspect-square" src="/lovable-uploads/1eb57cb0-4e03-4d54-931e-4a4caedab319.png" />
+            <img alt="Assorted Spices" className="rounded-2xl shadow-xl object-cover aspect-square" src="/lovable-uploads/cee2d2e9-05ae-4469-879b-51f077498a2e.png" />
           </div>
         </div>
       </div>
