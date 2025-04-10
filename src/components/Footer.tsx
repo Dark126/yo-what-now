@@ -1,12 +1,8 @@
-
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, Wheat } from "lucide-react";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="bg-spice-800 text-white pt-16 pb-8">
+  return <footer className="bg-spice-800 text-white pt-16 pb-8">
       <div className="spice-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
@@ -79,7 +75,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="text-spice-200 flex-shrink-0 mt-1" size={18} />
-                <span className="text-spice-200">LA UNJHA, 123 Spice Farm Road, Unjha District, Gujarat, India 384170</span>
+                <span className="text-spice-200">42 - Tirupati Complex, Unjha-384170 Gujarat, India 384170</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="text-spice-200 flex-shrink-0" size={18} />
@@ -99,8 +95,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
