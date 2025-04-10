@@ -11,9 +11,9 @@ const Products = () => {
     },
     {
       id: 2,
-      name: "Coriander Seeds",
-      description: "Hand-picked coriander seeds with a citrusy, nutty flavor for curries and marinades.",
-      image: "https://images.unsplash.com/photo-1615887574135-b85769ee1086?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      name: "Cinnamon",
+      description: "Aromatic cinnamon sticks with sweet, woody flavor for desserts, beverages, and savory dishes.",
+      image: "https://images.unsplash.com/photo-1573414404860-a601bc5b7b76?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
     },
     {
       id: 3,
