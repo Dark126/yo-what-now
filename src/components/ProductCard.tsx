@@ -26,7 +26,7 @@ const ProductCard = ({
     once: true
   }} className="bg-white rounded-xl overflow-hidden shadow-md card-hover" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
       <div className="h-60 overflow-hidden">
-        <img src={image} alt={name} className="object-contain" />
+        <img src={image} alt={name} className="object-cover" />
       </div>
       <div className="p-6">
         <h3 className="text-xl font-bold text-spice-700 mb-2">{name}</h3>
