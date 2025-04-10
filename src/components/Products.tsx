@@ -7,7 +7,7 @@ const Products = () => {
       id: 1,
       name: "Cardamom",
       description: "Premium green cardamom pods with intense aroma, perfect for desserts and beverages.",
-      image: "https://images.unsplash.com/photo-1590773012743-afc91d3c702f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "/lovable-uploads/9d2761be-f8ab-4f6b-8008-c85542e37153.png"
     },
     {
       id: 2,
