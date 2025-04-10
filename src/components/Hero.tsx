@@ -1,19 +1,14 @@
-
 import { ArrowDown } from "lucide-react";
-
 const Hero = () => {
   const handleScroll = () => {
     const productsSection = document.getElementById("products");
     if (productsSection) {
-      productsSection.scrollIntoView({ behavior: "smooth" });
+      productsSection.scrollIntoView({
+        behavior: "smooth"
+      });
     }
   };
-
-  return (
-    <section
-      id="home"
-      className="min-h-screen flex items-center hero-gradient pt-16"
-    >
+  return <section id="home" className="min-h-screen flex items-center hero-gradient pt-16">
       <div className="spice-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-slide-in">
@@ -27,10 +22,7 @@ const Hero = () => {
               essence and aroma in every grain.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <button
-                onClick={handleScroll}
-                className="button-primary flex items-center gap-2"
-              >
+              <button onClick={handleScroll} className="button-primary flex items-center gap-2">
                 Explore Products
                 <ArrowDown size={16} />
               </button>
@@ -42,16 +34,10 @@ const Hero = () => {
           <div className="relative animate-zoom-in">
             <div className="aspect-square rounded-full bg-leaf-100 absolute top-0 right-0 w-4/5 -z-10"></div>
             <div className="aspect-square rounded-full bg-spice-100 absolute bottom-0 left-0 w-4/5 -z-10"></div>
-            <img
-              src="https://images.unsplash.com/photo-1557800636-894a64c1696f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-              alt="Assorted Spices"
-              className="rounded-2xl shadow-xl object-cover aspect-square"
-            />
+            <img alt="Assorted Spices" className="rounded-2xl shadow-xl object-cover aspect-square" src="/lovable-uploads/cee2d2e9-05ae-4469-879b-51f077498a2e.png" />
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
