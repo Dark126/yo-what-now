@@ -13,7 +13,7 @@ const Footer = () => {
             <Link to="/" className="flex items-center gap-2 mb-4">
               <Wheat className="text-spice-200" size={24} />
               <span className="font-serif font-bold text-2xl text-white">
-                Spice<span className="text-leaf-300">Harvest</span>
+                LA <span className="text-leaf-300">UNJHA</span>
               </span>
             </Link>
             <p className="text-spice-200 mb-4">
@@ -57,13 +57,13 @@ const Footer = () => {
           </div>
           
           <div>
-            <h3 className="text-xl font-serif font-bold mb-4">Products</h3>
+            <h3 className="text-xl font-serif font-bold mb-4">LA UNJHA Products</h3>
             <ul className="space-y-2">
               <li>
                 <a href="#products" className="text-spice-200 hover:text-white transition-colors">Cardamom</a>
               </li>
               <li>
-                <a href="#products" className="text-spice-200 hover:text-white transition-colors">Coriander Seeds</a>
+                <a href="#products" className="text-spice-200 hover:text-white transition-colors">Cinnamon</a>
               </li>
               <li>
                 <a href="#products" className="text-spice-200 hover:text-white transition-colors">Cumin Seeds</a>
@@ -79,15 +79,15 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="text-spice-200 flex-shrink-0 mt-1" size={18} />
-                <span className="text-spice-200">123 Spice Farm Road, Spice District, Spiceville, SP 12345</span>
+                <span className="text-spice-200">LA UNJHA, 123 Spice Farm Road, Unjha District, Gujarat, India 384170</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="text-spice-200 flex-shrink-0" size={18} />
-                <span className="text-spice-200">info@spiceharvest.com</span>
+                <span className="text-spice-200">info@launjha.com</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="text-spice-200 flex-shrink-0" size={18} />
-                <span className="text-spice-200">+1 (123) 456-7890</span>
+                <span className="text-spice-200">+91 (123) 456-7890</span>
               </li>
             </ul>
           </div>
@@ -95,7 +95,7 @@ const Footer = () => {
         
         <div className="border-t border-spice-700 pt-6 mt-6 text-center">
           <p className="text-spice-300">
-            &copy; {currentYear} SpiceHarvest. All rights reserved.
+            &copy; {currentYear} LA UNJHA. All rights reserved.
           </p>
         </div>
       </div>

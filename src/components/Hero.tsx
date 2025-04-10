@@ -1,3 +1,4 @@
+
 import { ArrowDown } from "lucide-react";
 const Hero = () => {
   const handleScroll = () => {
@@ -13,11 +14,11 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="animate-slide-in">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-spice-700 leading-tight">
-              Premium Quality <br />
-              <span className="text-leaf-600">Farm Fresh Spices</span>
+              LA UNJHA <br />
+              <span className="text-leaf-600">Premium Farm Fresh Spices</span>
             </h1>
             <p className="mt-6 text-lg text-spice-600 max-w-lg">
-              Experience the authentic flavors of nature with our carefully sourced
+              Experience the authentic flavors of nature with LA UNJHA's carefully sourced
               and processed spices. From farm to your kitchen, we preserve the
               essence and aroma in every grain.
             </p>

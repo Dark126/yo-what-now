@@ -32,9 +32,9 @@ const Products = () => {
   return (
     <section id="products" className="section bg-leaf-50">
       <div className="spice-container">
-        <h2 className="section-title">Our Premium Spices</h2>
+        <h2 className="section-title">LA UNJHA Premium Spices</h2>
         <p className="text-lg text-gray-600 max-w-3xl mb-12">
-          Each of our spices is carefully sourced from sustainable farms and processed to preserve their natural flavors and aromatic properties.
+          Each of LA UNJHA's spices is carefully sourced from sustainable farms and processed to preserve their natural flavors and aromatic properties.
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
