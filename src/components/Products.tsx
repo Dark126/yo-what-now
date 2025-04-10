@@ -13,7 +13,7 @@ const Products = () => {
       id: 2,
       name: "Cinnamon",
       description: "Aromatic cinnamon sticks with sweet, woody flavor for desserts, beverages, and savory dishes.",
-      image: "https://images.unsplash.com/photo-1573414404860-a601bc5b7b76?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "/lovable-uploads/b0ca0c4e-10d9-4921-af00-53fde05d1cb4.png"
     },
     {
       id: 3,
