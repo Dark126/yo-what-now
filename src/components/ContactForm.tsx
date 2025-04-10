@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Mail, Phone, Send } from "lucide-react";
-
 const ContactForm = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,9 +18,7 @@ const ContactForm = () => {
     email: "",
     message: ""
   });
-
   const spiceOptions = ["Cardamom", "Coriander Seeds", "Cumin Seeds", "Fennel Seeds"];
-
   const validate = () => {
     let isValid = true;
     const newErrors = {
@@ -28,12 +26,10 @@ const ContactForm = () => {
       email: "",
       message: ""
     };
-
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
       isValid = false;
     }
-
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
       isValid = false;
@@ -41,47 +37,44 @@ const ContactForm = () => {
       newErrors.email = "Email is invalid";
       isValid = false;
     }
-
     if (!formData.message.trim()) {
       newErrors.message = "Message is required";
       isValid = false;
     }
-
     setErrors(newErrors);
     return isValid;
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+    const {
+      name,
+      value
+    } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
-
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
+    const {
+      value,
+      checked
+    } = e.target;
     setFormData(prev => ({
       ...prev,
-      spiceTypes: checked 
-        ? [...prev.spiceTypes, value]
-        : prev.spiceTypes.filter(type => type !== value)
+      spiceTypes: checked ? [...prev.spiceTypes, value] : prev.spiceTypes.filter(type => type !== value)
     }));
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (validate()) {
       // In a real application, you would send this data to your server or email service
       console.log("Form submitted:", formData);
-      
       toast({
         title: "Message Sent!",
         description: "We'll get back to you as soon as possible.",
-        duration: 5000,
+        duration: 5000
       });
-      
+
       // Reset form
       setFormData({
         name: "",
@@ -93,9 +86,7 @@ const ContactForm = () => {
       });
     }
   };
-
-  return (
-    <section id="contact" className="section bg-spice-50">
+  return <section id="contact" className="section bg-spice-50">
       <div className="spice-container">
         <h2 className="section-title">Get in Touch</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -111,7 +102,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-spice-700">Email</h3>
-                  <p className="text-gray-600">info@spiceharvest.com</p>
+                  <p className="text-gray-600">Launjha@gmail.com</p>
                 </div>
               </div>
               
@@ -121,7 +112,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-spice-700">Phone</h3>
-                  <p className="text-gray-600">+1 (123) 456-7890</p>
+                  <p className="text-gray-600 text-base">+91 98250 37405</p>
                 </div>
               </div>
             </div>
@@ -133,15 +124,7 @@ const ContactForm = () => {
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                   Your Name
                 </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={`input-field ${errors.name ? 'border-red-500' : ''}`}
-                  placeholder="John Doe"
-                />
+                <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} className={`input-field ${errors.name ? 'border-red-500' : ''}`} placeholder="John Doe" />
                 {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
               </div>
               
@@ -149,15 +132,7 @@ const ContactForm = () => {
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                   Email Address
                 </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`input-field ${errors.email ? 'border-red-500' : ''}`}
-                  placeholder="john@example.com"
-                />
+                <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} className={`input-field ${errors.email ? 'border-red-500' : ''}`} placeholder="john@example.com" />
                 {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
               </div>
               
@@ -165,28 +140,14 @@ const ContactForm = () => {
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
                   Phone Number (Optional)
                 </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="input-field"
-                  placeholder="+1 (123) 456-7890"
-                />
+                <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} className="input-field" placeholder="+1 (123) 456-7890" />
               </div>
               
               <div>
                 <label htmlFor="packagingType" className="block text-sm font-medium text-gray-700 mb-1">
                   Preferred Packaging
                 </label>
-                <select
-                  id="packagingType"
-                  name="packagingType"
-                  value={formData.packagingType}
-                  onChange={handleChange}
-                  className="input-field"
-                >
+                <select id="packagingType" name="packagingType" value={formData.packagingType} onChange={handleChange} className="input-field">
                   <option value="">Select packaging type</option>
                   <option value="1kg">1 Kg Plastic Packaging</option>
                   <option value="50kg">50 Kg Jute Bags</option>
@@ -199,22 +160,12 @@ const ContactForm = () => {
                   Interested Spices
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  {spiceOptions.map(spice => (
-                    <div key={spice} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        id={spice}
-                        name="spiceTypes"
-                        value={spice}
-                        checked={formData.spiceTypes.includes(spice)}
-                        onChange={handleCheckboxChange}
-                        className="w-4 h-4 text-spice-500 focus:ring-spice-400 rounded"
-                      />
+                  {spiceOptions.map(spice => <div key={spice} className="flex items-center">
+                      <input type="checkbox" id={spice} name="spiceTypes" value={spice} checked={formData.spiceTypes.includes(spice)} onChange={handleCheckboxChange} className="w-4 h-4 text-spice-500 focus:ring-spice-400 rounded" />
                       <label htmlFor={spice} className="ml-2 text-gray-700">
                         {spice}
                       </label>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
               
@@ -222,22 +173,11 @@ const ContactForm = () => {
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                   Your Message
                 </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className={`input-field resize-none ${errors.message ? 'border-red-500' : ''}`}
-                  placeholder="Tell us about your requirements..."
-                ></textarea>
+                <textarea id="message" name="message" rows={4} value={formData.message} onChange={handleChange} className={`input-field resize-none ${errors.message ? 'border-red-500' : ''}`} placeholder="Tell us about your requirements..."></textarea>
                 {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
               </div>
               
-              <button
-                type="submit"
-                className="w-full button-primary flex items-center justify-center gap-2 py-3"
-              >
+              <button type="submit" className="w-full button-primary flex items-center justify-center gap-2 py-3">
                 <Send size={16} />
                 Send Message
               </button>
@@ -245,8 +185,6 @@ const ContactForm = () => {
           </form>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ContactForm;
