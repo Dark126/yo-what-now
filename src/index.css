@@ -83,8 +83,16 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    height: 100%;
+  }
+
   body {
     @apply bg-background text-foreground;
+    min-height: 100%;
+    overflow-x: hidden;
+    perspective: 1000px;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -115,15 +123,36 @@
   }
 
   .button-primary {
-    @apply bg-spice-500 hover:bg-spice-600 text-white font-medium py-2 px-4 rounded-md transition-colors duration-300;
+    @apply bg-spice-500 hover:bg-spice-600 text-white font-medium py-2 px-4 rounded-md transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1;
   }
 
   .button-secondary {
-    @apply bg-leaf-100 hover:bg-leaf-200 text-leaf-700 font-medium py-2 px-4 rounded-md transition-colors duration-300;
+    @apply bg-leaf-100 hover:bg-leaf-200 text-leaf-700 font-medium py-2 px-4 rounded-md transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1;
   }
 
   .input-field {
     @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-spice-400 focus:border-transparent transition-all duration-300;
+  }
+  
+  /* 3D Card Styles */
+  .card-3d {
+    @apply relative overflow-hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  /* Glassmorphism effect */
+  .glass {
+    @apply bg-white bg-opacity-10 backdrop-blur-lg border border-white border-opacity-20 shadow-xl;
+  }
+  
+  /* Modern glassmorphism effect */
+  .modern-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
   }
 }
 
@@ -149,4 +178,61 @@
 .animate-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* 3D hover effect */
+.hover-3d {
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.hover-3d:hover {
+  transform: translateZ(20px);
+}
+
+/* Modern page transitions */
+.transition-ready {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.page-transition-enter {
+  opacity: 0;
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+/* Parallax effect for background elements */
+.parallax {
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(156, 107, 53, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 107, 53, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 107, 53, 0.5);
 }
