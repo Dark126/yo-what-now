@@ -1,5 +1,6 @@
 
-import ProductCard from "./ProductCard";
+import OptimizedProductCard from "./OptimizedProductCard";
+import { motion } from "framer-motion";
 
 const Products = () => {
   const products = [
@@ -30,20 +31,71 @@ const Products = () => {
   ];
 
   return (
-    <section id="products" className="section bg-leaf-50">
-      <div className="spice-container">
-        <h2 className="section-title">LA UNJHA Premium Spices</h2>
-        <p className="text-lg text-gray-600 max-w-3xl mb-12">
+    <motion.section 
+      id="products" 
+      className="section bg-leaf-50 relative overflow-hidden"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true, amount: 0.1 }}
+    >
+      {/* Background 3D elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+        <motion.div 
+          className="absolute top-[10%] right-[15%] w-40 h-40 rounded-full bg-spice-100 opacity-50 blur-3xl"
+          animate={{ 
+            y: [0, 20, 0],
+            scale: [1, 1.05, 1],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-[20%] left-[10%] w-60 h-60 rounded-full bg-leaf-100 opacity-50 blur-3xl"
+          animate={{ 
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+      </div>
+
+      <div className="spice-container relative z-10">
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          viewport={{ once: true }}
+        >
+          LA UNJHA Premium Spices
+        </motion.h2>
+        
+        <motion.p 
+          className="text-lg text-gray-600 max-w-3xl mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
           Each of LA UNJHA's spices is carefully sourced from sustainable farms and processed to preserve their natural flavors and aromatic properties.
-        </p>
+        </motion.p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product) => (
-            <ProductCard key={product.id} {...product} />
+            <OptimizedProductCard key={product.id} {...product} />
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
