@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -8,9 +8,8 @@ import Packaging from "@/components/Packaging";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import FloatingElements from "@/components/FloatingElements";
-import { optimizedHandleAnimations } from "@/utils/optimizedAnimation";
 
-// Improved page variants for smoother transitions
+// Simplified page variants for better performance
 const pageVariants = {
   initial: {
     opacity: 0,
@@ -19,7 +18,6 @@ const pageVariants = {
     opacity: 1,
     transition: {
       duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
     },
   },
   exit: {
@@ -30,45 +28,23 @@ const pageVariants = {
   },
 };
 
-// Smooth section animations
+// Simplified section variants
 const sectionVariants = {
   initial: {
     opacity: 0,
-    y: 30,
+    y: 20,
   },
   animate: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.7,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.5,
     },
   },
 };
 
 const Index = () => {
-  const [scrollY, setScrollY] = useState(0);
-  
-  useEffect(() => {
-    // Implement smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    // Optimize animations 
-    const animationCleanup = optimizedHandleAnimations();
-    
-    // Track scroll position for parallax effects
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      animationCleanup();
-      document.documentElement.style.scrollBehavior = '';
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const [scrollY] = useState(0);
   
   return (
     <AnimatePresence mode="wait">
@@ -82,15 +58,10 @@ const Index = () => {
       >
         <Navbar />
         
-        {/* New floating elements component */}
+        {/* Simplified floating elements */}
         <FloatingElements />
         
-        <motion.div 
-          variants={sectionVariants}
-          style={{
-            transform: `translateY(${scrollY * 0.1}px)`,
-          }}
-        >
+        <motion.div>
           <Hero />
         </motion.div>
         
@@ -130,21 +101,11 @@ const Index = () => {
           <Footer />
         </motion.div>
         
-        {/* Enhanced floating back to top button with smooth animations */}
+        {/* Simple back to top button with minimal animations */}
         <motion.a
           href="#home"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: scrollY > 300 ? 1 : 0, scale: scrollY > 300 ? 1 : 0.8 }}
-          transition={{ 
-            type: "spring",
-            stiffness: 260,
-            damping: 20
-          }}
-          whileHover={{ 
-            scale: 1.1,
-            boxShadow: "0 10px 25px rgba(156, 107, 53, 0.3)"
-          }}
-          whileTap={{ scale: 0.95 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: scrollY > 300 ? 1 : 0 }}
           className="fixed bottom-6 right-6 w-12 h-12 bg-spice-500 rounded-full flex items-center justify-center shadow-lg hover:bg-spice-600 transition-colors z-50"
         >
           <svg
