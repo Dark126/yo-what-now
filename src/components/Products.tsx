@@ -22,14 +22,14 @@ const Products = () => {
       id: 3,
       name: "Cumin Seeds",
       description: "Earthy, aromatic cumin seeds for authentic flavor in traditional dishes.",
-      image: "https://images.unsplash.com/photo-1550133730-695db5f53c82?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/a53e27ab-7016-4605-8ba1-31e98cc3468e.png",
       color: "from-amber-400 to-amber-600"
     },
     {
       id: 4,
       name: "Fennel Seeds",
       description: "Sweet, anise-flavored fennel seeds for desserts, breads, and savory dishes.",
-      image: "https://images.unsplash.com/photo-1620638306111-77ad269a2a97?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      image: "/lovable-uploads/8784e45d-f253-4c02-95d5-d998afffddab.png",
       color: "from-yellow-300 to-yellow-500"
     }
   ];
