@@ -2,10 +2,11 @@
 import { motion } from 'framer-motion';
 
 const FloatingElements = () => {
-  // Create colorful elements representing spices
+  // Create more vibrant colorful elements representing spices
   const spiceColors = [
-    'bg-red-400', 'bg-orange-400', 'bg-amber-400', 
-    'bg-yellow-300', 'bg-green-400', 'bg-spice-300'
+    'bg-red-500', 'bg-orange-500', 'bg-amber-500', 
+    'bg-yellow-400', 'bg-green-500', 'bg-spice-400',
+    'bg-red-400', 'bg-orange-400', 'bg-yellow-300'
   ];
   
   const elements = Array.from({ length: 10 }).map((_, i) => {
@@ -21,7 +22,7 @@ const FloatingElements = () => {
       initialY: `${Math.random() * 100}%`,
       delay,
       duration,
-      opacity: (Math.random() * 0.3 + 0.15).toFixed(2),
+      opacity: (Math.random() * 0.35 + 0.15).toFixed(2), // Slightly increased opacity
       color: spiceColors[colorIndex],
     };
   });

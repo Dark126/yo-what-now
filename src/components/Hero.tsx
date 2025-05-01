@@ -24,7 +24,7 @@ const Hero = () => {
           className="px-6"
         >
           <motion.h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-spice-600 leading-tight font-serif"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight font-serif"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ 
@@ -32,7 +32,7 @@ const Hero = () => {
               ease: [0.22, 1, 0.36, 1]
             }}
           >
-            <span className="text-gradient bg-gradient-to-r from-spice-500 via-leaf-600 to-spice-400 bg-clip-text text-transparent">LA UNJHA</span>
+            <span className="text-gradient bg-gradient-to-r from-amber-500 via-orange-600 to-red-500 bg-clip-text text-transparent">LA UNJHA</span>
           </motion.h1>
           
           <motion.div 
