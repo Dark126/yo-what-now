@@ -7,7 +7,8 @@ import Products from "@/components/Products";
 import Packaging from "@/components/Packaging";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
-import { optimizedHandleAnimations, createLightweightBackground } from "@/utils/optimizedAnimation";
+import FloatingElements from "@/components/FloatingElements";
+import { optimizedHandleAnimations } from "@/utils/optimizedAnimation";
 
 // Improved page variants for smoother transitions
 const pageVariants = {
@@ -47,7 +48,6 @@ const sectionVariants = {
 
 const Index = () => {
   const [scrollY, setScrollY] = useState(0);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   
   useEffect(() => {
     // Implement smooth scroll behavior
@@ -55,13 +55,6 @@ const Index = () => {
     
     // Optimize animations 
     const animationCleanup = optimizedHandleAnimations();
-    
-    // Initialize 3D background
-    let backgroundCleanup: (() => void) | undefined;
-    
-    if (canvasRef.current) {
-      backgroundCleanup = createLightweightBackground(canvasRef.current);
-    }
     
     // Track scroll position for parallax effects
     const handleScroll = () => {
@@ -72,7 +65,6 @@ const Index = () => {
     
     return () => {
       animationCleanup();
-      if (backgroundCleanup) backgroundCleanup();
       document.documentElement.style.scrollBehavior = '';
       window.removeEventListener('scroll', handleScroll);
     };
@@ -90,11 +82,8 @@ const Index = () => {
       >
         <Navbar />
         
-        {/* Canvas for WebGL effects */}
-        <canvas
-          ref={canvasRef}
-          className="fixed inset-0 w-full h-full -z-10 opacity-20 pointer-events-none"
-        />
+        {/* New floating elements component */}
+        <FloatingElements />
         
         <motion.div 
           variants={sectionVariants}
@@ -173,41 +162,6 @@ const Index = () => {
             />
           </svg>
         </motion.a>
-
-        {/* Optimized decorative elements */}
-        <div className="fixed -z-10 top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-          <motion.div 
-            className="absolute top-[15%] left-[10%] w-64 h-64 rounded-full bg-leaf-200 opacity-10 blur-3xl"
-            animate={{ 
-              y: [0, -15, 0],
-              rotate: [0, 3, 0]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            style={{
-              transform: `translateY(${scrollY * -0.05}px)`,
-            }}
-          />
-          <motion.div 
-            className="absolute bottom-[20%] right-[5%] w-96 h-96 rounded-full bg-spice-300 opacity-10 blur-3xl"
-            animate={{ 
-              y: [0, 15, 0],
-              rotate: [0, -3, 0]
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1
-            }}
-            style={{
-              transform: `translateY(${scrollY * 0.03}px)`,
-            }}
-          />
-        </div>
       </motion.div>
     </AnimatePresence>
   );
