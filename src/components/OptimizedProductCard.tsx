@@ -8,13 +8,15 @@ interface ProductCardProps {
   name: string;
   description: string;
   image: string;
+  color?: string;
 }
 
 const OptimizedProductCard = ({
   id,
   name,
   description,
-  image
+  image,
+  color = "from-spice-400 to-leaf-400" // Default gradient
 }: ProductCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   
@@ -44,23 +46,24 @@ const OptimizedProductCard = ({
           transformOrigin: "center center"
         }}
       >
-        <div className="h-60 overflow-hidden">
+        <div className="h-60 overflow-hidden relative">
           <motion.img 
             src={image} 
             alt={name} 
             className="object-cover w-full h-full transition-transform duration-700"
             whileHover={{ scale: 1.05 }}
           />
+          <div className={`absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t ${color} opacity-20`}></div>
         </div>
         
-        <div className="p-6">
-          <h3 className="text-xl font-bold text-spice-700 mb-2">{name}</h3>
+        <div className="p-6 border-t-2 border-opacity-20" style={{ borderColor: `var(--tw-gradient-stops)` }}>
+          <h3 className={`text-xl font-bold bg-gradient-to-r ${color} bg-clip-text text-transparent mb-2`}>{name}</h3>
           <p className="text-gray-600">{description}</p>
           
           <div className="mt-4 overflow-hidden">
             <motion.a 
               href="#packaging" 
-              className="inline-flex items-center gap-1 text-leaf-600 hover:text-leaf-700 font-medium"
+              className={`inline-flex items-center gap-1 text-gradient bg-gradient-to-r ${color} bg-clip-text text-transparent font-medium`}
               initial={{ x: 0 }}
               whileHover={{ x: 5 }}
               transition={{ duration: 0.3 }}

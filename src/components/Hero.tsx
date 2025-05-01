@@ -4,15 +4,15 @@ import { motion } from "framer-motion";
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background spice image */}
+      {/* Background spice image with increased opacity for more color */}
       <div 
         className="absolute inset-0 -z-10"
         style={{
           backgroundImage: "url('/lovable-uploads/cee2d2e9-05ae-4469-879b-51f077498a2e.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          opacity: 0.15,
-          filter: "blur(2px)"
+          opacity: 0.25, // Increased opacity for more vibrant backdrop
+          filter: "blur(2px) saturate(1.4)" // Added saturation to enhance colors
         }}
       />
       
@@ -24,7 +24,7 @@ const Hero = () => {
           className="px-6"
         >
           <motion.h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-spice-700 leading-tight font-serif"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-spice-600 leading-tight font-serif"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ 
@@ -32,18 +32,18 @@ const Hero = () => {
               ease: [0.22, 1, 0.36, 1]
             }}
           >
-            LA UNJHA
+            <span className="text-gradient bg-gradient-to-r from-spice-500 via-leaf-600 to-spice-400 bg-clip-text text-transparent">LA UNJHA</span>
           </motion.h1>
           
           <motion.div 
-            className="h-0.5 bg-spice-500 w-0 mx-auto my-6"
+            className="h-1 bg-gradient-to-r from-orange-400 via-amber-300 to-leaf-500 w-0 mx-auto my-6 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: "80%" }}
             transition={{ duration: 1, delay: 0.8 }}
           />
           
           <motion.h2 
-            className="text-2xl md:text-4xl text-leaf-600 mb-8 font-serif"
+            className="text-2xl md:text-4xl text-leaf-700 mb-8 font-serif"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ 
@@ -56,7 +56,7 @@ const Hero = () => {
           </motion.h2>
           
           <motion.p 
-            className="mt-6 text-lg text-spice-600 max-w-2xl mx-auto"
+            className="mt-6 text-lg text-spice-700 max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ 
@@ -82,7 +82,7 @@ const Hero = () => {
           >
             <motion.a 
               href="#products" 
-              className="button-primary"
+              className="bg-spice-500 hover:bg-spice-600 text-white font-medium py-3 px-6 rounded-md transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -91,7 +91,7 @@ const Hero = () => {
             
             <motion.a 
               href="#contact" 
-              className="button-secondary"
+              className="bg-leaf-100 hover:bg-leaf-200 text-leaf-800 font-medium py-3 px-6 rounded-md transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 border-2 border-leaf-400"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

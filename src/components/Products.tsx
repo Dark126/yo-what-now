@@ -8,32 +8,36 @@ const Products = () => {
       id: 1,
       name: "Cardamom",
       description: "Premium green cardamom pods with intense aroma, perfect for desserts and beverages.",
-      image: "/lovable-uploads/9d2761be-f8ab-4f6b-8008-c85542e37153.png"
+      image: "/lovable-uploads/9d2761be-f8ab-4f6b-8008-c85542e37153.png",
+      color: "from-green-400 to-green-600"
     },
     {
       id: 2,
       name: "Cinnamon",
       description: "Aromatic cinnamon sticks with sweet, woody flavor for desserts, beverages, and savory dishes.",
-      image: "/lovable-uploads/b0ca0c4e-10d9-4921-af00-53fde05d1cb4.png"
+      image: "/lovable-uploads/b0ca0c4e-10d9-4921-af00-53fde05d1cb4.png",
+      color: "from-spice-400 to-spice-600"
     },
     {
       id: 3,
       name: "Cumin Seeds",
       description: "Earthy, aromatic cumin seeds for authentic flavor in traditional dishes.",
-      image: "https://images.unsplash.com/photo-1550133730-695db5f53c82?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1550133730-695db5f53c82?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      color: "from-amber-400 to-amber-600"
     },
     {
       id: 4,
       name: "Fennel Seeds",
       description: "Sweet, anise-flavored fennel seeds for desserts, breads, and savory dishes.",
-      image: "https://images.unsplash.com/photo-1620638306111-77ad269a2a97?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      image: "https://images.unsplash.com/photo-1620638306111-77ad269a2a97?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+      color: "from-yellow-300 to-yellow-500"
     }
   ];
 
   return (
     <motion.section 
       id="products" 
-      className="section bg-leaf-50 relative overflow-hidden"
+      className="section bg-gradient-to-b from-leaf-50 to-spice-50 relative overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -42,7 +46,7 @@ const Products = () => {
       {/* Background 3D elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
         <motion.div 
-          className="absolute top-[10%] right-[15%] w-40 h-40 rounded-full bg-spice-100 opacity-50 blur-3xl"
+          className="absolute top-[10%] right-[15%] w-40 h-40 rounded-full bg-spice-200 opacity-50 blur-3xl"
           animate={{ 
             y: [0, 20, 0],
             scale: [1, 1.05, 1],
@@ -54,7 +58,7 @@ const Products = () => {
           }}
         />
         <motion.div 
-          className="absolute bottom-[20%] left-[10%] w-60 h-60 rounded-full bg-leaf-100 opacity-50 blur-3xl"
+          className="absolute bottom-[20%] left-[10%] w-60 h-60 rounded-full bg-leaf-200 opacity-50 blur-3xl"
           animate={{ 
             y: [0, -30, 0],
             scale: [1, 1.1, 1],
@@ -76,11 +80,13 @@ const Products = () => {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          LA UNJHA Premium Spices
+          <span className="text-gradient bg-gradient-to-r from-spice-600 to-leaf-600 bg-clip-text">
+            LA UNJHA Premium Spices
+          </span>
         </motion.h2>
         
         <motion.p 
-          className="text-lg text-gray-600 max-w-3xl mb-12"
+          className="text-lg text-gray-700 max-w-3xl mb-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}

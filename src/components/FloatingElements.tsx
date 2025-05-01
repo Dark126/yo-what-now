@@ -2,11 +2,17 @@
 import { motion } from 'framer-motion';
 
 const FloatingElements = () => {
-  // Reduced number of elements and simplified animations
-  const elements = Array.from({ length: 6 }).map((_, i) => {
+  // Create colorful elements representing spices
+  const spiceColors = [
+    'bg-red-400', 'bg-orange-400', 'bg-amber-400', 
+    'bg-yellow-300', 'bg-green-400', 'bg-spice-300'
+  ];
+  
+  const elements = Array.from({ length: 10 }).map((_, i) => {
     const size = Math.floor(Math.random() * 100) + 50;
     const delay = Math.random() * 0.5;
     const duration = Math.random() * 10 + 10;
+    const colorIndex = Math.floor(Math.random() * spiceColors.length);
     
     return {
       id: i,
@@ -15,7 +21,8 @@ const FloatingElements = () => {
       initialY: `${Math.random() * 100}%`,
       delay,
       duration,
-      opacity: (Math.random() * 0.2 + 0.05).toFixed(2),
+      opacity: (Math.random() * 0.3 + 0.15).toFixed(2),
+      color: spiceColors[colorIndex],
     };
   });
 
@@ -27,7 +34,7 @@ const FloatingElements = () => {
       {elements.map((element) => (
         <motion.div
           key={element.id}
-          className="absolute bg-white/20 rounded-full blur-xl"
+          className={`absolute ${element.color} rounded-full blur-xl`}
           style={{
             width: element.size,
             height: element.size,
