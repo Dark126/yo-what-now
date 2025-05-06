@@ -1,39 +1,59 @@
-
 import OptimizedProductCard from "./OptimizedProductCard";
 import { motion } from "framer-motion";
 
-const Products = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Cardamom",
-      description: "Premium green cardamom pods with intense aroma, perfect for desserts and beverages.",
-      image: "/lovable-uploads/9d2761be-f8ab-4f6b-8008-c85542e37153.png",
-      color: "from-green-400 to-green-600"
-    },
-    {
-      id: 2,
-      name: "Cinnamon",
-      description: "Aromatic cinnamon sticks with sweet, woody flavor for desserts, beverages, and savory dishes.",
-      image: "/lovable-uploads/b0ca0c4e-10d9-4921-af00-53fde05d1cb4.png",
-      color: "from-spice-400 to-spice-600"
-    },
-    {
-      id: 3,
-      name: "Cumin Seeds",
-      description: "Earthy, aromatic cumin seeds for authentic flavor in traditional dishes.",
-      image: "/lovable-uploads/a53e27ab-7016-4605-8ba1-31e98cc3468e.png",
-      color: "from-amber-400 to-amber-600"
-    },
-    {
-      id: 4,
-      name: "Fennel Seeds",
-      description: "Sweet, anise-flavored fennel seeds for desserts, breads, and savory dishes.",
-      image: "/lovable-uploads/8784e45d-f253-4c02-95d5-d998afffddab.png",
-      color: "from-yellow-300 to-yellow-500"
-    }
-  ];
+export const products = [
+  {
+    id: 1,
+    name: "Cardamom",
+    description: "Premium green cardamom pods with intense aroma, perfect for desserts and beverages.",
+    image: "/lovable-uploads/9d2761be-f8ab-4f6b-8008-c85542e37153.png",
+    color: "from-green-400 to-green-600",
+    packagingOptions: [
+      { id: "30kg", label: "30 Kg Plastic Packaging" },
+      { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ]
+  },
+  {
+    id: 2,
+    name: "Cinnamon",
+    description: "Aromatic cinnamon sticks with sweet, woody flavor for desserts, beverages, and savory dishes.",
+    image: "/lovable-uploads/b0ca0c4e-10d9-4921-af00-53fde05d1cb4.png",
+    color: "from-spice-400 to-spice-600",
+    packagingOptions: [
+      { id: "30kg", label: "30 Kg Plastic Packaging" },
+      { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ]
+  },
+  {
+    id: 3,
+    name: "Cumin Seeds",
+    description: "Earthy, aromatic cumin seeds for authentic flavor in traditional dishes.",
+    image: "/lovable-uploads/a53e27ab-7016-4605-8ba1-31e98cc3468e.png",
+    color: "from-amber-400 to-amber-600",
+    packagingOptions: [
+      { id: "50g", label: "50 Grams Packaging" },
+      { id: "100g", label: "100 Grams Packaging" },
+      { id: "250g", label: "250 Grams Packaging" },
+      { id: "500g", label: "500 Grams Packaging" },
+      { id: "1kg", label: "1 Kg Packaging" },
+      { id: "30kg", label: "30 Kg Plastic Packaging" },
+      { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ]
+  },
+  {
+    id: 4,
+    name: "Fennel Seeds",
+    description: "Sweet, anise-flavored fennel seeds for desserts, breads, and savory dishes.",
+    image: "/lovable-uploads/8784e45d-f253-4c02-95d5-d998afffddab.png",
+    color: "from-yellow-300 to-yellow-500",
+    packagingOptions: [
+      { id: "30kg", label: "30 Kg Plastic Packaging" },
+      { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ]
+  }
+];
 
+const Products = () => {
   return (
     <motion.section 
       id="products" 
