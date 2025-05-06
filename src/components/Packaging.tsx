@@ -26,6 +26,18 @@ const Packaging = () => {
   const displayImage = 
     selectedPackaging.includes("kg") ? packagingImages.large : packagingImages.small;
 
+  // Handle product selection without navigating away
+  const handleProductChange = (value: string) => {
+    const productId = Number(value);
+    setSelectedProduct(productId);
+    
+    // When product changes, set packaging to first option of that product
+    const newProduct = products.find(p => p.id === productId);
+    if (newProduct && newProduct.packagingOptions.length > 0) {
+      setSelectedPackaging(newProduct.packagingOptions[0].id);
+    }
+  };
+
   return (
     <section id="packaging" className="section bg-gradient-to-b from-spice-50 to-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
@@ -85,13 +97,7 @@ const Packaging = () => {
             <div className="space-y-6">
               <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-700">Select Product</label>
-                <Select value={selectedProduct.toString()} onValueChange={(value) => {
-                  const newProduct = products.find(p => p.id.toString() === value);
-                  setSelectedProduct(Number(value));
-                  if (newProduct) {
-                    setSelectedPackaging(newProduct.packagingOptions[0].id);
-                  }
-                }}>
+                <Select value={selectedProduct.toString()} onValueChange={handleProductChange}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select a product" />
                   </SelectTrigger>
