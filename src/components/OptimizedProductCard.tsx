@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
-import { optimizedAnimation } from "@/utils/optimizedAnimation";
+import * as animations from "@/utils/optimizedAnimation";
 
 interface OptimizedProductCardProps {
   id: number;
@@ -22,7 +22,49 @@ const OptimizedProductCard = ({
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   
-  const { cardVariants, imageVariants, contentVariants } = optimizedAnimation;
+  const cardVariants = {
+    initial: {
+      opacity: 0,
+      y: 20,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const imageVariants = {
+    initial: {
+      scale: 1.05,
+    },
+    animate: {
+      scale: 1,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
+  const contentVariants = {
+    initial: {
+      opacity: 0,
+      y: 10,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        delay: 0.2,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
 
   return (
     <Link to={`/product/${id}`}>
