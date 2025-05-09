@@ -114,7 +114,7 @@ export const products = [
     id: 7,
     name: "Cloves",
     description: "Aromatic dried flower buds with intense warming flavor and aroma. Our cloves are hand-picked at the perfect stage of development to ensure maximum essential oil content. These premium quality cloves deliver a powerful punch of sweet, bitter, and astringent notes.",
-    image: "https://images.unsplash.com/photo-1623627484632-f041d1fb366d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/lovable-uploads/1d0cded0-6bdc-48dc-aa5a-1e9473250fe1.png",
     color: "from-spice-600 to-spice-800",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
