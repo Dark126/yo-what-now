@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export const products = [
   {
     id: 1,
-    name: "Cardamom",
+    name: "Cardamom (Elaichi)",
     description: "Premium green cardamom pods with intense aroma and flavor. Our cardamom is carefully harvested at peak ripeness to ensure maximum essential oil content. Known as the 'Queen of Spices', it adds a distinctive sweet and aromatic flavor to both sweet and savory dishes.",
     image: "/lovable-uploads/9d2761be-f8ab-4f6b-8008-c85542e37153.png",
     color: "from-green-400 to-green-600",
@@ -22,7 +22,7 @@ export const products = [
   },
   {
     id: 2,
-    name: "Cinnamon",
+    name: "Cinnamon (Dal Chini)",
     description: "Aromatic cinnamon sticks with sweet, woody flavor harvested from the inner bark of Cinnamomum trees. Our premium quality cinnamon has a rich, complex flavor profile with notes of citrus, clove, and sweet warmth that enhances both sweet and savory dishes from around the world.",
     image: "/lovable-uploads/b0ca0c4e-10d9-4921-af00-53fde05d1cb4.png",
     color: "from-spice-400 to-spice-600",
@@ -39,7 +39,7 @@ export const products = [
   },
   {
     id: 3,
-    name: "Cumin Seeds",
+    name: "Cumin Seeds (Jeera)",
     description: "Earthy, aromatic cumin seeds carefully selected for their robust flavor profile. Our cumin seeds are sun-dried to preserve their natural oils and distinctive nutty, peppery flavor. Each batch is meticulously cleaned and sorted to ensure only the highest quality seeds reach your kitchen.",
     image: "/lovable-uploads/a53e27ab-7016-4605-8ba1-31e98cc3468e.png",
     color: "from-amber-400 to-amber-600",
@@ -61,7 +61,7 @@ export const products = [
   },
   {
     id: 4,
-    name: "Fennel Seeds",
+    name: "Fennel Seeds (Saunf)",
     description: "Sweet, anise-flavored fennel seeds with a distinctive licorice aroma. Our premium fennel seeds are carefully harvested at optimal maturity to ensure maximum flavor and essential oil content. They add a refreshing, slightly sweet flavor to dishes and can be used whole or ground.",
     image: "/lovable-uploads/8784e45d-f253-4c02-95d5-d998afffddab.png",
     color: "from-yellow-300 to-yellow-500",
@@ -95,7 +95,7 @@ export const products = [
   },
   {
     id: 6,
-    name: "Black Pepper",
+    name: "Black Pepper (Kali Mirch)",
     description: "Premium black peppercorns with intense heat and complex flavor. Our black pepper is harvested at peak ripeness and carefully dried to preserve its pungent aroma and distinctive bite. Each peppercorn contains a perfect balance of heat, citrus notes, and woody undertones.",
     image: "/lovable-uploads/052df019-b2c2-4556-a072-fff72d706bb0.png",
     color: "from-gray-700 to-gray-900",
@@ -112,7 +112,7 @@ export const products = [
   },
   {
     id: 7,
-    name: "Cloves",
+    name: "Cloves (Laung)",
     description: "Aromatic dried flower buds with intense warming flavor and aroma. Our cloves are hand-picked at the perfect stage of development to ensure maximum essential oil content. These premium quality cloves deliver a powerful punch of sweet, bitter, and astringent notes.",
     image: "/lovable-uploads/1d0cded0-6bdc-48dc-aa5a-1e9473250fe1.png",
     color: "from-spice-600 to-spice-800",
