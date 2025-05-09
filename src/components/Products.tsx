@@ -97,7 +97,7 @@ export const products = [
     id: 6,
     name: "Black Pepper",
     description: "Premium black peppercorns with intense heat and complex flavor. Our black pepper is harvested at peak ripeness and carefully dried to preserve its pungent aroma and distinctive bite. Each peppercorn contains a perfect balance of heat, citrus notes, and woody undertones.",
-    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/lovable-uploads/052df019-b2c2-4556-a072-fff72d706bb0.png",
     color: "from-gray-700 to-gray-900",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
