@@ -1,3 +1,4 @@
+
 import OptimizedProductCard from "./OptimizedProductCard";
 import { motion } from "framer-motion";
 
@@ -5,29 +6,41 @@ export const products = [
   {
     id: 1,
     name: "Cardamom",
-    description: "Premium green cardamom pods with intense aroma, perfect for desserts and beverages.",
+    description: "Premium green cardamom pods with intense aroma and flavor. Our cardamom is carefully harvested at peak ripeness to ensure maximum essential oil content. Known as the 'Queen of Spices', it adds a distinctive sweet and aromatic flavor to both sweet and savory dishes.",
     image: "/lovable-uploads/9d2761be-f8ab-4f6b-8008-c85542e37153.png",
     color: "from-green-400 to-green-600",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
       { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ],
+    healthBenefits: [
+      "Aids digestion and helps reduce bloating",
+      "Contains powerful antioxidants that fight inflammation",
+      "May help lower blood pressure and improve breathing",
+      "Supports oral health with antibacterial properties"
     ]
   },
   {
     id: 2,
     name: "Cinnamon",
-    description: "Aromatic cinnamon sticks with sweet, woody flavor for desserts, beverages, and savory dishes.",
+    description: "Aromatic cinnamon sticks with sweet, woody flavor harvested from the inner bark of Cinnamomum trees. Our premium quality cinnamon has a rich, complex flavor profile with notes of citrus, clove, and sweet warmth that enhances both sweet and savory dishes from around the world.",
     image: "/lovable-uploads/b0ca0c4e-10d9-4921-af00-53fde05d1cb4.png",
     color: "from-spice-400 to-spice-600",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
       { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ],
+    healthBenefits: [
+      "Rich in antioxidants that protect cells from oxidative damage",
+      "May help regulate blood sugar levels",
+      "Contains anti-inflammatory compounds that reduce swelling",
+      "Supports heart health by improving cholesterol levels"
     ]
   },
   {
     id: 3,
     name: "Cumin Seeds",
-    description: "Earthy, aromatic cumin seeds for authentic flavor in traditional dishes.",
+    description: "Earthy, aromatic cumin seeds carefully selected for their robust flavor profile. Our cumin seeds are sun-dried to preserve their natural oils and distinctive nutty, peppery flavor. Each batch is meticulously cleaned and sorted to ensure only the highest quality seeds reach your kitchen.",
     image: "/lovable-uploads/a53e27ab-7016-4605-8ba1-31e98cc3468e.png",
     color: "from-amber-400 to-amber-600",
     packagingOptions: [
@@ -38,17 +51,80 @@ export const products = [
       { id: "1kg", label: "1 Kg Packaging" },
       { id: "30kg", label: "30 Kg Plastic Packaging" },
       { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ],
+    healthBenefits: [
+      "Supports digestive health by stimulating enzyme production",
+      "Contains iron and promotes healthy immune function",
+      "Rich in antioxidants that help fight free radicals",
+      "May help improve cholesterol levels and aid weight management"
     ]
   },
   {
     id: 4,
     name: "Fennel Seeds",
-    description: "Sweet, anise-flavored fennel seeds for desserts, breads, and savory dishes.",
+    description: "Sweet, anise-flavored fennel seeds with a distinctive licorice aroma. Our premium fennel seeds are carefully harvested at optimal maturity to ensure maximum flavor and essential oil content. They add a refreshing, slightly sweet flavor to dishes and can be used whole or ground.",
     image: "/lovable-uploads/8784e45d-f253-4c02-95d5-d998afffddab.png",
     color: "from-yellow-300 to-yellow-500",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
       { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ],
+    healthBenefits: [
+      "Promotes digestive health and reduces bloating",
+      "Contains anethole which helps reduce inflammation",
+      "Supports respiratory health and may reduce coughing",
+      "Rich in minerals including copper, potassium, calcium, and zinc"
+    ]
+  },
+  {
+    id: 5,
+    name: "Psyllium Husk (Isabgol)",
+    description: "Ultra-fine psyllium husk powder with exceptional water absorption properties. Our psyllium husk is carefully processed to remove impurities while maintaining its natural fiber content. This versatile dietary supplement easily integrates into your daily wellness routine.",
+    image: "https://images.unsplash.com/photo-1584473457493-17c4c40bbf8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    color: "from-orange-300 to-orange-500",
+    packagingOptions: [
+      { id: "30kg", label: "30 Kg Plastic Packaging" },
+      { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ],
+    healthBenefits: [
+      "Promotes digestive regularity and gut health",
+      "Helps maintain healthy cholesterol levels",
+      "Supports weight management by providing feeling of fullness",
+      "May help regulate blood sugar levels as part of a healthy diet"
+    ]
+  },
+  {
+    id: 6,
+    name: "Black Pepper",
+    description: "Premium black peppercorns with intense heat and complex flavor. Our black pepper is harvested at peak ripeness and carefully dried to preserve its pungent aroma and distinctive bite. Each peppercorn contains a perfect balance of heat, citrus notes, and woody undertones.",
+    image: "https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    color: "from-gray-700 to-gray-900",
+    packagingOptions: [
+      { id: "30kg", label: "30 Kg Plastic Packaging" },
+      { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ],
+    healthBenefits: [
+      "Contains piperine which enhances nutrient absorption",
+      "Rich in antioxidants that protect cells from damage",
+      "Has anti-inflammatory properties that may reduce joint pain",
+      "Supports digestive health and improves metabolism"
+    ]
+  },
+  {
+    id: 7,
+    name: "Cloves",
+    description: "Aromatic dried flower buds with intense warming flavor and aroma. Our cloves are hand-picked at the perfect stage of development to ensure maximum essential oil content. These premium quality cloves deliver a powerful punch of sweet, bitter, and astringent notes.",
+    image: "https://images.unsplash.com/photo-1623627484632-f041d1fb366d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    color: "from-spice-600 to-spice-800",
+    packagingOptions: [
+      { id: "30kg", label: "30 Kg Plastic Packaging" },
+      { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ],
+    healthBenefits: [
+      "Contains eugenol, a powerful antioxidant and antibacterial compound",
+      "Supports oral health with natural pain-relieving properties",
+      "May help regulate blood sugar levels",
+      "Improves digestive health by stimulating enzyme production"
     ]
   }
 ];

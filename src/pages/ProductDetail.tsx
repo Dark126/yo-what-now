@@ -102,22 +102,12 @@ const ProductDetail = () => {
                 <div className="mb-8">
                   <h2 className="text-2xl font-semibold text-spice-700 mb-4">Health Benefits</h2>
                   <ul className="space-y-2">
-                    <li className="flex items-start gap-2">
-                      <Check size={20} className="text-leaf-500 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700">Rich in essential nutrients and antioxidants</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check size={20} className="text-leaf-500 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700">Supports digestive health and metabolism</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check size={20} className="text-leaf-500 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700">Natural anti-inflammatory properties</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <Check size={20} className="text-leaf-500 mt-1 flex-shrink-0" />
-                      <span className="text-gray-700">Enhances flavor while providing health benefits</span>
-                    </li>
+                    {product.healthBenefits?.map((benefit, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <Check size={20} className="text-leaf-500 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700">{benefit}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </motion.div>
