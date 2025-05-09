@@ -80,7 +80,7 @@ export const products = [
     id: 5,
     name: "Psyllium Husk (Isabgol)",
     description: "Ultra-fine psyllium husk powder with exceptional water absorption properties. Our psyllium husk is carefully processed to remove impurities while maintaining its natural fiber content. This versatile dietary supplement easily integrates into your daily wellness routine.",
-    image: "https://images.unsplash.com/photo-1584473457493-17c4c40bbf8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    image: "/lovable-uploads/67a4ca57-e5ba-410a-85ba-ceba767d0cb3.png",
     color: "from-orange-300 to-orange-500",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
