@@ -189,6 +189,7 @@ const Products = () => {
           viewport={{ once: true }}
         >
           Each of LA UNJHA's spices is carefully sourced from sustainable farms and processed to preserve their natural flavors and aromatic properties.
+          Click on any product to see detailed information and packaging options.
         </motion.p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
