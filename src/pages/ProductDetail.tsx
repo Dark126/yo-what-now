@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { products } from "@/components/Products";
@@ -19,6 +19,11 @@ const ProductDetail = () => {
   const [selectedPackaging, setSelectedPackaging] = useState<string | null>(null);
   const [isPackagingModalOpen, setIsPackagingModalOpen] = useState(false);
   const [selectedPackagingForModal, setSelectedPackagingForModal] = useState<string | null>(null);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Find the product based on the ID from the URL
   const productId = parseInt(id || "1", 10);
@@ -197,7 +202,7 @@ const ProductDetail = () => {
         isOpen={isPackagingModalOpen}
         onClose={() => setIsPackagingModalOpen(false)}
         onConfirm={handleConfirmPackaging}
-        packagingOption={product.packagingOptions.find(p => p.id === selectedPackagingForModal)}
+        packagingOption={product?.packagingOptions.find(p => p.id === selectedPackagingForModal)}
         isLargePackaging={selectedPackagingForModal?.includes('kg') || false}
       />
       
