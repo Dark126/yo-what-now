@@ -32,11 +32,11 @@ const Hero = () => {
               ease: [0.22, 1, 0.36, 1]
             }}
           >
-            <span className="text-gradient bg-gradient-to-r from-amber-500 via-orange-600 to-red-500 bg-clip-text text-transparent">LA UNJHA</span>
+            <span className="text-gradient bg-gradient-to-r from-spice-600 via-amber-500 to-leaf-600 bg-clip-text text-transparent drop-shadow-lg">LA UNJHA</span>
           </motion.h1>
           
           <motion.div 
-            className="h-1 bg-gradient-to-r from-orange-400 via-amber-300 to-leaf-500 w-0 mx-auto my-6 rounded-full"
+            className="h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-leaf-500 w-0 mx-auto my-6 rounded-full shadow-md"
             initial={{ width: 0 }}
             animate={{ width: "80%" }}
             transition={{ duration: 1, delay: 0.8 }}
