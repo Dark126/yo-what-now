@@ -50,12 +50,6 @@ const Navbar = () => {
             Products
           </a>
           <a
-            href="#packaging"
-            className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
-          >
-            Packaging
-          </a>
-          <a
             href="#contact"
             className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
           >
@@ -89,13 +83,6 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               Products
-            </a>
-            <a
-              href="#packaging"
-              className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50"
-              onClick={() => setIsOpen(false)}
-            >
-              Packaging
             </a>
             <a
               href="#contact"

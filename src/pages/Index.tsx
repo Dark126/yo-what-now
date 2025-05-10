@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Products from "@/components/Products";
-import Packaging from "@/components/Packaging";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import FloatingElements from "@/components/FloatingElements";
@@ -75,15 +74,6 @@ const Index = () => {
           viewport={{ once: true, amount: 0.2 }}
         >
           <Products />
-        </motion.div>
-        
-        <motion.div 
-          variants={sectionVariants}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <Packaging />
         </motion.div>
         
         <motion.div 
