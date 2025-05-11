@@ -30,8 +30,8 @@ const Navbar = () => {
     >
       <div className="spice-container flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
-          <span className="font-serif font-bold text-2xl">
-            <span className="text-emerald-500">LA</span> <span className="text-orange-500">UNJHA</span>
+          <span className="font-serif font-bold text-2xl text-black">
+            LA UNJHA
           </span>
         </Link>
 
