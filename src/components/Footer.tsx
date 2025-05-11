@@ -105,11 +105,6 @@ const Footer = () => {
                 </a>
               </motion.li>
               <motion.li whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
-                <a href="#packaging" className="text-spice-200 hover:text-white transition-colors flex items-center gap-2">
-                  <span className="text-xs opacity-60">→</span> Packaging
-                </a>
-              </motion.li>
-              <motion.li whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
                 <a href="#contact" className="text-spice-200 hover:text-white transition-colors flex items-center gap-2">
                   <span className="text-xs opacity-60">→</span> Contact
                 </a>
@@ -140,6 +135,21 @@ const Footer = () => {
                   <span className="text-xs opacity-60">→</span> Fennel Seeds
                 </a>
               </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
+                <a href="#products" className="text-spice-200 hover:text-white transition-colors flex items-center gap-2">
+                  <span className="text-xs opacity-60">→</span> Psyllium Husk
+                </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
+                <a href="#products" className="text-spice-200 hover:text-white transition-colors flex items-center gap-2">
+                  <span className="text-xs opacity-60">→</span> Black Pepper
+                </a>
+              </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
+                <a href="#products" className="text-spice-200 hover:text-white transition-colors flex items-center gap-2">
+                  <span className="text-xs opacity-60">→</span> Cloves
+                </a>
+              </motion.li>
             </ul>
           </motion.div>
           
@@ -152,7 +162,7 @@ const Footer = () => {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <MapPin className="text-spice-200 flex-shrink-0 mt-1" size={18} />
-                <span className="text-spice-200">42 - Tirupati Complex, Unjha-384170 Gujarat, India 384170</span>
+                <span className="text-spice-200">42 - Tirupati Complex, Unjha-384170 Gujarat, India</span>
               </motion.li>
               <motion.li 
                 className="flex items-center gap-3"
@@ -168,7 +178,7 @@ const Footer = () => {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Phone className="text-spice-200 flex-shrink-0" size={18} />
-                <span className="text-spice-200">+91 (123) 456-7890</span>
+                <span className="text-spice-200">+91 9876543210</span>
               </motion.li>
             </ul>
           </motion.div>
