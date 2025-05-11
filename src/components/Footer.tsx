@@ -170,7 +170,7 @@ const Footer = () => {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Mail className="text-spice-200 flex-shrink-0" size={18} />
-                <span className="text-spice-200">info@launjha.com</span>
+                <span className="text-spice-200">launjha@gmail.com</span>
               </motion.li>
               <motion.li 
                 className="flex items-center gap-3"
@@ -178,7 +178,7 @@ const Footer = () => {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Phone className="text-spice-200 flex-shrink-0" size={18} />
-                <span className="text-spice-200">+91 9876543210</span>
+                <span className="text-spice-200">+91 84879 67505</span>
               </motion.li>
             </ul>
           </motion.div>
