@@ -7,6 +7,7 @@ import Products from "@/components/Products";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import FloatingElements from "@/components/FloatingElements";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 // Enhanced page variants for more vibrant transitions
 const pageVariants = {
@@ -63,6 +64,9 @@ const Index = () => {
         {/* Vibrant floating elements */}
         <FloatingElements />
         
+        {/* WhatsApp floating button */}
+        <WhatsAppButton phoneNumber="919876543210" />
+        
         <motion.div>
           <Hero />
         </motion.div>
@@ -103,7 +107,7 @@ const Index = () => {
             scale: scrollY > 300 ? 1 : 0.9 
           }}
           transition={{ duration: 0.3 }}
-          className="fixed bottom-6 right-6 w-12 h-12 bg-gradient-to-r from-orange-500 to-spice-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl z-50"
+          className="fixed bottom-6 right-20 w-12 h-12 bg-gradient-to-r from-orange-500 to-spice-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl z-50"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
