@@ -150,6 +150,11 @@ const Footer = () => {
                   <span className="text-xs opacity-60">→</span> Cloves
                 </a>
               </motion.li>
+              <motion.li whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
+                <a href="#products" className="text-spice-200 hover:text-white transition-colors flex items-center gap-2">
+                  <span className="text-xs opacity-60">→</span> Sesame Seeds
+                </a>
+              </motion.li>
             </ul>
           </motion.div>
           

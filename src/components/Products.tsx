@@ -126,6 +126,23 @@ export const products = [
       "May help regulate blood sugar levels",
       "Improves digestive health by stimulating enzyme production"
     ]
+  },
+  {
+    id: 8,
+    name: "Sesame Seeds (Til)",
+    description: "Premium quality sesame seeds with a rich, nutty flavor and delicate crunch. Our sesame seeds are carefully cleaned and sorted to ensure consistent quality. These tiny seeds pack a powerful nutritional punch and add a distinctive taste to both sweet and savory dishes.",
+    image: "/lovable-uploads/sesame-seeds.png",
+    color: "from-amber-200 to-amber-400",
+    packagingOptions: [
+      { id: "30kg", label: "30 Kg Plastic Packaging" },
+      { id: "50kg", label: "50 Kg Plastic Packaging" }
+    ],
+    healthBenefits: [
+      "Rich in healthy fats, protein, and essential minerals",
+      "Contains powerful antioxidants that support heart health",
+      "High in calcium which supports bone health",
+      "May help lower cholesterol and blood pressure levels"
+    ]
   }
 ];
 
