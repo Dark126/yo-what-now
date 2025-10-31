@@ -65,7 +65,7 @@ const Index = () => {
         <FloatingElements />
         
         {/* WhatsApp floating button */}
-        <WhatsAppButton phoneNumber="919876543210" />
+        <WhatsAppButton phoneNumber="918487967505" />
         
         <motion.div>
           <Hero />
