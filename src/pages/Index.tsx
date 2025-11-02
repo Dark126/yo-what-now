@@ -7,7 +7,6 @@ import Products from "@/components/Products";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 import FloatingElements from "@/components/FloatingElements";
-import WhatsAppButton from "@/components/WhatsAppButton";
 
 // Enhanced page variants for more vibrant transitions
 const pageVariants = {
@@ -124,9 +123,6 @@ const Index = () => {
           </svg>
         </motion.a>
       </motion.div>
-      
-      {/* WhatsApp floating button - outside motion.div to maintain fixed positioning */}
-      <WhatsAppButton phoneNumber="918487967505" />
     </AnimatePresence>
   );
 };
