@@ -28,7 +28,7 @@ const WhatsAppButton = ({ phoneNumber, message = "Hi, I'm interested in your pro
 
       {/* Pulsing ring effect */}
       <motion.div
-        className="absolute inset-0 bg-[#25D366] rounded-full opacity-75"
+        className="absolute inset-0 bg-gradient-to-br from-[#F5E6D3] to-[#B8D4A8] rounded-full opacity-75"
         animate={{
           scale: [1, 1.3, 1],
           opacity: [0.75, 0, 0.75],
@@ -45,7 +45,7 @@ const WhatsAppButton = ({ phoneNumber, message = "Hi, I'm interested in your pro
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white rounded-full shadow-2xl hover:shadow-[0_0_30px_rgba(37,211,102,0.6)] transition-shadow duration-300"
+        className="relative flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#F5E6D3] to-[#B8D4A8] text-white rounded-full shadow-2xl hover:shadow-[0_0_30px_rgba(184,212,168,0.6)] transition-shadow duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         aria-label="Contact us on WhatsApp"
