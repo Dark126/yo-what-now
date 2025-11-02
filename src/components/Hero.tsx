@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-[#F5E6D3] to-[#B8D4A8]">
       {/* Background spice image with increased opacity for more color */}
       <div 
         className="absolute inset-0 -z-10"

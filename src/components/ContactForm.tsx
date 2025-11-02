@@ -141,7 +141,7 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="section bg-spice-50">
+    <section id="contact" className="section bg-gradient-to-br from-[#F5E6D3] to-[#B8D4A8]">
       <div className="spice-container">
         <h2 className="section-title">Get in Touch</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
