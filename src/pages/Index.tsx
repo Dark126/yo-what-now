@@ -64,9 +64,6 @@ const Index = () => {
         {/* Vibrant floating elements */}
         <FloatingElements />
         
-        {/* WhatsApp floating button */}
-        <WhatsAppButton phoneNumber="918487967505" />
-        
         <motion.div>
           <Hero />
         </motion.div>
@@ -127,6 +124,9 @@ const Index = () => {
           </svg>
         </motion.a>
       </motion.div>
+      
+      {/* WhatsApp floating button - outside motion.div to maintain fixed positioning */}
+      <WhatsAppButton phoneNumber="918487967505" />
     </AnimatePresence>
   );
 };
