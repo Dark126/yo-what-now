@@ -32,7 +32,7 @@ const Hero = () => {
               ease: [0.22, 1, 0.36, 1]
             }}
           >
-            <span className="text-gradient bg-gradient-to-r from-spice-600 via-amber-500 to-leaf-600 bg-clip-text text-transparent drop-shadow-lg">LA UNJHA</span>
+            <span className="text-gradient bg-gradient-to-r from-spice-600 via-amber-500 to-leaf-600 bg-clip-text text-transparent drop-shadow-lg">LLK International</span>
           </motion.h1>
           
           <motion.div 
@@ -65,7 +65,7 @@ const Hero = () => {
               ease: [0.22, 1, 0.36, 1]
             }}
           >
-            Experience the authentic flavors of nature with LA UNJHA's carefully sourced
+            Experience the authentic flavors of nature with LLK International's carefully sourced
             and processed spices. From farm to your kitchen, we preserve the
             essence and aroma in every grain.
           </motion.p>

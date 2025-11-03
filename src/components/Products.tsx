@@ -194,7 +194,7 @@ const Products = () => {
           viewport={{ once: true }}
         >
           <span className="text-gradient bg-gradient-to-r from-spice-600 to-leaf-600 bg-clip-text">
-            LA UNJHA Premium Spices
+            LLK International Premium Spices
           </span>
         </motion.h2>
         
@@ -205,7 +205,7 @@ const Products = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          Each of LA UNJHA's spices is carefully sourced from sustainable farms and processed to preserve their natural flavors and aromatic properties.
+          Each of LLK International's spices is carefully sourced from sustainable farms and processed to preserve their natural flavors and aromatic properties.
           Click on any product to see detailed information and packaging options.
         </motion.p>
         

@@ -51,7 +51,7 @@ const Footer = () => {
             <Link to="/" className="flex items-center gap-2 mb-4">
               <Wheat className="text-spice-200" size={24} />
               <span className="font-serif font-bold text-2xl text-white">
-                LA <span className="text-leaf-300">UNJHA</span>
+                LLK <span className="text-leaf-300">International</span>
               </span>
             </Link>
             <p className="text-spice-200 mb-4">
@@ -113,7 +113,7 @@ const Footer = () => {
           </motion.div>
           
           <motion.div variants={itemVariants}>
-            <h3 className="text-xl font-serif font-bold mb-4">LA UNJHA Products</h3>
+            <h3 className="text-xl font-serif font-bold mb-4">LLK International Products</h3>
             <ul className="space-y-2">
               <motion.li whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
                 <a href="#products" className="text-spice-200 hover:text-white transition-colors flex items-center gap-2">
@@ -202,7 +202,7 @@ const Footer = () => {
             className="text-spice-300"
             variants={itemVariants}
           >
-            &copy; {currentYear} LA UNJHA. All rights reserved.
+            &copy; {currentYear} LLK International. All rights reserved.
           </motion.p>
         </div>
       </motion.div>

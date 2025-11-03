@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="spice-container flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2">
           <span className="font-serif font-bold text-2xl text-black">
-            LA UNJHA
+            LLK International
           </span>
         </Link>
 
