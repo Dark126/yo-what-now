@@ -44,6 +44,12 @@ const Navbar = () => {
             Home
           </a>
           <a
+            href="#about"
+            className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
+          >
+            About
+          </a>
+          <a
             href="#products"
             className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
           >
@@ -76,6 +82,13 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               Home
+            </a>
+            <a
+              href="#about"
+              className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50"
+              onClick={() => setIsOpen(false)}
+            >
+              About
             </a>
             <a
               href="#products"
