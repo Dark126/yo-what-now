@@ -9,6 +9,13 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Package } from "lucide-react";
+import PackagingViewer3D from "@/components/PackagingViewer3D";
+import frontImage from "@/assets/packaging/front.png";
+import backImage from "@/assets/packaging/back.png";
+import leftImage from "@/assets/packaging/left.png";
+import rightImage from "@/assets/packaging/right.png";
+import topImage from "@/assets/packaging/top.png";
+import bottomImage from "@/assets/packaging/bottom.png";
 
 interface PackagingOption {
   id: string;
@@ -32,29 +39,25 @@ const PackagingSelectionModal = ({
 }: PackagingSelectionModalProps) => {
   if (!packagingOption) return null;
 
-  const packagingImages = {
-    small: "https://images.unsplash.com/photo-1584473457493-17c4c40bbf8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    large: "https://images.unsplash.com/photo-1623627484632-f041d1fb366d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-  };
-
-  const displayImage = isLargePackaging ? packagingImages.large : packagingImages.small;
-
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-4xl max-h-[90vh]">
         <DialogHeader>
-          <DialogTitle>Packaging: {packagingOption.label}</DialogTitle>
+          <DialogTitle className="text-2xl">Packaging: {packagingOption.label}</DialogTitle>
           <DialogDescription>
-            Preview how your product will look in this packaging
+            Rotate and explore the 3D packaging model. Drag to rotate, scroll to zoom.
           </DialogDescription>
         </DialogHeader>
         
         <div className="flex flex-col items-center space-y-4">
-          <div className="overflow-hidden rounded-lg w-full h-60">
-            <img
-              src={displayImage}
-              alt={`${packagingOption.label} packaging`}
-              className="w-full h-full object-cover"
+          <div className="w-full h-[500px] rounded-lg overflow-hidden">
+            <PackagingViewer3D
+              frontImage={frontImage}
+              backImage={backImage}
+              leftImage={leftImage}
+              rightImage={rightImage}
+              topImage={topImage}
+              bottomImage={bottomImage}
             />
           </div>
           
