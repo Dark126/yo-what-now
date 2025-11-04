@@ -81,7 +81,7 @@ const Index = () => {
           variants={sectionVariants}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.05, margin: "0px 0px -200px 0px" }}
         >
           <Products />
         </motion.div>

@@ -151,10 +151,8 @@ const Products = () => {
     <motion.section 
       id="products" 
       className="section bg-gradient-to-b from-leaf-50 to-spice-50 relative overflow-hidden"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true, amount: 0.1 }}
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
     >
       {/* Background 3D elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
