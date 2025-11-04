@@ -177,7 +177,7 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-spice-700">Address</h3>
-                  <p className="text-gray-600">42 - Tirupati Complex, Sardar Unjha-384170 Gujarat, India</p>
+                  <p className="text-gray-600">42 - Tirupati Complex, Sardar Chowk, Unjha-384170 Gujarat, India</p>
                 </div>
               </div>
             </div>

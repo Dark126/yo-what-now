@@ -172,7 +172,7 @@ const Footer = () => {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <MapPin className="text-spice-200 flex-shrink-0 mt-1" size={18} />
-                <span className="text-spice-200">42 - Tirupati Complex, Sardar Unjha-384170 Gujarat, India</span>
+                <span className="text-spice-200">42 - Tirupati Complex, Sardar Chowk, Unjha-384170 Gujarat, India</span>
               </motion.li>
               <motion.li 
                 className="flex items-center gap-3"
