@@ -74,7 +74,7 @@ const OptimizedProductCard = ({
         variants={cardVariants}
         initial="initial"
         whileInView="animate"
-        viewport={{ once: true, amount: 0.25 }}
+        viewport={{ once: true, amount: 0.1, margin: "0px 0px -100px 0px" }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         whileHover={{
