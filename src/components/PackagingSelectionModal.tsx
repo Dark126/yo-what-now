@@ -9,13 +9,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Package } from "lucide-react";
-import PackagingViewer3D from "@/components/PackagingViewer3D";
-import frontImage from "@/assets/packaging/front.png";
-import backImage from "@/assets/packaging/back.png";
-import leftImage from "@/assets/packaging/left.png";
-import rightImage from "@/assets/packaging/right.png";
-import topImage from "@/assets/packaging/top.png";
-import bottomImage from "@/assets/packaging/bottom.png";
 
 interface PackagingOption {
   id: string;
@@ -45,23 +38,12 @@ const PackagingSelectionModal = ({
         <DialogHeader>
           <DialogTitle className="text-2xl">Packaging: {packagingOption.label}</DialogTitle>
           <DialogDescription>
-            Rotate and explore the 3D packaging model. Drag to rotate, scroll to zoom.
+            Confirm your packaging selection to proceed with your order.
           </DialogDescription>
         </DialogHeader>
         
         <div className="flex flex-col items-center space-y-4">
-          <div className="w-full h-[500px] rounded-lg overflow-hidden">
-            <PackagingViewer3D
-              frontImage={frontImage}
-              backImage={backImage}
-              leftImage={leftImage}
-              rightImage={rightImage}
-              topImage={topImage}
-              bottomImage={bottomImage}
-            />
-          </div>
-          
-          <div className="bg-amber-50 text-amber-800 p-4 rounded-lg w-full">
+          <div className="bg-amber-50 text-amber-800 p-6 rounded-lg w-full">
             <h4 className="font-semibold text-sm flex items-center gap-1">
               <Package size={16} className="inline" /> 
               Packaging details:
