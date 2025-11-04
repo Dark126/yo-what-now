@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { Mail, Phone, Send } from "lucide-react";
+import { Mail, Phone, Send, MapPin } from "lucide-react";
 import { products } from "./Products";
 import { 
   RadioGroup, 
@@ -168,6 +168,16 @@ const ContactForm = () => {
                 <div>
                   <h3 className="text-lg font-medium text-spice-700">Phone</h3>
                   <p className="text-gray-600 text-base">+91 84879 67505</p>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-spice-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <MapPin className="text-spice-600" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium text-spice-700">Address</h3>
+                  <p className="text-gray-600">42 - Tirupati Complex, Sardar Unjha-384170 Gujarat, India</p>
                 </div>
               </div>
             </div>
