@@ -121,8 +121,8 @@ const About = () => {
             <div className="relative h-[400px] md:h-auto overflow-hidden">
               <motion.img
                 src={founderImage}
-                alt="Founder of LLK International"
-                className="w-full h-full object-cover grayscale"
+                alt="Anil Kumar Singhal - Founder of LLK International"
+                className="w-full h-full object-cover"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
               />
@@ -139,9 +139,10 @@ const About = () => {
                 <h3 className="text-sm font-semibold text-spice-500 uppercase tracking-wider mb-2">
                   Meet Our Founder
                 </h3>
-                <h2 className="font-serif font-bold text-3xl md:text-4xl mb-4 text-gray-900">
-                  A Legacy of Excellence
+                <h2 className="font-serif font-bold text-3xl md:text-4xl mb-2 text-gray-900">
+                  Anil Kumar Singhal
                 </h2>
+                <p className="text-spice-600 font-medium mb-4">Founder & Managing Director</p>
                 <div className="w-16 h-1 bg-gradient-to-r from-spice-600 to-leaf-600 mb-6" />
                 
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
