@@ -37,26 +37,26 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
-          <a
-            href="#home"
+          <Link
+            to="/"
             className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
           >
             Home
-          </a>
-          <a
-            href="#about"
+          </Link>
+          <Link
+            to="/about"
             className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
           >
             About
-          </a>
+          </Link>
           <a
-            href="#products"
+            href="/#products"
             className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
           >
             Products
           </a>
           <a
-            href="#contact"
+            href="/#contact"
             className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
           >
             Contact
@@ -76,29 +76,29 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-md animate-fade-in">
           <div className="flex flex-col py-4">
-            <a
-              href="#home"
+            <Link
+              to="/"
               className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50"
               onClick={() => setIsOpen(false)}
             >
               Home
-            </a>
-            <a
-              href="#about"
+            </Link>
+            <Link
+              to="/about"
               className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50"
               onClick={() => setIsOpen(false)}
             >
               About
-            </a>
+            </Link>
             <a
-              href="#products"
+              href="/#products"
               className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50"
               onClick={() => setIsOpen(false)}
             >
               Products
             </a>
             <a
-              href="#contact"
+              href="/#contact"
               className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50"
               onClick={() => setIsOpen(false)}
             >

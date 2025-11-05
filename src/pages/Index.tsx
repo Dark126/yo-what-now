@@ -3,7 +3,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
 import Products from "@/components/Products";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
@@ -66,15 +65,6 @@ const Index = () => {
         
         <motion.div>
           <Hero />
-        </motion.div>
-        
-        <motion.div 
-          variants={sectionVariants}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <About />
         </motion.div>
         
         <motion.div 
