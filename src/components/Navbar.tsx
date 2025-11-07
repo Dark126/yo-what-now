@@ -1,11 +1,13 @@
 
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +21,24 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleHashNavigation = (hash: string) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      const element = document.querySelector(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    setIsOpen(false);
+  };
 
   return (
     <nav
@@ -49,18 +69,18 @@ const Navbar = () => {
           >
             About
           </Link>
-          <a
-            href="/#products"
+          <button
+            onClick={() => handleHashNavigation("#products")}
             className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
           >
             Products
-          </a>
-          <a
-            href="/#contact"
+          </button>
+          <button
+            onClick={() => handleHashNavigation("#contact")}
             className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
           >
             Contact
-          </a>
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -90,20 +110,18 @@ const Navbar = () => {
             >
               About
             </Link>
-            <a
-              href="/#products"
-              className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50"
-              onClick={() => setIsOpen(false)}
+            <button
+              onClick={() => handleHashNavigation("#products")}
+              className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50 w-full text-left"
             >
               Products
-            </a>
-            <a
-              href="/#contact"
-              className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50"
-              onClick={() => setIsOpen(false)}
+            </button>
+            <button
+              onClick={() => handleHashNavigation("#contact")}
+              className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50 w-full text-left"
             >
               Contact
-            </a>
+            </button>
           </div>
         </div>
       )}
