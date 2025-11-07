@@ -84,15 +84,15 @@ const About = () => {
                 <p className="text-spice-600 font-medium mb-4">Founder & Managing Director</p>
                 <div className="w-16 h-1 bg-gradient-to-r from-spice-600 to-leaf-600 mb-6" />
                 
-                <p className="text-base text-gray-700 mb-6 leading-relaxed">
+                <p className="text-base text-gray-700 mb-6 leading-relaxed text-justify">
                   Anil Kumar Singhal, Founder of LLK International, brings over 28 years of experience in the Indian spice industry, supplying premium-quality spices to both domestic manufacturers, wholesalers, and private label brands as well as global importers across multiple countries.
                 </p>
                 
-                <p className="text-base text-gray-600 leading-relaxed mb-6">
+                <p className="text-base text-gray-600 leading-relaxed mb-6 text-justify">
                   Starting from Unjha, the spice capital of India, he built the company on strong sourcing networks, strict quality control, and long-term business trust. Under his leadership, LLK International has evolved from traditional trading into a reliable, process-driven supplier offering cleaned, graded, and export-standard spice solutions for bulk buyers.
                 </p>
 
-                <p className="text-base text-gray-600 leading-relaxed mb-8 italic">
+                <p className="text-base text-gray-600 leading-relaxed mb-8 italic text-justify">
                   His core philosophy remains simple: deliver spices that are valued not just for price, but for purity, consistency, and integrity.
                 </p>
 
@@ -119,10 +119,10 @@ const About = () => {
             <h3 className="font-serif font-bold text-2xl md:text-3xl mb-6 text-gray-900">
               About LLK International
             </h3>
-            <p className="text-base text-gray-700 mb-6 leading-relaxed">
+            <p className="text-base text-gray-700 mb-6 leading-relaxed text-justify">
               Based in Unjha, a major spice hub of India, LLK International was founded with a mission to bring the world closer to authentic Indian spices. Our network of farmers and processing partners ensures consistent purity, flavour, and export-grade quality.
             </p>
-            <p className="text-base text-gray-700 leading-relaxed">
+            <p className="text-base text-gray-700 leading-relaxed text-justify">
               Every batch we ship meets international standards for safety, moisture, and packaging integrity. From cumin and fennel to sesame and psyllium, we deliver spices that global buyers trust.
             </p>
           </motion.div>
