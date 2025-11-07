@@ -1,91 +1,35 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Mail, Phone, Send, MapPin } from "lucide-react";
 import { products } from "./Products";
-import {
-  RadioGroup,
-  RadioGroupItem
-} from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-// ✅ ADDED FOR GOOGLE SHEETS
-// Converts selected spice IDs into readable spice names from products array
-const mapSpiceIdsToNames = (ids: number[]) => {
-  return ids
-    .map(id => {
-      const product = products.find(p => p.id === id);
-      return product ? product.name : "";
-    })
-    .filter(Boolean)
-    .join(", ");
-};
-
-// ✅ ADDED FOR GOOGLE SHEETS
-const submitToGoogleSheets = async (formData: any) => {
-  const endpoint = import.meta.env.VITE_SHEETS_ENDPOINT;
-
-  const payload = {
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    message: formData.message,
-    spiceTypes: mapSpiceIdsToNames(formData.spiceTypes), // readable names
-  };
-
-  const res = await fetch(endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-
-  const data = await res.json().catch(() => ({}));
-  if (!data.ok) {
-    throw new Error(data?.error || "Failed to submit lead");
-  }
-};
+// Convert selected product IDs to readable spice names
+const mapSpiceIdsToNames = (ids: number[]) =>
+  ids
+    .map((id) => products.find((p) => p.id === id)?.name || "")
+    .filter(Boolean);
 
 const ContactForm = () => {
   const { toast } = useToast();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
-    packagingType: "",
-    spiceTypes: [] as number[]
+    spiceTypes: [] as number[],
   });
 
   const [errors, setErrors] = useState({
     name: "",
     email: "",
-    message: ""
+    message: "",
   });
 
-  const [availablePackaging, setAvailablePackaging] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (formData.spiceTypes.length > 0) {
-      const selectedProducts = products.filter(p => formData.spiceTypes.includes(p.id));
-      let packagingOptions: string[] = [];
-      selectedProducts.forEach(product => {
-        product.packagingOptions.forEach(option => {
-          if (!packagingOptions.includes(option.id)) {
-            packagingOptions.push(option.id);
-          }
-        });
-      });
-      setAvailablePackaging(packagingOptions);
-      if (!packagingOptions.includes(formData.packagingType)) {
-        setFormData(prev => ({ ...prev, packagingType: "" }));
-      }
-    } else {
-      setAvailablePackaging([]);
-      setFormData(prev => ({ ...prev, packagingType: "" }));
-    }
-  }, [formData.spiceTypes]);
-
+  // ---- validation ----
   const validate = () => {
     let isValid = true;
     const newErrors = { name: "", email: "", message: "" };
@@ -112,64 +56,84 @@ const ContactForm = () => {
     return isValid;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  // ---- handlers ----
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleCheckboxChange = (productId: number, checked: boolean) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       spiceTypes: checked
         ? [...prev.spiceTypes, productId]
-        : prev.spiceTypes.filter(id => id !== productId)
+        : prev.spiceTypes.filter((id) => id !== productId),
     }));
   };
 
-  const handlePackagingChange = (value: string) => {
-    setFormData(prev => ({ ...prev, packagingType: value }));
-  };
-
-  // ✅ UPDATED handleSubmit to send data to Google Sheets
+  // ---- submit via Netlify function proxy ----
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validate()) {
-      try {
-        await submitToGoogleSheets(formData);
+    if (!validate()) return;
 
-        toast({
-          title: "Message Sent!",
-          description: "We'll get back to you as soon as possible.",
-          duration: 5000
-        });
+    try {
+      const spices = mapSpiceIdsToNames(formData.spiceTypes); // array of names
 
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          message: "",
-          packagingType: "",
-          spiceTypes: []
-        });
+      const res = await fetch("/.netlify/functions/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          spiceTypes: spices, // array (Apps Script handles array or string)
+        }),
+      });
 
-      } catch (err: any) {
-        toast({
-          title: "Submission Failed",
-          description: err.message || "Something went wrong. Please try again.",
-          variant: "destructive"
-        });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data?.ok === false) {
+        throw new Error(data?.error || "Failed to submit lead");
       }
+
+      toast({
+        title: "Message Sent!",
+        description: "We'll get back to you as soon as possible.",
+        duration: 5000,
+      });
+
+      // reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+        spiceTypes: [],
+      });
+      setErrors({ name: "", email: "", message: "" });
+    } catch (err: any) {
+      toast({
+        title: "Submission Failed",
+        description: err?.message || "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
   return (
-    <section id="contact" className="section bg-gradient-to-br from-[#F5E6D3] to-[#B8D4A8]">
+    <section
+      id="contact"
+      className="section bg-gradient-to-br from-[#F5E6D3] to-[#B8D4A8]"
+    >
       <div className="spice-container">
         <h2 className="section-title">Get in Touch</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
             <p className="text-lg text-gray-600 mb-8">
-              Interested in our products? Fill out the form below and we'll get back to you as soon as possible with pricing and availability.
+              Interested in our products? Fill out the form below and we'll get
+              back to you as soon as possible with pricing and availability.
             </p>
 
             <div className="space-y-6">
@@ -199,7 +163,10 @@ const ContactForm = () => {
                 </div>
                 <div>
                   <h3 className="text-lg font-medium text-spice-700">Address</h3>
-                  <p className="text-gray-600">42 - Tirupati Complex, Sardar Chowk, Unjha-384170 Gujarat, India</p>
+                  <p className="text-gray-600">
+                    42 - Tirupati Complex, Sardar Chowk, Unjha-384170 Gujarat,
+                    India
+                  </p>
                 </div>
               </div>
             </div>
@@ -217,10 +184,12 @@ const ContactForm = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`input-field ${errors.name ? 'border-red-500' : ''}`}
+                  className={`input-field ${errors.name ? "border-red-500" : ""}`}
                   placeholder="John Doe"
                 />
-                {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
+                {errors.name && (
+                  <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+                )}
               </div>
 
               <div>
@@ -233,10 +202,12 @@ const ContactForm = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`input-field ${errors.email ? 'border-red-500' : ''}`}
+                  className={`input-field ${errors.email ? "border-red-500" : ""}`}
                   placeholder="john@example.com"
                 />
-                {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                )}
               </div>
 
               <div>
@@ -259,12 +230,14 @@ const ContactForm = () => {
                   Interested Spices
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  {products.map(product => (
+                  {products.map((product) => (
                     <div key={product.id} className="flex items-center space-x-2">
                       <Checkbox
                         id={`spice-${product.id}`}
                         checked={formData.spiceTypes.includes(product.id)}
-                        onCheckedChange={(checked) => handleCheckboxChange(product.id, checked === true)}
+                        onCheckedChange={(checked) =>
+                          handleCheckboxChange(product.id, checked === true)
+                        }
                       />
                       <Label htmlFor={`spice-${product.id}`} className="text-gray-700">
                         {product.name}
@@ -284,13 +257,18 @@ const ContactForm = () => {
                   rows={4}
                   value={formData.message}
                   onChange={handleChange}
-                  className={`input-field resize-none ${errors.message ? 'border-red-500' : ''}`}
+                  className={`input-field resize-none ${errors.message ? "border-red-500" : ""}`}
                   placeholder="Tell us about your requirements..."
-                ></textarea>
-                {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
+                />
+                {errors.message && (
+                  <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+                )}
               </div>
 
-              <button type="submit" className="w-full button-primary flex items-center justify-center gap-2 py-3">
+              <button
+                type="submit"
+                className="w-full button-primary flex items-center justify-center gap-2 py-3"
+              >
                 <Send size={16} />
                 Send Message
               </button>
