@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { MapPin, Award, TrendingUp, Shield } from "lucide-react";
-import founderImage from "@/assets/founder-bw.jpg";
+import founderImage from "@/assets/founder-transparent.png";
 
 const About = () => {
   return (
-    <section id="about" className="section bg-gradient-to-b from-white to-leaf-50 relative overflow-hidden">
+    <section id="about" className="section bg-gradient-to-b from-[#FFFFF0] to-[#FAF9F6] relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
         <motion.div 
@@ -115,18 +115,17 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
           viewport={{ once: true }}
-          className="mt-20 bg-white rounded-2xl shadow-lg overflow-hidden border border-spice-100"
+          className="mt-20 bg-[#FFFEF9] rounded-2xl shadow-lg overflow-hidden border border-spice-100"
         >
           <div className="grid md:grid-cols-2 gap-0">
-            <div className="relative h-[400px] md:h-auto overflow-hidden">
+            <div className="relative h-[400px] md:h-auto overflow-hidden flex items-center justify-center bg-[#FFFEF9]">
               <motion.img
                 src={founderImage}
                 alt="Anil Kumar Singhal - Founder of LLK International"
-                className="w-full h-full object-cover"
+                className="h-full w-auto object-contain"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/10" />
             </div>
             
             <div className="p-8 md:p-12 flex flex-col justify-center">
@@ -146,17 +145,21 @@ const About = () => {
                 <div className="w-16 h-1 bg-gradient-to-r from-spice-600 to-leaf-600 mb-6" />
                 
                 <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                  With over 22 years of deep expertise in the spice industry, our founder has built LLK International on the pillars of quality, integrity, and customer trust. His vision has transformed our company into a leading exporter of premium Indian spices.
+                  Anil Kumar Singhal, Founder of LLK International, brings over 28 years of experience in the Indian spice industry, supplying premium-quality spices to both domestic manufacturers, wholesalers, and private label brands as well as global importers across multiple countries.
                 </p>
                 
-                <p className="text-gray-600 leading-relaxed mb-8">
-                  His hands-on approach and commitment to maintaining the highest standards have established lasting relationships with farmers, processors, and international clients. Under his guidance, LLK International continues to set benchmarks in the spice export industry.
+                <p className="text-gray-600 leading-relaxed mb-6">
+                  Starting from Unjha, the spice capital of India, he built the company on strong sourcing networks, strict quality control, and long-term business trust. Under his leadership, LLK International has evolved from traditional trading into a reliable, process-driven supplier offering cleaned, graded, and export-standard spice solutions for bulk buyers.
+                </p>
+
+                <p className="text-gray-600 leading-relaxed mb-8 italic">
+                  His core philosophy remains simple: deliver spices that are valued not just for price, but for purity, consistency, and integrity.
                 </p>
 
                 <div className="flex items-center gap-4">
                   <div className="flex-1 h-px bg-gradient-to-r from-spice-200 to-transparent" />
                   <p className="text-sm font-semibold text-spice-700">
-                    22+ Years of Excellence
+                    28+ Years of Excellence
                   </p>
                   <div className="flex-1 h-px bg-gradient-to-l from-spice-200 to-transparent" />
                 </div>
