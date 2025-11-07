@@ -1,7 +1,7 @@
 // netlify/functions/submit.js
-import fetch from "node-fetch";
+// Uses Node 18+ global fetch (no imports required)
 
-export const handler = async (event, context) => {
+export const handler = async (event) => {
   try {
     if (event.httpMethod !== "POST") {
       return {
@@ -11,9 +11,16 @@ export const handler = async (event, context) => {
     }
 
     const body = JSON.parse(event.body || "{}");
+    const scriptUrl = process.env.SHEETS_WEBHOOK;
 
-    const scriptUrl = process.env.SHEETS_WEBHOOK; // Google Apps Script URL
+    if (!scriptUrl) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ ok: false, error: "Missing SHEETS_WEBHOOK env var" }),
+      };
+    }
 
+    // Forward to Google Apps Script
     await fetch(scriptUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -28,7 +35,8 @@ export const handler = async (event, context) => {
     console.error("Proxy failed:", err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ ok: false, error: err.message }),
+      body: JSON.stringify({ ok: false, error: String(err) }),
     };
   }
 };
+
