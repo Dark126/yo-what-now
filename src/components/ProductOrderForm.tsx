@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Send } from "lucide-react";
 
@@ -11,6 +11,7 @@ interface OrderFormProps {
 
 const ProductOrderForm = ({ productName, packagingId }: OrderFormProps) => {
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -22,42 +23,54 @@ const ProductOrderForm = ({ productName, packagingId }: OrderFormProps) => {
   const [errors, setErrors] = useState({
     name: "",
     email: "",
+    phone: "",
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // ✅ Validation
   const validate = () => {
-    let ok = true;
-    const newErrors = { name: "", email: "" };
+    const newErrors = { name: "", email: "", phone: "" };
+    let valid = true;
 
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
-      ok = false;
+      valid = false;
     }
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
-      ok = false;
+      valid = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
-      ok = false;
+      newErrors.email = "Invalid email format";
+      valid = false;
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+      valid = false;
     }
 
     setErrors(newErrors);
-    return ok;
+
+    // ✅ Scroll to first error
+    if (!valid && formRef.current) {
+      const firstErrorField = formRef.current.querySelector(".error-field");
+      firstErrorField?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    return valid;
   };
 
-  // ✅ Input handler
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-  // ✅ Submit handler → Netlify → Apps Script → Sheet
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
+    setIsSubmitting(true);
     try {
       const res = await fetch("/.netlify/functions/submit", {
         method: "POST",
@@ -84,13 +97,7 @@ const ProductOrderForm = ({ productName, packagingId }: OrderFormProps) => {
         duration: 5000,
       });
 
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        notes: "",
-      });
-      setErrors({ name: "", email: "" });
+      setFormData({ name: "", email: "", phone: "", notes: "" });
     } catch (err: any) {
       toast({
         title: "Order Failed",
@@ -98,18 +105,24 @@ const ProductOrderForm = ({ productName, packagingId }: OrderFormProps) => {
         variant: "destructive",
       });
     }
+    setIsSubmitting(false);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-md">
+    <form
+      onSubmit={handleSubmit}
+      ref={formRef}
+      className="bg-white p-8 rounded-xl shadow-md"
+    >
       <div className="space-y-4">
 
-        {/* ✅ Auto-filled product & packaging (not editable) */}
+        {/* ✅ Auto-filled product & packaging */}
         <div className="bg-gray-50 p-4 rounded-lg border text-sm text-gray-700">
           <p><strong>Product:</strong> {productName}</p>
           <p><strong>Packaging:</strong> {packagingId}</p>
         </div>
 
+        {/* ✅ Name */}
         <div>
           <label className="block text-sm font-medium mb-1">Your Name</label>
           <input
@@ -117,12 +130,13 @@ const ProductOrderForm = ({ productName, packagingId }: OrderFormProps) => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`input-field ${errors.name ? "border-red-500" : ""}`}
+            className={`input-field ${errors.name ? "border-red-500 error-field" : ""}`}
             placeholder="John Doe"
           />
           {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
         </div>
 
+        {/* ✅ Email */}
         <div>
           <label className="block text-sm font-medium mb-1">Email Address</label>
           <input
@@ -130,26 +144,29 @@ const ProductOrderForm = ({ productName, packagingId }: OrderFormProps) => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`input-field ${errors.email ? "border-red-500" : ""}`}
+            className={`input-field ${errors.email ? "border-red-500 error-field" : ""}`}
             placeholder="john@example.com"
           />
           {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
         </div>
 
+        {/* ✅ Phone */}
         <div>
-          <label className="block text-sm font-medium mb-1">Phone (Optional)</label>
+          <label className="block text-sm font-medium mb-1">Phone Number</label>
           <input
             type="tel"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="input-field"
+            className={`input-field ${errors.phone ? "border-red-500 error-field" : ""}`}
             placeholder="+91 98765 43210"
           />
+          {errors.phone && <p className="text-sm text-red-500">{errors.phone}</p>}
         </div>
 
+        {/* ✅ Notes (optional) */}
         <div>
-          <label className="block text-sm font-medium mb-1">Additional Notes</label>
+          <label className="block text-sm font-medium mb-1">Additional Notes (Optional)</label>
           <textarea
             name="notes"
             rows={4}
@@ -160,12 +177,14 @@ const ProductOrderForm = ({ productName, packagingId }: OrderFormProps) => {
           />
         </div>
 
+        {/* ✅ Submit Button */}
         <button
           type="submit"
-          className="w-full button-primary flex items-center justify-center gap-2 py-3"
+          disabled={isSubmitting}
+          className="w-full button-primary flex items-center justify-center gap-2 py-3 disabled:opacity-60"
         >
           <Send size={16} />
-          Submit Order
+          {isSubmitting ? "Sending order..." : "Submit Order"}
         </button>
       </div>
     </form>
