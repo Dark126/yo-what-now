@@ -1,18 +1,22 @@
-
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { products } from "./Products";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { Send } from "lucide-react";
 
-// helper: get product by id
-const getProductById = (id: number) => products.find(p => p.id === id);
+// Convert selected spice IDs to readable names
+const mapSpiceIdsToNames = (ids: number[]) =>
+  ids
+    .map((id) => products.find((p) => p.id === id)?.name || "")
+    .filter(Boolean);
 
-const OrderForm = () => {
+const ProductOrderForm = () => {
   const { toast } = useToast();
 
-  const [form, setForm] = useState({
-    productId: 0 as number,     // required
-    packagingId: "",            // required
+  const [formData, setFormData] = useState({
+    spiceTypes: [] as number[],
+    packagingType: "",
     name: "",
     email: "",
     phone: "",
@@ -20,66 +24,93 @@ const OrderForm = () => {
   });
 
   const [errors, setErrors] = useState({
-    productId: "",
-    packagingId: "",
     name: "",
     email: "",
   });
 
-  const selectedProduct = useMemo(() => getProductById(form.productId), [form.productId]);
-  const packagingOptions = selectedProduct?.packagingOptions || []; // [{id, label}]
-
+  // ✅ Form validation
   const validate = () => {
-    const e = { productId: "", packagingId: "", name: "", email: "" };
     let ok = true;
+    const newErrors = { name: "", email: "" };
 
-    if (!form.productId) { e.productId = "Please select a product"; ok = false; }
-    if (!form.packagingId) { e.packagingId = "Please select packaging"; ok = false; }
-    if (!form.name.trim()) { e.name = "Name is required"; ok = false; }
-    if (!form.email.trim()) { e.email = "Email is required"; ok = false; }
-    else if (!/\S+@\S+\.\S+/.test(form.email)) { e.email = "Email is invalid"; ok = false; }
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+      ok = false;
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+      ok = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid";
+      ok = false;
+    }
 
-    setErrors(e);
+    setErrors(newErrors);
     return ok;
   };
 
+  // ✅ Input handlers
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleCheckboxChange = (productId: number, checked: boolean) => {
+    setFormData((prev) => ({
+      ...prev,
+      spiceTypes: checked
+        ? [...prev.spiceTypes, productId]
+        : prev.spiceTypes.filter((id) => id !== productId),
+    }));
+  };
+
+  // ✅ Submit (sends to Netlify → Apps Script → Google Sheet)
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     try {
-      const productName = selectedProduct?.name || "";
-      const packagingLabel = packagingOptions.find(o => o.id === form.packagingId)?.label || "";
+      const spices = mapSpiceIdsToNames(formData.spiceTypes);
 
       const res = await fetch("/.netlify/functions/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           formType: "order",
-          product: productName,
-          packaging: packagingLabel,
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          notes: form.notes,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          packagingType: formData.packagingType,
+          spiceTypes: spices,
+          notes: formData.notes,
         }),
       });
 
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || data?.ok === false) throw new Error(data?.error || "Submission failed");
+      if (!res.ok || data?.ok === false) {
+        throw new Error(data?.error || "Failed to submit order");
+      }
 
       toast({
-        title: "Order Request Sent!",
-        description: "We'll contact you shortly with pricing and availability.",
+        title: "Order Submitted!",
+        description: "We will reach out to you soon with pricing & details.",
         duration: 5000,
       });
 
-      // reset
-      setForm({ productId: 0, packagingId: "", name: "", email: "", phone: "", notes: "" });
-      setErrors({ productId: "", packagingId: "", name: "", email: "" });
+      setFormData({
+        spiceTypes: [],
+        packagingType: "",
+        name: "",
+        email: "",
+        phone: "",
+        notes: "",
+      });
+      setErrors({ name: "", email: "" });
     } catch (err: any) {
       toast({
-        title: "Submission Failed",
+        title: "Order Failed",
         description: err?.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
@@ -87,96 +118,124 @@ const OrderForm = () => {
   };
 
   return (
-    <section id="order" className="section bg-white">
+    <section className="section bg-white">
       <div className="spice-container">
         <h2 className="section-title">Place an Order</h2>
+
         <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-md">
           <div className="space-y-4">
 
-            {/* Product */}
+            {/* ✅ Select Products */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Product</label>
-              <select
-                className={`input-field ${errors.productId ? "border-red-500" : ""}`}
-                value={form.productId || ""}
-                onChange={(e) => setForm(f => ({ ...f, productId: Number(e.target.value), packagingId: "" }))}
-              >
-                <option value="" disabled>Select a product</option>
-                {products.map(p => (
-                  <option key={p.id} value={p.id}>{p.name}</option>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Select Spices
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                {products.map((product) => (
+                  <div key={product.id} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`spice-${product.id}`}
+                      checked={formData.spiceTypes.includes(product.id)}
+                      onCheckedChange={(checked) =>
+                        handleCheckboxChange(product.id, checked === true)
+                      }
+                    />
+                    <Label htmlFor={`spice-${product.id}`}>{product.name}</Label>
+                  </div>
                 ))}
-              </select>
-              {errors.productId && <p className="mt-1 text-sm text-red-500">{errors.productId}</p>}
+              </div>
             </div>
 
-            {/* Packaging (depends on product) */}
+            {/* ✅ Packaging dropdown */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Packaging</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Packaging Type
+              </label>
               <select
-                className={`input-field ${errors.packagingId ? "border-red-500" : ""}`}
-                value={form.packagingId}
-                onChange={(e) => setForm(f => ({ ...f, packagingId: e.target.value }))}
-                disabled={!form.productId}
+                name="packagingType"
+                value={formData.packagingType}
+                onChange={handleChange}
+                className="input-field"
               >
-                <option value="" disabled>{form.productId ? "Select packaging" : "Select product first"}</option>
-                {packagingOptions.map(opt => (
-                  <option key={opt.id} value={opt.id}>{opt.label}</option>
-                ))}
+                <option value="">Select packaging</option>
+                <option value="25 kg bag">25 kg Bag</option>
+                <option value="50 kg bag">50 kg Bag</option>
+                <option value="Bulk">Bulk Packaging</option>
+                <option value="Custom">Custom Packaging</option>
               </select>
-              {errors.packagingId && <p className="mt-1 text-sm text-red-500">{errors.packagingId}</p>}
             </div>
 
-            {/* Name */}
+            {/* ✅ Name */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Name
+              </label>
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 className={`input-field ${errors.name ? "border-red-500" : ""}`}
-                value={form.name}
-                onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))}
-                placeholder="Rahul Sharma"
+                placeholder="John Doe"
               />
-              {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
+              {errors.name && (
+                <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+              )}
             </div>
 
-            {/* Email */}
+            {/* ✅ Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 className={`input-field ${errors.email ? "border-red-500" : ""}`}
-                value={form.email}
-                onChange={(e) => setForm(f => ({ ...f, email: e.target.value }))}
-                placeholder="rahul@example.com"
+                placeholder="john@example.com"
               />
-              {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+              {errors.email && (
+                <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+              )}
             </div>
 
-            {/* Phone (optional) */}
+            {/* ✅ Phone */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Phone (Optional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Phone (Optional)
+              </label>
               <input
                 type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
                 className="input-field"
-                value={form.phone}
-                onChange={(e) => setForm(f => ({ ...f, phone: e.target.value }))}
-                placeholder="+91 98xxxxxxx"
+                placeholder="+91 98765 43210"
               />
             </div>
 
-            {/* Notes */}
+            {/* ✅ Additional Notes */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Additional Notes
+              </label>
               <textarea
+                name="notes"
                 rows={4}
+                value={formData.notes}
+                onChange={handleChange}
                 className="input-field resize-none"
-                value={form.notes}
-                onChange={(e) => setForm(f => ({ ...f, notes: e.target.value }))}
-                placeholder="Share quantity, delivery port, special requirements, etc."
+                placeholder="Write any specific requirement..."
               />
             </div>
 
-            <button type="submit" className="w-full button-primary flex items-center justify-center gap-2 py-3">
+            {/* ✅ Submit Button */}
+            <button
+              type="submit"
+              className="w-full button-primary flex items-center justify-center gap-2 py-3"
+            >
               <Send size={16} />
               Submit Order
             </button>
@@ -187,4 +246,5 @@ const OrderForm = () => {
   );
 };
 
-export default OrderForm;
+export default ProductOrderForm;
+
