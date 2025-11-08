@@ -1,28 +1,15 @@
-// netlify/functions/submit.js
+// ✅ Netlify Function - Handles BOTH Contact + Order Forms
 exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
-  }
-
   try {
+    if (event.httpMethod !== "POST") {
+      return { statusCode: 405, body: "Method Not Allowed" };
+    }
+
     const body = JSON.parse(event.body || "{}");
 
-    // Extract fields for BOTH forms
-    const {
-      formType,     // "inquiry" or "order"
-      name,
-      email,
-      phone,
-      message,
-      notes,
-      product,      // <-- only for order
-      packaging,    // <-- only for order
-    } = body;
+    const { formType, name, email, phone, message, notes, product, packaging, spiceTypes } = body;
 
-    // ✅ Basic validation (same rules still apply)
+    // ✅ Basic validation (required fields)
     if (!name || !email) {
       return {
         statusCode: 400,
@@ -30,28 +17,31 @@ exports.handler = async (event) => {
       };
     }
 
-    // ✅ Web App endpoint from Google Apps Script
-    const scriptURL = process.env.SHEETS_WEBHOOK;
+    // ✅ Send to Google Apps Script Webhook
+    const scriptURL = process.env.VITE_SHEETS_ENDPOINT; // ✅ SAME ENV VAR as before
+
+    const payload = {
+      formType,
+      name,
+      email,
+      phone,
+      message,
+      notes,
+      product,
+      packaging,
+      spiceTypes,
+    };
 
     const res = await fetch(scriptURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        formType,
-        name,
-        email,
-        phone,
-        message,
-        notes,
-        product,
-        packaging,
-      }),
+      body: JSON.stringify(payload),
     });
 
     const result = await res.json().catch(() => ({}));
 
-    if (!res.ok || result?.success === false) {
-      throw new Error(result?.error || "Google Script error");
+    if (!result.ok) {
+      throw new Error(result.error || "Apps Script failed");
     }
 
     return {
@@ -65,6 +55,7 @@ exports.handler = async (event) => {
     };
   }
 };
+
 
 
 
