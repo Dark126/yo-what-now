@@ -1,9 +1,28 @@
+// netlify/functions/submit.js
 exports.handler = async (event) => {
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: "Method not allowed" }),
+    };
+  }
+
   try {
     const body = JSON.parse(event.body || "{}");
 
-    const { formType, name, email, phone, notes, product, packaging } = body;
+    // Extract fields for BOTH forms
+    const {
+      formType,     // "inquiry" or "order"
+      name,
+      email,
+      phone,
+      message,
+      notes,
+      product,      // <-- only for order
+      packaging,    // <-- only for order
+    } = body;
 
+    // ✅ Basic validation (same rules still apply)
     if (!name || !email) {
       return {
         statusCode: 400,
@@ -11,34 +30,34 @@ exports.handler = async (event) => {
       };
     }
 
-    // ✅ Send to Google Apps Script webhook URL
-    const scriptURL = process.env.GOOGLE_SCRIPT_WEBHOOK;
+    // ✅ Web App endpoint from Google Apps Script
+    const scriptURL = process.env.SHEETS_WEBHOOK;
 
     const res = await fetch(scriptURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        type: formType,
+        formType,
         name,
         email,
         phone,
+        message,
         notes,
         product,
         packaging,
       }),
     });
 
-    const result = await res.json();
+    const result = await res.json().catch(() => ({}));
 
-    if (!result.success) {
-      throw new Error("Apps Script returned failure");
+    if (!res.ok || result?.success === false) {
+      throw new Error(result?.error || "Google Script error");
     }
 
     return {
       statusCode: 200,
       body: JSON.stringify({ ok: true }),
     };
-
   } catch (err) {
     return {
       statusCode: 500,
@@ -46,5 +65,6 @@ exports.handler = async (event) => {
     };
   }
 };
+
 
 
