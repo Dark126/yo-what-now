@@ -85,11 +85,12 @@ const ContactForm = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          formType: "contact",   // ✅ added for clean routing
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
           message: formData.message,
-          spiceTypes: spices, // array (Apps Script handles array or string)
+          spiceTypes: spices,
         }),
       });
 
