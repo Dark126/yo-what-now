@@ -65,6 +65,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/about"
+            onClick={() => window.scrollTo(0, 0)}
             className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
           >
             About
@@ -106,7 +107,10 @@ const Navbar = () => {
             <Link
               to="/about"
               className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                window.scrollTo(0, 0);
+                setIsOpen(false);
+              }}
             >
               About
             </Link>
