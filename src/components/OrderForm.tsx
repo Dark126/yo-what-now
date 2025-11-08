@@ -1,17 +1,19 @@
-import { useState, useMemo } from "react";
+
+import { useState, useRef } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { products } from "./Products";
 import { Send } from "lucide-react";
 
-// helper: get product by id
-const getProductById = (id: number) => products.find(p => p.id === id);
+interface OrderFormProps {
+  productName: string;
+  packagingId: string;
+  productId: number;
+}
 
-const OrderForm = () => {
+const ProductOrderForm = ({ productName, packagingId }: OrderFormProps) => {
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
 
-  const [form, setForm] = useState({
-    productId: 0 as number,     // required
-    packagingId: "",            // required
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
@@ -19,171 +21,174 @@ const OrderForm = () => {
   });
 
   const [errors, setErrors] = useState({
-    productId: "",
-    packagingId: "",
     name: "",
     email: "",
+    phone: "",
   });
 
-  const selectedProduct = useMemo(() => getProductById(form.productId), [form.productId]);
-  const packagingOptions = selectedProduct?.packagingOptions || []; // [{id, label}]
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // ✅ Validation
   const validate = () => {
-    const e = { productId: "", packagingId: "", name: "", email: "" };
-    let ok = true;
+    const newErrors = { name: "", email: "", phone: "" };
+    let valid = true;
 
-    if (!form.productId) { e.productId = "Please select a product"; ok = false; }
-    if (!form.packagingId) { e.packagingId = "Please select packaging"; ok = false; }
-    if (!form.name.trim()) { e.name = "Name is required"; ok = false; }
-    if (!form.email.trim()) { e.email = "Email is required"; ok = false; }
-    else if (!/\S+@\S+\.\S+/.test(form.email)) { e.email = "Email is invalid"; ok = false; }
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+      valid = false;
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+      valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+      valid = false;
+    }
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+      valid = false;
+    }
 
-    setErrors(e);
-    return ok;
+    setErrors(newErrors);
+
+    // ✅ Scroll to first error
+    if (!valid && formRef.current) {
+      const firstErrorField = formRef.current.querySelector(".error-field");
+      firstErrorField?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    return valid;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
+    setIsSubmitting(true);
     try {
-      const productName = selectedProduct?.name || "";
-      const packagingLabel = packagingOptions.find(o => o.id === form.packagingId)?.label || "";
-
       const res = await fetch("/.netlify/functions/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           formType: "order",
           product: productName,
-          packaging: packagingLabel,
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          notes: form.notes,
+          packaging: packagingId,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          notes: formData.notes,
         }),
       });
 
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || data?.ok === false) throw new Error(data?.error || "Submission failed");
+      if (!res.ok || data?.ok === false) {
+        throw new Error(data?.error || "Failed to submit order");
+      }
 
       toast({
-        title: "Order Request Sent!",
-        description: "We'll contact you shortly with pricing and availability.",
+        title: "Order Submitted!",
+        description: "We will reach out to you soon with pricing & details.",
         duration: 5000,
       });
 
-      // reset
-      setForm({ productId: 0, packagingId: "", name: "", email: "", phone: "", notes: "" });
-      setErrors({ productId: "", packagingId: "", name: "", email: "" });
+      setFormData({ name: "", email: "", phone: "", notes: "" });
     } catch (err: any) {
       toast({
-        title: "Submission Failed",
+        title: "Order Failed",
         description: err?.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
     }
+    setIsSubmitting(false);
   };
 
   return (
-    <section id="order" className="section bg-white">
-      <div className="spice-container">
-        <h2 className="section-title">Place an Order</h2>
-        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-md">
-          <div className="space-y-4">
+    <form
+      onSubmit={handleSubmit}
+      ref={formRef}
+      className="bg-white p-8 rounded-xl shadow-md"
+    >
+      <div className="space-y-4">
 
-            {/* Product */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Product</label>
-              <select
-                className={`input-field ${errors.productId ? "border-red-500" : ""}`}
-                value={form.productId || ""}
-                onChange={(e) => setForm(f => ({ ...f, productId: Number(e.target.value), packagingId: "" }))}
-              >
-                <option value="" disabled>Select a product</option>
-                {products.map(p => (
-                  <option key={p.id} value={p.id}>{p.name}</option>
-                ))}
-              </select>
-              {errors.productId && <p className="mt-1 text-sm text-red-500">{errors.productId}</p>}
-            </div>
+        {/* ✅ Auto-filled product & packaging */}
+        <div className="bg-gray-50 p-4 rounded-lg border text-sm text-gray-700">
+          <p><strong>Product:</strong> {productName}</p>
+          <p><strong>Packaging:</strong> {packagingId}</p>
+        </div>
 
-            {/* Packaging (depends on product) */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Packaging</label>
-              <select
-                className={`input-field ${errors.packagingId ? "border-red-500" : ""}`}
-                value={form.packagingId}
-                onChange={(e) => setForm(f => ({ ...f, packagingId: e.target.value }))}
-                disabled={!form.productId}
-              >
-                <option value="" disabled>{form.productId ? "Select packaging" : "Select product first"}</option>
-                {packagingOptions.map(opt => (
-                  <option key={opt.id} value={opt.id}>{opt.label}</option>
-                ))}
-              </select>
-              {errors.packagingId && <p className="mt-1 text-sm text-red-500">{errors.packagingId}</p>}
-            </div>
+        {/* ✅ Name */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Your Name</label>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className={`input-field ${errors.name ? "border-red-500 error-field" : ""}`}
+            placeholder="John Doe"
+          />
+          {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
+        </div>
 
-            {/* Name */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-              <input
-                type="text"
-                className={`input-field ${errors.name ? "border-red-500" : ""}`}
-                value={form.name}
-                onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))}
-                placeholder="Rahul Sharma"
-              />
-              {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name}</p>}
-            </div>
+        {/* ✅ Email */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Email Address</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className={`input-field ${errors.email ? "border-red-500 error-field" : ""}`}
+            placeholder="john@example.com"
+          />
+          {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+        </div>
 
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-              <input
-                type="email"
-                className={`input-field ${errors.email ? "border-red-500" : ""}`}
-                value={form.email}
-                onChange={(e) => setForm(f => ({ ...f, email: e.target.value }))}
-                placeholder="rahul@example.com"
-              />
-              {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
-            </div>
+        {/* ✅ Phone */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Phone Number</label>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className={`input-field ${errors.phone ? "border-red-500 error-field" : ""}`}
+            placeholder="+91 98765 43210"
+          />
+          {errors.phone && <p className="text-sm text-red-500">{errors.phone}</p>}
+        </div>
 
-            {/* Phone (optional) */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Phone (Optional)</label>
-              <input
-                type="tel"
-                className="input-field"
-                value={form.phone}
-                onChange={(e) => setForm(f => ({ ...f, phone: e.target.value }))}
-                placeholder="+91 98xxxxxxx"
-              />
-            </div>
+        {/* ✅ Notes (optional) */}
+        <div>
+          <label className="block text-sm font-medium mb-1">Additional Notes (Optional)</label>
+          <textarea
+            name="notes"
+            rows={4}
+            value={formData.notes}
+            onChange={handleChange}
+            className="input-field resize-none"
+            placeholder="Write any specific requirement..."
+          />
+        </div>
 
-            {/* Notes */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
-              <textarea
-                rows={4}
-                className="input-field resize-none"
-                value={form.notes}
-                onChange={(e) => setForm(f => ({ ...f, notes: e.target.value }))}
-                placeholder="Share quantity, delivery port, special requirements, etc."
-              />
-            </div>
-
-            <button type="submit" className="w-full button-primary flex items-center justify-center gap-2 py-3">
-              <Send size={16} />
-              Submit Order
-            </button>
-          </div>
-        </form>
+        {/* ✅ Submit Button */}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full button-primary flex items-center justify-center gap-2 py-3 disabled:opacity-60"
+        >
+          <Send size={16} />
+          {isSubmitting ? "Sending order..." : "Submit Order"}
+        </button>
       </div>
-    </section>
+    </form>
   );
 };
 
-export default OrderForm;
+export default ProductOrderForm;
