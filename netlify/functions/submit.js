@@ -1,45 +1,50 @@
-
-// netlify/functions/submit.js
-import fetch from "node-fetch";
-
-export const handler = async (event) => {
+exports.handler = async (event) => {
   try {
-    if (event.httpMethod !== "POST") {
+    const body = JSON.parse(event.body || "{}");
+
+    const { formType, name, email, phone, notes, product, packaging } = body;
+
+    if (!name || !email) {
       return {
-        statusCode: 405,
-        body: JSON.stringify({ error: "Method not allowed" }),
+        statusCode: 400,
+        body: JSON.stringify({ ok: false, error: "Missing required fields" }),
       };
     }
 
-    const body = JSON.parse(event.body || "{}");
-    const scriptUrl = process.env.SHEETS_WEBHOOK; // Google Apps Script Web App URL
+    // ✅ Send to Google Apps Script webhook URL
+    const scriptURL = process.env.GOOGLE_SCRIPT_WEBHOOK;
 
-    console.log("Incoming form data:", body);
-
-    // ✅ Send request to Google Apps Script
-    const response = await fetch(scriptUrl, {
+    const res = await fetch(scriptURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        type: formType,
+        name,
+        email,
+        phone,
+        notes,
+        product,
+        packaging,
+      }),
     });
 
-    const result = await response.json().catch(() => ({}));
-    console.log("Google Script Response:", result);
+    const result = await res.json();
 
-    if (!response.ok || result?.ok === false) {
-      throw new Error(result?.error || "Google Script failed");
+    if (!result.success) {
+      throw new Error("Apps Script returned failure");
     }
 
     return {
       statusCode: 200,
       body: JSON.stringify({ ok: true }),
     };
+
   } catch (err) {
-    console.error("Proxy failed:", err);
     return {
       statusCode: 500,
       body: JSON.stringify({ ok: false, error: err.message }),
     };
   }
 };
+
 
