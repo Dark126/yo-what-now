@@ -102,7 +102,7 @@ const ProductDetail = () => {
                 transition={{ delay: 0.3 }}
               >
                 <h1 className="text-4xl font-bold text-spice-800 mb-4">{product.name}</h1>
-                <p className="text-lg text-gray-600 mb-6">{product.description}</p>
+                <p className="text-lg text-gray-600 mb-6 text-justify">{product.description}</p>
                 
                 <div className="mb-8">
                   <h2 className="text-2xl font-semibold text-spice-700 mb-4">Health Benefits</h2>
@@ -110,7 +110,7 @@ const ProductDetail = () => {
                     {product.healthBenefits?.map((benefit, index) => (
                       <li key={index} className="flex items-start gap-2">
                         <Check size={20} className="text-leaf-500 mt-1 flex-shrink-0" />
-                        <span className="text-gray-700">{benefit}</span>
+                        <span className="text-gray-700 text-justify">{benefit}</span>
                       </li>
                     ))}
                   </ul>
@@ -134,7 +134,7 @@ const ProductDetail = () => {
                   Select Packaging
                 </span>
               </h2>
-              <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto">
+              <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto text-justify">
                 Choose the packaging option that best suits your needs. 
                 Click on a packaging type to view details and confirm your selection.
               </p>
@@ -177,7 +177,7 @@ const ProductDetail = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-center mb-2">Place Your Order</h2>
-              <p className="text-center text-gray-600 mb-8">
+              <p className="text-center text-gray-600 mb-8 text-justify">
                 Complete the form below to request a quote or place an order
               </p>
               
@@ -190,7 +190,7 @@ const ProductDetail = () => {
               ) : (
                 <div className="text-center py-10 bg-gray-50 rounded-xl border border-gray-100">
                   <Package size={48} className="mx-auto text-gray-400 mb-4" />
-                  <p className="text-gray-500">Please select a packaging option above to continue</p>
+                  <p className="text-gray-500 text-justify">Please select a packaging option above to continue</p>
                 </div>
               )}
             </motion.div>
