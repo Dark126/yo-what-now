@@ -59,6 +59,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           <Link
             to="/"
+            onClick={() => window.scrollTo(0, 0)}
             className="font-medium text-spice-700 hover:text-spice-500 transition-colors"
           >
             Home
@@ -100,7 +101,10 @@ const Navbar = () => {
             <Link
               to="/"
               className="px-8 py-3 font-medium text-spice-700 hover:bg-spice-50"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                window.scrollTo(0, 0);
+                setIsOpen(false);
+              }}
             >
               Home
             </Link>
