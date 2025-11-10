@@ -6,10 +6,9 @@ exports.handler = async (event) => {
     }
 
     const body = JSON.parse(event.body || "{}");
-
     const { formType, name, email, phone, message, notes, product, packaging, spiceTypes } = body;
 
-    // ✅ Basic validation (required fields)
+    // ✅ Basic validation
     if (!name || !email) {
       return {
         statusCode: 400,
@@ -17,8 +16,12 @@ exports.handler = async (event) => {
       };
     }
 
-    // ✅ Send to Google Apps Script Webhook
-    const scriptURL = process.env.VITE_SHEETS_ENDPOINT; // ✅ SAME ENV VAR as before
+    // ✅ Correct env var reference (backend)
+    const scriptURL = process.env.SHEETS_WEBHOOK || process.env.VITE_SHEETS_ENDPOINT;
+
+    if (!scriptURL) {
+      throw new Error("Google Script webhook URL missing from environment variables");
+    }
 
     const payload = {
       formType,
@@ -48,13 +51,16 @@ exports.handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify({ ok: true }),
     };
+
   } catch (err) {
+    console.error("🔥 Netlify Function Error:", err.message);
     return {
       statusCode: 500,
       body: JSON.stringify({ ok: false, error: err.message }),
     };
   }
 };
+
 
 
 
