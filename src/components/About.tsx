@@ -79,7 +79,7 @@ const About = () => {
                   Meet Our Founder
                 </h3>
                 <h2 className="font-serif font-bold text-3xl md:text-4xl mb-2 text-gray-900">
-                  Anil Kumar Singhal
+                  Mr. Anil Kumar Singhal
                 </h2>
                 <p className="text-spice-600 font-medium mb-4">Founder</p>
                 <div className="w-16 h-1 bg-gradient-to-r from-spice-600 to-leaf-600 mb-6" />
