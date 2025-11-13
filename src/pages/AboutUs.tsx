@@ -29,6 +29,43 @@ const AboutUs = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  // ⭐ JSON-LD Structured Data for About Page SEO
+  const aboutPageJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "About LLK International - LA Unjha Spices",
+    "url": "https://launjha.com/about",
+    "description":
+      "Learn about LLK International, a leading Indian spice supplier from Unjha. Founded by Mr. Anil Kumar Singhal with over 28 years of experience in sourcing, processing, and exporting authentic Indian spices.",
+    "about": {
+      "@type": "Organization",
+      "name": "LLK International",
+      "brand": "LA Unjha Spices",
+      "url": "https://launjha.com",
+      "logo": "https://launjha.com/opengraph-image.png",
+      "description":
+        "LLK International supplies premium cumin, fennel, sesame, black pepper, cardamom, and psyllium husk globally. Based in Unjha, the spice capital of India.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Unjha",
+        "addressRegion": "Gujarat",
+        "addressCountry": "IN"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Mr. Anil Kumar Singhal",
+        "jobTitle": "Founder & Director",
+        "description":
+          "Anil Kumar Singhal, founder of LLK International, has 28+ years of experience in the Indian spice industry, specializing in cumin, fennel, sesame, psyllium husk, and other premium spices sourced from Unjha, Gujarat.",
+        "image": "https://launjha.com/lovable-uploads/founder-transparent.png",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "LLK International"
+        }
+      }
+    }
+  };
+
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -41,6 +78,11 @@ const AboutUs = () => {
       >
         <Navbar />
 
+        {/* ⭐ Inject About Page JSON-LD */}
+        <script type="application/ld+json">
+          {JSON.stringify(aboutPageJsonLd)}
+        </script>
+
         <div className="pt-20">
           <About />
         </div>
@@ -52,5 +94,6 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
+
 
 
