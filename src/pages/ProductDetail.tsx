@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -16,16 +15,15 @@ const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+
   const [selectedPackaging, setSelectedPackaging] = useState<string | null>(null);
   const [isPackagingModalOpen, setIsPackagingModalOpen] = useState(false);
   const [selectedPackagingForModal, setSelectedPackagingForModal] = useState<string | null>(null);
 
-  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Find the product based on the ID from the URL
   const productId = parseInt(id || "1", 10);
   const product = products.find(p => p.id === productId);
 
@@ -33,10 +31,7 @@ const ProductDetail = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
         <h1 className="text-2xl font-bold">Product not found</h1>
-        <Button 
-          variant="default" 
-          className="mt-4"
-          onClick={() => navigate("/")}>
+        <Button variant="default" className="mt-4" onClick={() => navigate("/")}>
           Back to Home
         </Button>
       </div>
@@ -51,28 +46,25 @@ const ProductDetail = () => {
   const handleConfirmPackaging = () => {
     setSelectedPackaging(selectedPackagingForModal);
     setIsPackagingModalOpen(false);
-    
+
     toast({
       title: "Packaging selected",
-      description: `You selected ${product.packagingOptions.find(p => p.id === selectedPackagingForModal)?.label}`,
+      description: `You selected ${
+        product.packagingOptions.find(p => p.id === selectedPackagingForModal)?.label
+      }`,
     });
 
-    // Scroll to the form
     setTimeout(() => {
       document.getElementById("order-form")?.scrollIntoView({ behavior: "smooth" });
     }, 300);
   };
 
-  const packagingImages = {
-    small: "https://images.unsplash.com/photo-1584473457493-17c4c40bbf8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    large: "https://images.unsplash.com/photo-1623627484632-f041d1fb366d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-  };
-
   return (
     <>
       <Navbar />
+
       <div className="pt-20 pb-16 min-h-screen">
-        {/* Hero section with product image and title */}
+        {/* HERO SECTION — MAIN PRODUCT IMAGE (NOT LAZY LOADED) */}
         <section className="bg-gradient-to-b from-spice-50 to-white">
           <div className="container mx-auto px-4 py-12 max-w-6xl">
             <motion.div 
@@ -88,9 +80,11 @@ const ProductDetail = () => {
               >
                 <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
                   <img 
-                    src={product.image} 
+                    src={product.image}
                     alt={product.name}
                     className="w-full h-[400px] object-cover object-center"
+                    width="800"
+                    height="600"
                   />
                 </div>
               </motion.div>
@@ -120,7 +114,7 @@ const ProductDetail = () => {
           </div>
         </section>
 
-        {/* Packaging options section */}
+        {/* PACKAGING OPTIONS — ICONS LAZY LOADED */}
         <section className="py-12 bg-white">
           <div className="container mx-auto px-4 max-w-6xl">
             <motion.div
@@ -134,8 +128,9 @@ const ProductDetail = () => {
                   Select Packaging
                 </span>
               </h2>
+
               <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto text-justify">
-                Choose the packaging option that best suits your needs. 
+                Choose the packaging option that best suits your needs.
                 Click on a packaging type to view details and confirm your selection.
               </p>
 
@@ -144,15 +139,18 @@ const ProductDetail = () => {
                   <motion.div
                     key={option.id}
                     className={`bg-white border rounded-xl p-6 cursor-pointer transition-all duration-200 hover:shadow-lg ${
-                      selectedPackaging === option.id ? 'border-2 border-spice-500 shadow-md' : 'border-gray-200'
+                      selectedPackaging === option.id
+                        ? "border-2 border-spice-500 shadow-md"
+                        : "border-gray-200"
                     }`}
                     whileHover={{ y: -5, transition: { duration: 0.2 } }}
                     onClick={() => handlePackagingClick(option.id)}
                   >
                     <div className="h-12 flex items-center justify-center mb-4">
-                      <Package size={32} className="text-spice-500" />
+                      <Package size={32} className="text-spice-500" loading="lazy" />
                     </div>
                     <h3 className="text-lg font-semibold text-center">{option.label}</h3>
+
                     {selectedPackaging === option.id && (
                       <div className="mt-3 flex justify-center">
                         <span className="inline-flex items-center px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
@@ -167,7 +165,7 @@ const ProductDetail = () => {
           </div>
         </section>
 
-        {/* Order form section */}
+        {/* ORDER FORM */}
         <section id="order-form" className="py-12 bg-gradient-to-b from-white to-spice-50">
           <div className="container mx-auto px-4 max-w-4xl">
             <motion.div
@@ -180,17 +178,19 @@ const ProductDetail = () => {
               <p className="text-center text-gray-600 mb-8 text-justify">
                 Complete the form below to request a quote or place an order
               </p>
-              
+
               {selectedPackaging ? (
-                <ProductOrderForm 
-                  productId={product.id} 
-                  productName={product.name} 
+                <ProductOrderForm
+                  productId={product.id}
+                  productName={product.name}
                   packagingId={selectedPackaging}
                 />
               ) : (
                 <div className="text-center py-10 bg-gray-50 rounded-xl border border-gray-100">
                   <Package size={48} className="mx-auto text-gray-400 mb-4" />
-                  <p className="text-gray-500 text-justify">Please select a packaging option above to continue</p>
+                  <p className="text-gray-500 text-justify">
+                    Please select a packaging option above to continue
+                  </p>
                 </div>
               )}
             </motion.div>
@@ -202,13 +202,16 @@ const ProductDetail = () => {
         isOpen={isPackagingModalOpen}
         onClose={() => setIsPackagingModalOpen(false)}
         onConfirm={handleConfirmPackaging}
-        packagingOption={product?.packagingOptions.find(p => p.id === selectedPackagingForModal)}
-        isLargePackaging={selectedPackagingForModal?.includes('kg') || false}
+        packagingOption={product?.packagingOptions.find(
+          (p) => p.id === selectedPackagingForModal
+        )}
+        isLargePackaging={selectedPackagingForModal?.includes("kg") || false}
       />
-      
+
       <Footer />
     </>
   );
 };
 
 export default ProductDetail;
+
