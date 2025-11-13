@@ -5,22 +5,14 @@ import About from "@/components/About";
 import Footer from "@/components/Footer";
 
 const pageVariants = {
-  initial: {
-    opacity: 0,
-  },
+  initial: { opacity: 0 },
   animate: {
     opacity: 1,
-    transition: {
-      duration: 0.7,
-      ease: "easeOut",
-    },
+    transition: { duration: 0.7, ease: "easeOut" },
   },
   exit: {
     opacity: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeIn",
-    },
+    transition: { duration: 0.5, ease: "easeIn" },
   },
 };
 
@@ -29,7 +21,7 @@ const AboutUs = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // ⭐ JSON-LD Structured Data for About Page SEO
+  // ⭐ Corrected JSON-LD with WebP founder image
   const aboutPageJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -57,7 +49,7 @@ const AboutUs = () => {
         "jobTitle": "Founder & Director",
         "description":
           "Anil Kumar Singhal, founder of LLK International, has 28+ years of experience in the Indian spice industry, specializing in cumin, fennel, sesame, psyllium husk, and other premium spices sourced from Unjha, Gujarat.",
-        "image": "https://launjha.com/lovable-uploads/founder-transparent.png",
+        "image": "https://launjha.com/assets/founder-transparent.webp",
         "worksFor": {
           "@type": "Organization",
           "name": "LLK International"
@@ -78,7 +70,7 @@ const AboutUs = () => {
       >
         <Navbar />
 
-        {/* ⭐ Inject About Page JSON-LD */}
+        {/* ⭐ Inject JSON-LD */}
         <script type="application/ld+json">
           {JSON.stringify(aboutPageJsonLd)}
         </script>
@@ -94,6 +86,7 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
+
 
 
 
