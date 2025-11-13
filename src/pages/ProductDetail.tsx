@@ -25,7 +25,7 @@ const ProductDetail = () => {
   }, []);
 
   const productId = parseInt(id || "1", 10);
-  const product = products.find(p => p.id === productId);
+  const product = products.find((p) => p.id === productId);
 
   if (!product) {
     return (
@@ -37,6 +37,29 @@ const ProductDetail = () => {
       </div>
     );
   }
+
+  // ⭐ PRODUCT-SPECIFIC JSON-LD (SEO)
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": product.name,
+    "image": product.image.startsWith("http")
+      ? product.image
+      : `https://launjha.com${product.image}`,
+    "description": product.description,
+    "brand": {
+      "@type": "Brand",
+      "name": "LA Unjha Spices"
+    },
+    "sku": `LLK-${product.id}`,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock",
+      "url": `https://launjha.com/product/${product.id}`
+    }
+  };
 
   const handlePackagingClick = (packagingId: string) => {
     setSelectedPackagingForModal(packagingId);
@@ -50,7 +73,7 @@ const ProductDetail = () => {
     toast({
       title: "Packaging selected",
       description: `You selected ${
-        product.packagingOptions.find(p => p.id === selectedPackagingForModal)?.label
+        product.packagingOptions.find((p) => p.id === selectedPackagingForModal)?.label
       }`,
     });
 
@@ -63,23 +86,26 @@ const ProductDetail = () => {
     <>
       <Navbar />
 
+      {/* ⭐ Inject JSON-LD Schema for Google */}
+      <script type="application/ld+json">{JSON.stringify(productJsonLd)}</script>
+
       <div className="pt-20 pb-16 min-h-screen">
-        {/* HERO SECTION — MAIN PRODUCT IMAGE (NOT LAZY LOADED) */}
+        {/* HERO SECTION */}
         <section className="bg-gradient-to-b from-spice-50 to-white">
           <div className="container mx-auto px-4 py-12 max-w-6xl">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="flex flex-col md:flex-row gap-8 items-center"
             >
-              <motion.div 
+              <motion.div
                 className="w-full md:w-1/2"
                 initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
                 <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
-                  <img 
+                  <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-[400px] object-cover object-center"
@@ -89,7 +115,7 @@ const ProductDetail = () => {
                 </div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="w-full md:w-1/2"
                 initial={{ x: 50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
@@ -97,7 +123,7 @@ const ProductDetail = () => {
               >
                 <h1 className="text-4xl font-bold text-spice-800 mb-4">{product.name}</h1>
                 <p className="text-lg text-gray-600 mb-6 text-justify">{product.description}</p>
-                
+
                 <div className="mb-8">
                   <h2 className="text-2xl font-semibold text-spice-700 mb-4">Health Benefits</h2>
                   <ul className="space-y-2">
@@ -114,7 +140,7 @@ const ProductDetail = () => {
           </div>
         </section>
 
-        {/* PACKAGING OPTIONS — ICONS LAZY LOADED */}
+        {/* PACKAGING OPTIONS */}
         <section className="py-12 bg-white">
           <div className="container mx-auto px-4 max-w-6xl">
             <motion.div
@@ -130,8 +156,7 @@ const ProductDetail = () => {
               </h2>
 
               <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto text-justify">
-                Choose the packaging option that best suits your needs.
-                Click on a packaging type to view details and confirm your selection.
+                Choose the packaging option that best suits your needs. Click on a packaging type to view details and confirm your selection.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -202,9 +227,7 @@ const ProductDetail = () => {
         isOpen={isPackagingModalOpen}
         onClose={() => setIsPackagingModalOpen(false)}
         onConfirm={handleConfirmPackaging}
-        packagingOption={product?.packagingOptions.find(
-          (p) => p.id === selectedPackagingForModal
-        )}
+        packagingOption={product?.packagingOptions.find((p) => p.id === selectedPackagingForModal)}
         isLargePackaging={selectedPackagingForModal?.includes("kg") || false}
       />
 
@@ -214,4 +237,5 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
 
