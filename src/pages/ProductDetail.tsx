@@ -5,7 +5,6 @@ import { products } from "@/components/Products";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Check, Package } from "lucide-react";
 import PackagingSelectionModal from "@/components/PackagingSelectionModal";
 import ProductOrderForm from "@/components/ProductOrderForm";
@@ -19,6 +18,7 @@ const ProductDetail = () => {
   const [selectedPackaging, setSelectedPackaging] = useState<string | null>(null);
   const [isPackagingModalOpen, setIsPackagingModalOpen] = useState(false);
   const [selectedPackagingForModal, setSelectedPackagingForModal] = useState<string | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,7 +38,7 @@ const ProductDetail = () => {
     );
   }
 
-  // ⭐ PRODUCT-SPECIFIC JSON-LD (SEO)
+  // ⭐ PRODUCT JSON-LD
   const productJsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -47,10 +47,7 @@ const ProductDetail = () => {
       ? product.image
       : `https://launjha.com${product.image}`,
     "description": product.description,
-    "brand": {
-      "@type": "Brand",
-      "name": "LA Unjha Spices"
-    },
+    "brand": { "@type": "Brand", "name": "LA Unjha Spices" },
     "sku": `LLK-${product.id}`,
     "offers": {
       "@type": "Offer",
@@ -86,10 +83,13 @@ const ProductDetail = () => {
     <>
       <Navbar />
 
-      {/* ⭐ Inject JSON-LD Schema for Google */}
-      <script type="application/ld+json">{JSON.stringify(productJsonLd)}</script>
+      {/* ⭐ Insert JSON-LD */}
+      <script type="application/ld+json">
+        {JSON.stringify(productJsonLd)}
+      </script>
 
       <div className="pt-20 pb-16 min-h-screen">
+
         {/* HERO SECTION */}
         <section className="bg-gradient-to-b from-spice-50 to-white">
           <div className="container mx-auto px-4 py-12 max-w-6xl">
@@ -98,23 +98,40 @@ const ProductDetail = () => {
               animate={{ opacity: 1 }}
               className="flex flex-col md:flex-row gap-8 items-center"
             >
+              {/* ⭐ Optimized Product Image */}
               <motion.div
                 className="w-full md:w-1/2"
                 initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
               >
-                <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-[400px] object-cover object-center"
-                    width="800"
-                    height="600"
-                  />
+                <div className="bg-white rounded-2xl overflow-hidden shadow-lg relative">
+
+                  {/* Blur placeholder until image loads */}
+                  {!imageLoaded && (
+                    <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+                  )}
+
+                  <picture>
+                    <source srcSet={product.image} type="image/webp" />
+                    <source srcSet={product.image.replace(".webp", ".jpg")} type="image/jpeg" />
+
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      width="800"
+                      height="600"
+                      decoding="async"
+                      className={`w-full h-[400px] object-cover object-center transition-opacity duration-500 ${
+                        imageLoaded ? "opacity-100" : "opacity-0"
+                      }`}
+                      onLoad={() => setImageLoaded(true)}
+                    />
+                  </picture>
                 </div>
               </motion.div>
 
+              {/* DETAILS */}
               <motion.div
                 className="w-full md:w-1/2"
                 initial={{ x: 50, opacity: 0 }}
@@ -140,7 +157,7 @@ const ProductDetail = () => {
           </div>
         </section>
 
-        {/* PACKAGING OPTIONS */}
+        {/* PACKAGING */}
         <section className="py-12 bg-white">
           <div className="container mx-auto px-4 max-w-6xl">
             <motion.div
@@ -150,13 +167,13 @@ const ProductDetail = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-center mb-8">
-                <span className="text-gradient bg-gradient-to-r from-amber-600 to-spice-600 bg-clip-text">
+                <span className="bg-gradient-to-r from-amber-600 to-spice-600 bg-clip-text text-transparent">
                   Select Packaging
                 </span>
               </h2>
 
               <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto text-justify">
-                Choose the packaging option that best suits your needs. Click on a packaging type to view details and confirm your selection.
+                Choose the packaging option that best suits your needs.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -168,12 +185,13 @@ const ProductDetail = () => {
                         ? "border-2 border-spice-500 shadow-md"
                         : "border-gray-200"
                     }`}
-                    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                    whileHover={{ y: -5 }}
                     onClick={() => handlePackagingClick(option.id)}
                   >
                     <div className="h-12 flex items-center justify-center mb-4">
                       <Package size={32} className="text-spice-500" loading="lazy" />
                     </div>
+
                     <h3 className="text-lg font-semibold text-center">{option.label}</h3>
 
                     {selectedPackaging === option.id && (
@@ -201,7 +219,7 @@ const ProductDetail = () => {
             >
               <h2 className="text-3xl font-bold text-center mb-2">Place Your Order</h2>
               <p className="text-center text-gray-600 mb-8 text-justify">
-                Complete the form below to request a quote or place an order
+                Complete the form below to request a quote or place an order.
               </p>
 
               {selectedPackaging ? (
@@ -227,7 +245,9 @@ const ProductDetail = () => {
         isOpen={isPackagingModalOpen}
         onClose={() => setIsPackagingModalOpen(false)}
         onConfirm={handleConfirmPackaging}
-        packagingOption={product?.packagingOptions.find((p) => p.id === selectedPackagingForModal)}
+        packagingOption={product.packagingOptions.find(
+          (p) => p.id === selectedPackagingForModal
+        )}
         isLargePackaging={selectedPackagingForModal?.includes("kg") || false}
       />
 
@@ -237,5 +257,6 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
 
 
