@@ -57,7 +57,7 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "LLK International",
-      "brand": "LA Unjha Spices",
+      "alternateName": "LA Unjha Spices",
       "url": "https://launjha.com",
       "logo": "https://launjha.com/opengraph-image.png",
       "description": "LLK International supplies premium cumin, fennel, sesame, black pepper, cardamom, psyllium husk and cloves globally. Sourced from Unjha, the spice capital of India.",
@@ -84,5 +84,24 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "LLK International - LA Unjha Spices
+      "name": "LLK International — LA Unjha Spices",
+      "url": "https://launjha.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://launjha.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
+    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
 
