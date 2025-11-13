@@ -70,22 +70,29 @@ const OptimizedProductCard = ({
         {/* Image wrapper */}
         <motion.div className="h-48 overflow-hidden relative" variants={imageVariants}>
 
-          {/* Blur placeholder before image loads */}
+          {/* Blur placeholder */}
           {!loaded && (
             <div className="absolute inset-0 bg-gray-200 animate-pulse" />
           )}
 
-          <img
-            src={image}
-            alt={name}
-            width={width}
-            height={height}
-            loading="lazy"
-            onLoad={() => setLoaded(true)}
-            className={`w-full h-full object-cover transform transition-transform duration-700 ${
-              loaded ? "opacity-100" : "opacity-0"
-            } group-hover:scale-110`}
-          />
+          {/* Picture tag for WebP optimization */}
+          <picture>
+            <source srcSet={image} type="image/webp" />
+            <source srcSet={image.replace(".webp", ".jpg")} type="image/jpeg" />
+
+            <img
+              src={image}
+              alt={name}
+              width={width}
+              height={height}
+              loading="lazy"
+              decoding="async"
+              onLoad={() => setLoaded(true)}
+              className={`w-full h-full object-cover transform transition-transform duration-700 ${
+                loaded ? "opacity-100" : "opacity-0"
+              } group-hover:scale-110`}
+            />
+          </picture>
 
           {/* Dark overlay on hover */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -114,4 +121,5 @@ const OptimizedProductCard = ({
 };
 
 export default OptimizedProductCard;
+
 
