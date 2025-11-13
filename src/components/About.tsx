@@ -4,24 +4,27 @@ import founderImage from "@/assets/founder-transparent.png";
 
 const About = () => {
   return (
-    <section id="about" className="section bg-gradient-to-b from-[#FFFFF0] to-[#FAF9F6] relative overflow-hidden">
+    <section
+      id="about"
+      className="section bg-gradient-to-b from-[#FFFFF0] to-[#FAF9F6] relative overflow-hidden"
+    >
       {/* Background decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-        <motion.div 
+        <motion.div
           className="absolute top-[20%] left-[10%] w-32 h-32 rounded-full bg-spice-200 opacity-30 blur-3xl"
-          animate={{ 
+          animate={{
             y: [0, 30, 0],
             scale: [1, 1.1, 1],
           }}
           transition={{
             duration: 7,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         />
-        <motion.div 
+        <motion.div
           className="absolute bottom-[10%] right-[15%] w-40 h-40 rounded-full bg-leaf-200 opacity-30 blur-3xl"
-          animate={{ 
+          animate={{
             y: [0, -20, 0],
             scale: [1, 1.05, 1],
           }}
@@ -29,7 +32,7 @@ const About = () => {
             duration: 6,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1
+            delay: 1,
           }}
         />
       </div>
@@ -49,7 +52,7 @@ const About = () => {
           </h2>
         </motion.div>
 
-        {/* Meet Our Founder Section */}
+        {/* Founder Section (NO lazy loading) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -63,11 +66,13 @@ const About = () => {
                 src={founderImage}
                 alt="Anil Kumar Singhal - Founder of LLK International"
                 className="h-full w-auto object-contain"
+                width="500"
+                height="600"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
               />
             </div>
-            
+
             <div className="p-8 md:p-12 flex flex-col justify-center">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -83,17 +88,21 @@ const About = () => {
                 </h2>
                 <p className="text-spice-600 font-medium mb-4">Founder</p>
                 <div className="w-16 h-1 bg-gradient-to-r from-spice-600 to-leaf-600 mb-6" />
-                
+
                 <p className="text-base text-gray-700 mb-6 leading-relaxed text-justify">
-                  Anil Kumar Singhal, Founder of LLK International, brings over 28 years of experience in the Indian spice industry, supplying premium-quality spices to both domestic manufacturers, wholesalers, and private label brands as well as global importers across multiple countries.
+                  Anil Kumar Singhal, Founder of LLK International, brings over
+                  28 years of experience in the Indian spice industry, supplying
+                  premium-quality spices globally.
                 </p>
-                
+
                 <p className="text-base text-gray-600 leading-relaxed mb-6 text-justify">
-                  Starting from Unjha, the spice capital of India, he built the company on strong sourcing networks, strict quality control, and long-term business trust. Under his leadership, LLK International has evolved from traditional trading into a reliable, process-driven supplier offering cleaned, graded, and export-standard spice solutions for bulk buyers.
+                  Starting from Unjha, the spice capital of India, he built LLK
+                  on strong sourcing networks, strict quality control, and trust.
                 </p>
 
                 <p className="text-base text-gray-600 leading-relaxed mb-8 italic text-justify">
-                  His core philosophy remains simple: deliver spices that are valued not just for price, but for purity, consistency, and integrity.
+                  His philosophy: deliver spices valued not just for price, but
+                  for purity, consistency, and integrity.
                 </p>
 
                 <div className="flex items-center gap-4">
@@ -120,10 +129,11 @@ const About = () => {
               About LLK International
             </h3>
             <p className="text-base text-gray-700 mb-6 leading-relaxed text-justify">
-              Based in Unjha, a major spice hub of India, LLK International was founded with a mission to bring the world closer to authentic Indian spices. Our network of farmers and processing partners ensures consistent purity, flavour, and export-grade quality.
+              Based in Unjha, LLK International brings authentic Indian spices
+              sourced directly from trusted farmers and processors.
             </p>
             <p className="text-base text-gray-700 leading-relaxed text-justify">
-              Every batch we ship meets international standards for safety, moisture, and packaging integrity. From cumin and fennel to sesame and psyllium, we deliver spices that global buyers trust.
+              Every batch meets global safety and quality standards for export.
             </p>
           </motion.div>
 
@@ -134,30 +144,39 @@ const About = () => {
             viewport={{ once: true }}
             className="grid grid-cols-2 gap-6"
           >
+            {/* SAFE LAZY LOAD ICONS */}
             <motion.div
               whileHover={{ y: -5 }}
               className="bg-white p-6 rounded-lg shadow-md border border-spice-100"
             >
-              <MapPin className="text-spice-600 mb-3" size={32} />
-              <h3 className="font-serif font-bold text-lg mb-2 text-spice-700">Located in Unjha</h3>
-              <p className="text-sm text-gray-600">India's premier spice trading hub</p>
+              <MapPin className="text-spice-600 mb-3" size={32} loading="lazy" />
+              <h3 className="font-serif font-bold text-lg mb-2 text-spice-700">
+                Located in Unjha
+              </h3>
+              <p className="text-sm text-gray-600">
+                India's premier spice trading hub
+              </p>
             </motion.div>
 
             <motion.div
               whileHover={{ y: -5 }}
               className="bg-white p-6 rounded-lg shadow-md border border-leaf-100"
             >
-              <Award className="text-leaf-600 mb-3" size={32} />
-              <h3 className="font-serif font-bold text-lg mb-2 text-leaf-700">Export Quality</h3>
-              <p className="text-sm text-gray-600">International standards certified</p>
+              <Award className="text-leaf-600 mb-3" size={32} loading="lazy" />
+              <h3 className="font-serif font-bold text-lg mb-2 text-leaf-700">
+                Export Quality
+              </h3>
+              <p className="text-sm text-gray-600">Certified international standards</p>
             </motion.div>
 
             <motion.div
               whileHover={{ y: -5 }}
               className="bg-white p-6 rounded-lg shadow-md border border-spice-100"
             >
-              <TrendingUp className="text-spice-600 mb-3" size={32} />
-              <h3 className="font-serif font-bold text-lg mb-2 text-spice-700">Trusted Network</h3>
+              <TrendingUp className="text-spice-600 mb-3" size={32} loading="lazy" />
+              <h3 className="font-serif font-bold text-lg mb-2 text-spice-700">
+                Trusted Network
+              </h3>
               <p className="text-sm text-gray-600">Direct farmer partnerships</p>
             </motion.div>
 
@@ -165,8 +184,10 @@ const About = () => {
               whileHover={{ y: -5 }}
               className="bg-white p-6 rounded-lg shadow-md border border-leaf-100"
             >
-              <Shield className="text-leaf-600 mb-3" size={32} />
-              <h3 className="font-serif font-bold text-lg mb-2 text-leaf-700">Quality Assured</h3>
+              <Shield className="text-leaf-600 mb-3" size={32} loading="lazy" />
+              <h3 className="font-serif font-bold text-lg mb-2 text-leaf-700">
+                Quality Assured
+              </h3>
               <p className="text-sm text-gray-600">Rigorous safety testing</p>
             </motion.div>
           </motion.div>
