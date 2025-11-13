@@ -21,7 +21,7 @@ const AboutUs = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // ⭐ Corrected JSON-LD with WebP founder image
+  // ⭐ JSON-LD using correct public founder image path
   const aboutPageJsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -49,7 +49,7 @@ const AboutUs = () => {
         "jobTitle": "Founder & Director",
         "description":
           "Anil Kumar Singhal, founder of LLK International, has 28+ years of experience in the Indian spice industry, specializing in cumin, fennel, sesame, psyllium husk, and other premium spices sourced from Unjha, Gujarat.",
-        "image": "https://launjha.com/assets/founder-transparent.webp",
+        "image": "https://launjha.com/founder-transparent.webp",
         "worksFor": {
           "@type": "Organization",
           "name": "LLK International"
@@ -86,6 +86,7 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
+
 
 
 
