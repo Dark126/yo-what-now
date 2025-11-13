@@ -6,10 +6,8 @@ export const products = [
     id: 1,
     name: "Cardamom (Elaichi)",
     description:
-      "Premium green cardamom pods with intense aroma and flavor. Our cardamom is carefully harvested at peak ripeness to ensure maximum essential oil content. Known as the 'Queen of Spices', it adds a distinctive sweet and aromatic flavor to both sweet and savory dishes.",
-    image: "/lovable-uploads/9d2761be-f8ab-4f6b-8008-c85542e37153.png",
-    width: 800,
-    height: 600,
+      "Premium green cardamom pods with intense aroma and flavor. Our cardamom is carefully harvested at peak ripeness to ensure maximum essential oil content.",
+    image: "/images/products/Cardamom.webp",
     color: "from-green-400 to-green-600",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
@@ -17,39 +15,37 @@ export const products = [
     ],
     healthBenefits: [
       "Aids digestion and helps reduce bloating",
-      "Contains powerful antioxidants that fight inflammation",
-      "May help lower blood pressure and improve breathing",
+      "Rich in antioxidants",
+      "May help lower blood pressure",
       "Supports oral health with antibacterial properties",
     ],
   },
+
   {
     id: 2,
     name: "Cinnamon (Dal Chini)",
     description:
-      "Aromatic cinnamon sticks with sweet, woody flavor harvested from the inner bark of Cinnamomum trees. Our premium quality cinnamon has a rich, complex flavor profile with notes of citrus, clove, and sweet warmth.",
-    image: "/lovable-uploads/b0ca0c4e-10d9-4921-af00-53fde05d1cb4.png",
-    width: 800,
-    height: 600,
+      "Aromatic cinnamon sticks with sweet, woody flavor harvested from the inner bark of Cinnamomum trees.",
+    image: "/images/products/Cinnamon.webp",
     color: "from-spice-400 to-spice-600",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
       { id: "50kg", label: "50 Kg Plastic Packaging" },
     ],
     healthBenefits: [
-      "Rich in antioxidants that protect cells from oxidative damage",
-      "May help regulate blood sugar levels",
-      "Contains anti-inflammatory compounds that reduce swelling",
-      "Supports heart health by improving cholesterol levels",
+      "Rich in antioxidants",
+      "May help regulate blood sugar",
+      "Anti-inflammatory properties",
+      "Supports heart health",
     ],
   },
+
   {
     id: 3,
     name: "Cumin Seeds (Jeera)",
     description:
-      "Earthy, aromatic cumin seeds carefully selected for their robust flavor profile. Our cumin seeds are sun-dried to preserve their natural oils and distinctive nutty, peppery flavor.",
-    image: "/lovable-uploads/a53e27ab-7016-4605-8ba1-31e98cc3468e.png",
-    width: 800,
-    height: 600,
+      "Earthy, aromatic cumin seeds carefully selected for their robust flavor. Sun-dried to preserve their natural oils.",
+    image: "/images/products/Cumin Seeds.webp",
     color: "from-amber-400 to-amber-600",
     packagingOptions: [
       { id: "50g", label: "50 Grams Packaging" },
@@ -61,40 +57,38 @@ export const products = [
       { id: "50kg", label: "50 Kg Plastic Packaging" },
     ],
     healthBenefits: [
-      "Supports digestive health by stimulating enzyme production",
-      "Contains iron and promotes healthy immune function",
-      "Rich in antioxidants that help fight free radicals",
-      "May help improve cholesterol levels and aid weight management",
+      "Supports digestive health",
+      "Rich in antioxidants",
+      "Contains iron and supports immunity",
+      "May aid weight management",
     ],
   },
+
   {
     id: 4,
     name: "Fennel Seeds (Saunf)",
     description:
-      "Sweet, anise-flavored fennel seeds with a distinctive licorice aroma. Harvested at optimal maturity to ensure maximum flavor.",
-    image: "/lovable-uploads/8784e45d-f253-4c02-95d5-d998afffddab.png",
-    width: 800,
-    height: 600,
+      "Sweet, anise-flavored fennel seeds with a distinctive licorice aroma.",
+    image: "/images/products/Fennel Seeds.webp",
     color: "from-yellow-300 to-yellow-500",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
       { id: "50kg", label: "50 Kg Plastic Packaging" },
     ],
     healthBenefits: [
-      "Promotes digestive health and reduces bloating",
-      "Contains anethole which helps reduce inflammation",
+      "Promotes digestive health",
+      "Anti-inflammatory properties",
       "Supports respiratory health",
       "Rich in essential minerals",
     ],
   },
+
   {
     id: 5,
     name: "Psyllium Husk (Isabgol)",
     description:
-      "Ultra-fine psyllium husk powder with exceptional water absorption properties and high purity.",
-    image: "/lovable-uploads/67a4ca57-e5ba-410a-85ba-ceba767d0cb3.png",
-    width: 800,
-    height: 600,
+      "Ultra-fine psyllium husk powder with exceptional water absorption properties.",
+    image: "/images/products/Psyllium Husk.webp",
     color: "from-orange-300 to-orange-500",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
@@ -102,19 +96,18 @@ export const products = [
     ],
     healthBenefits: [
       "Promotes digestive regularity",
-      "Helps maintain healthy cholesterol levels",
+      "Helps maintain cholesterol levels",
       "Supports weight management",
-      "May help regulate blood sugar",
+      "Helps regulate blood sugar",
     ],
   },
+
   {
     id: 6,
     name: "Black Pepper (Kali Mirch)",
     description:
-      "Premium black peppercorns with intense heat and complex citrus notes.",
-    image: "/lovable-uploads/052df019-b2c2-4556-a072-fff72d706bb0.png",
-    width: 800,
-    height: 600,
+      "Premium black peppercorns with intense heat and complex flavor.",
+    image: "/images/products/Black Pepper.webp",
     color: "from-gray-700 to-gray-900",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
@@ -123,48 +116,46 @@ export const products = [
     healthBenefits: [
       "Enhances nutrient absorption",
       "Rich in antioxidants",
-      "Anti-inflammatory properties",
+      "Anti-inflammatory",
       "Supports digestive health",
     ],
   },
+
   {
     id: 7,
     name: "Cloves (Laung)",
     description:
-      "Aromatic dried flower buds rich in essential oils and warming spice flavor.",
-    image: "/lovable-uploads/1d0cded0-6bdc-48dc-aa5a-1e9473250fe1.png",
-    width: 800,
-    height: 600,
+      "Aromatic dried flower buds with intense warming flavor.",
+    image: "/images/products/Clove.webp",
     color: "from-spice-600 to-spice-800",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
       { id: "50kg", label: "50 Kg Plastic Packaging" },
     ],
     healthBenefits: [
-      "Powerful antioxidant eugenol",
+      "Rich in eugenol (strong antioxidant)",
       "Supports oral health",
       "May regulate blood sugar",
-      "Improves digestive enzyme production",
+      "Improves digestion",
     ],
   },
+
   {
     id: 8,
     name: "Sesame Seeds (Til)",
     description:
-      "Premium sesame seeds with a rich nutty flavor and delicate crunch.",
-    image: "/lovable-uploads/sesame-seeds.png",
-    width: 800,
-    height: 600,
+      "Premium sesame seeds with a rich, nutty flavor and delicate crunch.",
+    image: "/images/products/sesame-seeds.webp",
     color: "from-amber-200 to-amber-400",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
       { id: "50kg", label: "50 Kg Plastic Packaging" },
     ],
     healthBenefits: [
-      "Rich in healthy fats and minerals",
-      "Contains heart-healthy antioxidants",
-      "High in calcium for bone support",
-      "May help lower cholesterol",
+      "Rich in healthy fats & protein",
+      "High in antioxidants",
+      "Supports bone health",
+      "Lowers cholesterol",
     ],
   },
 ];
@@ -177,25 +168,6 @@ const Products = () => {
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
     >
-      {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-        <motion.div
-          className="absolute top-[10%] right-[15%] w-40 h-40 rounded-full bg-spice-200 opacity-50 blur-3xl"
-          animate={{ y: [0, 20, 0], scale: [1, 1.05, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-[20%] left-[10%] w-60 h-60 rounded-full bg-leaf-200 opacity-50 blur-3xl"
-          animate={{ y: [0, -30, 0], scale: [1, 1.1, 1] }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
-      </div>
-
       <div className="spice-container relative z-10">
         <motion.h2
           className="section-title"
@@ -216,7 +188,7 @@ const Products = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          Each of LLK International's spices is carefully sourced and processed to preserve their natural flavors and aroma.
+          Click on any product to see detailed information and packaging options.
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -230,4 +202,5 @@ const Products = () => {
 };
 
 export default Products;
+
 
