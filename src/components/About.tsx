@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { MapPin, Award, TrendingUp, Shield } from "lucide-react";
-import founderImage from "@/assets/founder-transparent.png";
+import founderImage from "@/assets/founder-transparent.webp"; // UPDATED WEBP IMAGE
 
 const About = () => {
   return (
@@ -12,28 +12,13 @@ const About = () => {
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
         <motion.div
           className="absolute top-[20%] left-[10%] w-32 h-32 rounded-full bg-spice-200 opacity-30 blur-3xl"
-          animate={{
-            y: [0, 30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 7,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ y: [0, 30, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
           className="absolute bottom-[10%] right-[15%] w-40 h-40 rounded-full bg-leaf-200 opacity-30 blur-3xl"
-          animate={{
-            y: [0, -20, 0],
-            scale: [1, 1.05, 1],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
+          animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
       </div>
 
@@ -52,7 +37,7 @@ const About = () => {
           </h2>
         </motion.div>
 
-        {/* Founder Section (NO lazy loading) */}
+        {/* Founder Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -68,6 +53,7 @@ const About = () => {
                 className="h-full w-auto object-contain"
                 width="500"
                 height="600"
+                loading="eager"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
               />
@@ -144,7 +130,6 @@ const About = () => {
             viewport={{ once: true }}
             className="grid grid-cols-2 gap-6"
           >
-            {/* SAFE LAZY LOAD ICONS */}
             <motion.div
               whileHover={{ y: -5 }}
               className="bg-white p-6 rounded-lg shadow-md border border-spice-100"
@@ -153,9 +138,7 @@ const About = () => {
               <h3 className="font-serif font-bold text-lg mb-2 text-spice-700">
                 Located in Unjha
               </h3>
-              <p className="text-sm text-gray-600">
-                India's premier spice trading hub
-              </p>
+              <p className="text-sm text-gray-600">India's premier spice trading hub</p>
             </motion.div>
 
             <motion.div
@@ -198,3 +181,4 @@ const About = () => {
 };
 
 export default About;
+
