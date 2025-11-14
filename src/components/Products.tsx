@@ -45,7 +45,7 @@ export const products = [
     name: "Cumin Seeds (Jeera)",
     description:
       "Earthy, aromatic cumin seeds carefully selected for their robust flavor profile. Our cumin seeds are sun-dried to preserve their natural oils and distinctive nutty, peppery flavor. Each batch is meticulously cleaned and sorted to ensure only the highest quality seeds reach your kitchen.",
-    image: "/images/products/Cumin%20Seeds.webp",
+    image: "/images/products/Cumin-Seeds.webp",
     color: "from-amber-400 to-amber-600",
     packagingOptions: [
       { id: "50g", label: "50 Grams Packaging" },
@@ -69,7 +69,7 @@ export const products = [
     name: "Fennel Seeds (Saunf)",
     description:
       "Sweet, anise-flavored fennel seeds with a distinctive licorice aroma. Our premium fennel seeds are carefully harvested at optimal maturity to ensure maximum flavor and essential oil content. They add a refreshing, slightly sweet flavor to dishes and can be used whole or ground.",
-    image: "/images/products/Fennel%20Seeds.webp",
+    image: "/images/products/Fennel-Seeds.webp",
     color: "from-yellow-300 to-yellow-500",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
@@ -88,7 +88,7 @@ export const products = [
     name: "Psyllium Husk (Isabgol)",
     description:
       "Ultra-fine psyllium husk powder with exceptional water absorption properties. Our psyllium husk is carefully processed to remove impurities while maintaining its natural fiber content. This versatile dietary supplement easily integrates into your daily wellness routine.",
-    image: "/images/products/Psyllium%20Husk.webp",
+    image: "/images/products/Psyllium-Husk.webp",
     color: "from-orange-300 to-orange-500",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
@@ -107,7 +107,7 @@ export const products = [
     name: "Black Pepper (Kali Mirch)",
     description:
       "Premium black peppercorns with intense heat and complex flavor. Our black pepper is harvested at peak ripeness and carefully dried to preserve its pungent aroma and distinctive bite. Each peppercorn contains a perfect balance of heat, citrus notes, and woody undertones.",
-    image: "/images/products/Black%20Pepper.webp",
+    image: "/images/products/Black-Pepper.webp",
     color: "from-gray-700 to-gray-900",
     packagingOptions: [
       { id: "30kg", label: "30 Kg Plastic Packaging" },
