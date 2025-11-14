@@ -11,7 +11,7 @@ const Hero = () => {
         className="absolute inset-0 -z-10"
         style={{
           backgroundImage:
-            "url('/images/products/Main%20Page.webp')",
+            "url('/images/products/Main-Page.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 0.25, // Vibrant but soft backdrop
