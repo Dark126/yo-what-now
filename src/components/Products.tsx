@@ -20,7 +20,6 @@ export const products = [
       "Supports oral health with antibacterial properties",
     ],
   },
-
   {
     id: 2,
     name: "Cinnamon (Dal Chini)",
@@ -39,7 +38,6 @@ export const products = [
       "Supports heart health by improving cholesterol levels",
     ],
   },
-
   {
     id: 3,
     name: "Cumin Seeds (Jeera)",
@@ -63,7 +61,6 @@ export const products = [
       "May help improve cholesterol levels and aid weight management",
     ],
   },
-
   {
     id: 4,
     name: "Fennel Seeds (Saunf)",
@@ -82,7 +79,6 @@ export const products = [
       "Rich in minerals including copper, potassium, calcium, and zinc",
     ],
   },
-
   {
     id: 5,
     name: "Psyllium Husk (Isabgol)",
@@ -101,7 +97,6 @@ export const products = [
       "May help regulate blood sugar levels as part of a healthy diet",
     ],
   },
-
   {
     id: 6,
     name: "Black Pepper (Kali Mirch)",
@@ -120,7 +115,6 @@ export const products = [
       "Supports digestive health and improves metabolism",
     ],
   },
-
   {
     id: 7,
     name: "Cloves (Laung)",
@@ -139,7 +133,6 @@ export const products = [
       "Improves digestive health by stimulating enzyme production",
     ],
   },
-
   {
     id: 8,
     name: "Sesame Seeds (Til)",
@@ -164,54 +157,40 @@ const Products = () => {
   return (
     <motion.section
       id="products"
-      className="section bg-gradient-to-b from-leaf-50 to-spice-50 relative overflow-hidden"
+      className="section relative overflow-hidden"
+      style={{ background: "#fafaf8" }}
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
     >
-      {/* Background 3D elements */}
+      {/* Background elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
         <motion.div
-          className="absolute top-[10%] right-[15%] w-40 h-40 rounded-full bg-spice-200 opacity-50 blur-3xl"
-          animate={{
-            y: [0, 20, 0],
-            scale: [1, 1.05, 1],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          className="absolute top-[10%] right-[15%] w-40 h-40 rounded-full bg-amber-100 opacity-50 blur-3xl"
+          animate={{ y: [0, 20, 0], scale: [1, 1.05, 1] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-[20%] left-[10%] w-60 h-60 rounded-full bg-leaf-200 opacity-50 blur-3xl"
-          animate={{
-            y: [0, -30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
+          className="absolute bottom-[20%] left-[10%] w-60 h-60 rounded-full bg-orange-100 opacity-50 blur-3xl"
+          animate={{ y: [0, -30, 0], scale: [1, 1.1, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         />
       </div>
 
       <div className="spice-container relative z-10">
         <motion.h2
-          className="section-title"
+          className="section-title text-center mb-6"
+          style={{ color: "#111" }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <span className="text-gradient bg-gradient-to-r from-spice-600 to-leaf-600 bg-clip-text">
-            LLK International Premium Spices
-          </span>
+          LLK International{" "}
+          <span style={{ color: "#d97706" }}>Premium Spices</span>
         </motion.h2>
 
         <motion.p
-          className="text-lg text-gray-700 max-w-3xl mb-12"
+          className="text-lg text-gray-600 max-w-3xl mb-12 text-center mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
@@ -234,6 +213,3 @@ const Products = () => {
 };
 
 export default Products;
-
-
-
