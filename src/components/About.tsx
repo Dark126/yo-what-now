@@ -1,178 +1,152 @@
 import { motion } from "framer-motion";
 import { MapPin, Award, TrendingUp, Shield } from "lucide-react";
 
+const features = [
+  { icon: MapPin,    title: "Located in Unjha",  desc: "India's premier spice trading hub",     color: "#d97706" },
+  { icon: Award,     title: "Export Quality",     desc: "Certified international standards",      color: "#b45309" },
+  { icon: TrendingUp,title: "Trusted Network",    desc: "Direct farmer partnerships",             color: "#d97706" },
+  { icon: Shield,    title: "Quality Assured",    desc: "Rigorous safety testing every batch",    color: "#b45309" },
+];
+
 const About = () => {
   return (
-    <section
-      id="about"
-      className="section bg-gradient-to-b from-[#FFFFF0] to-[#FAF9F6] relative overflow-hidden"
-    >
-      {/* Background decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-        <motion.div
-          className="absolute top-[20%] left-[10%] w-32 h-32 rounded-full bg-spice-200 opacity-30 blur-3xl"
-          animate={{ y: [0, 30, 0], scale: [1, 1.1, 1] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-[10%] right-[15%] w-40 h-40 rounded-full bg-leaf-200 opacity-30 blur-3xl"
-          animate={{ y: [0, -20, 0], scale: [1, 1.05, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
-      </div>
+    <section id="about" className="section" style={{ background: "#fafaf8" }}>
+      <div className="spice-container">
 
-      <div className="spice-container relative z-10">
-        {/* Page title */}
+        {/* Section label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          style={{ textAlign: "center", marginBottom: "64px" }}
         >
-          <h2 className="section-title">
-            <span className="text-gradient bg-gradient-to-r from-spice-600 to-leaf-600 bg-clip-text">
-              About Us
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: "8px",
+            background: "rgba(217,119,6,0.08)", border: "1px solid rgba(217,119,6,0.2)",
+            padding: "6px 18px", borderRadius: "100px", marginBottom: "16px"
+          }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#d97706", display: "inline-block" }} />
+            <span style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#d97706", fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>
+              Our Story
             </span>
+          </div>
+          <h2 className="section-title" style={{ color: "#111" }}>
+            About <span style={{ color: "#d97706" }}>LLK International</span>
           </h2>
+          <p style={{ maxWidth: "520px", margin: "16px auto 0", color: "#6b7280", lineHeight: 1.8, fontFamily: "'DM Sans', sans-serif", fontSize: "1.05rem" }}>
+            Based in Unjha — India's spice capital — we bring authentic, farm-fresh spices to the world with uncompromising quality.
+          </p>
         </motion.div>
 
-        {/* Founder Section */}
+        {/* Founder Card */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
           viewport={{ once: true }}
-          className="mt-20 bg-[#FFFEF9] rounded-2xl shadow-lg overflow-hidden border border-spice-100"
+          style={{
+            background: "#fff",
+            borderRadius: "20px",
+            border: "1px solid rgba(217,119,6,0.12)",
+            overflow: "hidden",
+            boxShadow: "0 8px 40px rgba(0,0,0,0.06)",
+            marginBottom: "64px",
+          }}
         >
-          <div className="grid md:grid-cols-2 gap-0">
-            {/* Founder Image */}
-            <div className="flex items-center justify-center p-6 bg-[#FFFEF9]">
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+            {/* Image side */}
+            <div style={{
+              background: "linear-gradient(135deg, #fffbf0, #fef3c7)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              padding: "40px", minHeight: "400px"
+            }}>
               <motion.img
                 src="/founder-transparent.webp"
-                alt="Anil Kumar Singhal - Founder of LLK International"
-                className="w-full max-w-sm md:max-w-md object-contain"
-                width="500"
-                height="600"
-                loading="eager"
-                whileHover={{ scale: 1.05 }}
+                alt="Anil Kumar Singhal — Founder, LLK International"
+                style={{ width: "100%", maxWidth: "340px", objectFit: "contain" }}
+                whileHover={{ scale: 1.03 }}
                 transition={{ duration: 0.5 }}
+                loading="eager"
               />
             </div>
 
-            {/* Founder Text */}
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <h3 className="text-sm font-semibold text-spice-500 uppercase tracking-wider mb-2">
+            {/* Text side */}
+            <div style={{ padding: "48px 52px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#d97706", marginBottom: "10px", fontFamily: "'DM Sans', sans-serif" }}>
                 Meet Our Founder
-              </h3>
-              <h2 className="font-serif font-bold text-3xl md:text-4xl mb-2 text-gray-900">
+              </p>
+              <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(1.6rem, 3vw, 2.2rem)", fontWeight: 800, color: "#111", marginBottom: "4px", letterSpacing: "-0.02em" }}>
                 Mr. Anil Kumar Singhal
               </h2>
-              <p className="text-spice-600 font-medium mb-4">Founder</p>
-              <div className="w-16 h-1 bg-gradient-to-r from-spice-600 to-leaf-600 mb-6" />
+              <p style={{ color: "#d97706", fontWeight: 500, marginBottom: "20px", fontFamily: "'DM Sans', sans-serif" }}>Founder & Director</p>
+              <div style={{ width: "48px", height: "3px", background: "linear-gradient(90deg, #d97706, #b45309)", borderRadius: "2px", marginBottom: "28px" }} />
 
-              <p className="text-base text-gray-700 mb-6 leading-relaxed text-justify">
-                Anil Kumar Singhal, Founder of LLK International, brings over
-                28 years of experience in the Indian spice industry, supplying
-                premium-quality spices globally.
+              <p style={{ color: "#4b5563", lineHeight: 1.85, marginBottom: "16px", fontFamily: "'DM Sans', sans-serif", fontWeight: 300, fontSize: "1rem" }}>
+                With over <strong style={{ color: "#111", fontWeight: 500 }}>28 years of experience</strong> in the Indian spice industry, Anil Kumar Singhal built LLK International on a foundation of trust, purity, and direct farmer relationships.
+              </p>
+              <p style={{ color: "#4b5563", lineHeight: 1.85, marginBottom: "28px", fontFamily: "'DM Sans', sans-serif", fontWeight: 300, fontSize: "1rem", fontStyle: "italic" }}>
+                "Deliver spices valued not just for price, but for purity, consistency, and integrity."
               </p>
 
-              <p className="text-base text-gray-600 leading-relaxed mb-6 text-justify">
-                Starting from Unjha, the spice capital of India, he built LLK
-                on strong sourcing networks, strict quality control, and trust.
-              </p>
-
-              <p className="text-base text-gray-600 leading-relaxed mb-8 italic text-justify">
-                His philosophy: deliver spices valued not just for price, but
-                for purity, consistency, and integrity.
-              </p>
-
-              <div className="flex items-center gap-4">
-                <div className="flex-1 h-px bg-gradient-to-r from-spice-200 to-transparent" />
-                <p className="text-sm font-semibold text-spice-700">
-                  28+ Years of Excellence
-                </p>
-                <div className="flex-1 h-px bg-gradient-to-l from-spice-200 to-transparent" />
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div style={{ flex: 1, height: "1px", background: "linear-gradient(90deg, rgba(217,119,6,0.3), transparent)" }} />
+                <span style={{ fontSize: "13px", fontWeight: 600, color: "#d97706", fontFamily: "'DM Sans', sans-serif", whiteSpace: "nowrap" }}>28+ Years of Excellence</span>
+                <div style={{ flex: 1, height: "1px", background: "linear-gradient(270deg, rgba(217,119,6,0.3), transparent)" }} />
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* About LLK Company Section */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mt-20">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="font-serif font-bold text-2xl md:text-3xl mb-6 text-gray-900">
-              About LLK International
-            </h3>
-            <p className="text-base text-gray-700 mb-6 leading-relaxed text-justify">
-              Based in Unjha, LLK International brings authentic Indian spices
-              sourced directly from trusted farmers and processors.
-            </p>
-            <p className="text-base text-gray-700 leading-relaxed text-justify">
-              Every batch meets global safety and quality standards for export.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="grid grid-cols-2 gap-6"
-          >
-            {/* 4 small feature cards */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-spice-100 hover:-translate-y-1 transition">
-              <MapPin className="text-spice-600 mb-3" size={32} />
-              <h3 className="font-serif font-bold text-lg mb-2 text-spice-700">
-                Located in Unjha
+        {/* Feature Cards */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px", maxWidth: "700px", margin: "0 auto" }}>
+          {features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -6, boxShadow: "0 16px 40px rgba(217,119,6,0.15)" }}
+              style={{
+                background: "#fff",
+                border: "1px solid rgba(217,119,6,0.1)",
+                borderRadius: "14px",
+                padding: "28px 24px",
+                cursor: "default",
+                transition: "box-shadow 0.3s ease",
+              }}
+            >
+              <div style={{
+                width: "44px", height: "44px", borderRadius: "10px",
+                background: "rgba(217,119,6,0.08)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                marginBottom: "16px"
+              }}>
+                <f.icon size={22} color={f.color} />
+              </div>
+              <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1rem", fontWeight: 700, color: "#111", marginBottom: "6px" }}>
+                {f.title}
               </h3>
-              <p className="text-sm text-gray-600">
-                India's premier spice trading hub
+              <p style={{ fontSize: "0.85rem", color: "#6b7280", lineHeight: 1.6, fontFamily: "'DM Sans', sans-serif" }}>
+                {f.desc}
               </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md border border-leaf-100 hover:-translate-y-1 transition">
-              <Award className="text-leaf-600 mb-3" size={32} />
-              <h3 className="font-serif font-bold text-lg mb-2 text-leaf-700">
-                Export Quality
-              </h3>
-              <p className="text-sm text-gray-600">
-                Certified international standards
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md border border-spice-100 hover:-translate-y-1 transition">
-              <TrendingUp className="text-spice-600 mb-3" size={32} />
-              <h3 className="font-serif font-bold text-lg mb-2 text-spice-700">
-                Trusted Network
-              </h3>
-              <p className="text-sm text-gray-600">
-                Direct farmer partnerships
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md border border-leaf-100 hover:-translate-y-1 transition">
-              <Shield className="text-leaf-600 mb-3" size={32} />
-              <h3 className="font-serif font-bold text-lg mb-2 text-leaf-700">
-                Quality Assured
-              </h3>
-              <p className="text-sm text-gray-600">
-                Rigorous safety testing
-              </p>
-            </div>
-          </motion.div>
+            </motion.div>
+          ))}
         </div>
       </div>
+
+      {/* Mobile responsive */}
+      <style>{`
+        @media (max-width: 768px) {
+          #about .grid-founder { grid-template-columns: 1fr !important; }
+          #about .founder-img  { min-height: 280px !important; }
+          #about .founder-text { padding: 32px 24px !important; }
+          #about .feat-grid    { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   );
 };
 
 export default About;
-
-
-
