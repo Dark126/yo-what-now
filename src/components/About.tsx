@@ -2,151 +2,296 @@ import { motion } from "framer-motion";
 import { MapPin, Award, TrendingUp, Shield } from "lucide-react";
 
 const features = [
-  { icon: MapPin,    title: "Located in Unjha",  desc: "India's premier spice trading hub",     color: "#d97706" },
-  { icon: Award,     title: "Export Quality",     desc: "Certified international standards",      color: "#b45309" },
-  { icon: TrendingUp,title: "Trusted Network",    desc: "Direct farmer partnerships",             color: "#d97706" },
-  { icon: Shield,    title: "Quality Assured",    desc: "Rigorous safety testing every batch",    color: "#b45309" },
+  { icon: MapPin,     title: "Located in Unjha",  desc: "India's premier spice trading hub",     color: "#d97706" },
+  { icon: Award,      title: "Export Quality",     desc: "Certified international standards",      color: "#b45309" },
+  { icon: TrendingUp, title: "Trusted Network",    desc: "Direct farmer partnerships",             color: "#d97706" },
+  { icon: Shield,     title: "Quality Assured",    desc: "Rigorous safety testing every batch",    color: "#b45309" },
 ];
 
 const About = () => {
   return (
-    <section id="about" className="section" style={{ background: "#fafaf8" }}>
-      <div className="spice-container">
+    <section id="about" style={{ background: "#1a0a00", position: "relative", overflow: "hidden" }}>
 
-        {/* Section label */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+        /* Dot grid pattern */
+        .about-pattern {
+          position: absolute;
+          inset: 0;
+          opacity: 0.035;
+          background-image: radial-gradient(circle, #f59e0b 1px, transparent 1px);
+          background-size: 28px 28px;
+          pointer-events: none;
+        }
+
+        /* Warm glow blobs */
+        .about-glow-1 {
+          position: absolute;
+          top: -10%;
+          right: -5%;
+          width: 500px; height: 500px;
+          background: radial-gradient(circle, rgba(180,83,9,0.12) 0%, transparent 70%);
+          pointer-events: none;
+        }
+
+        .about-glow-2 {
+          position: absolute;
+          bottom: -10%;
+          left: -5%;
+          width: 400px; height: 400px;
+          background: radial-gradient(circle, rgba(217,119,6,0.08) 0%, transparent 70%);
+          pointer-events: none;
+        }
+
+        /* Section label pill */
+        .about-label {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(217,119,6,0.1);
+          border: 1px solid rgba(217,119,6,0.25);
+          padding: 6px 18px;
+          border-radius: 2px;
+          margin-bottom: 18px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #f59e0b;
+        }
+
+        /* Founder card */
+        .about-founder-card {
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(245,158,11,0.12);
+          border-radius: 4px;
+          overflow: hidden;
+          box-shadow: 0 12px 60px rgba(0,0,0,0.4);
+        }
+
+        .about-founder-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+
+        /* Image side */
+        .about-founder-img-side {
+          position: relative;
+          background: linear-gradient(135deg, #2d1200, #1a0a00);
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+          min-height: 460px;
+          overflow: hidden;
+        }
+
+        .about-founder-img-side::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background:
+            radial-gradient(ellipse at 50% 100%, rgba(217,119,6,0.2) 0%, transparent 60%);
+        }
+
+        /* Decorative diagonal stripe */
+        .about-founder-img-side::after {
+          content: '';
+          position: absolute;
+          top: 0; right: 0;
+          width: 3px;
+          height: 100%;
+          background: linear-gradient(to bottom, transparent, #d97706, transparent);
+        }
+
+        .about-founder-img {
+          position: relative;
+          z-index: 2;
+          width: 85%;
+          max-width: 320px;
+          object-fit: contain;
+          filter: drop-shadow(0 -8px 32px rgba(217,119,6,0.15));
+        }
+
+        /* Floating years badge */
+        .about-years-badge {
+          position: absolute;
+          top: 28px;
+          left: 28px;
+          z-index: 3;
+          background: rgba(217,119,6,0.15);
+          border: 1px solid rgba(217,119,6,0.3);
+          border-radius: 2px;
+          padding: 10px 16px;
+          text-align: center;
+        }
+
+        .about-years-num {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: #f59e0b;
+          line-height: 1;
+          display: block;
+        }
+
+        .about-years-text {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 9px;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: rgba(245,158,11,0.6);
+          display: block;
+          margin-top: 4px;
+        }
+
+        /* Text side */
+        .about-founder-text-side {
+          padding: 52px 48px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .about-founder-role {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #d97706;
+          margin-bottom: 10px;
+        }
+
+        .about-founder-name {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(1.6rem, 3vw, 2.4rem);
+          font-weight: 700;
+          color: #fafaf0;
+          margin-bottom: 6px;
+          letter-spacing: -0.01em;
+          line-height: 1.2;
+        }
+
+        .about-founder-title {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.9rem;
+          color: rgba(245,158,11,0.6);
+          margin-bottom: 28px;
+        }
+
+        .about-divider {
+          width: 48px;
+          height: 2px;
+          background: linear-gradient(90deg, #d97706, transparent);
+          margin-bottom: 28px;
+        }
+
+        .about-founder-bio {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 300;
+          color: rgba(255,240,210,0.55);
+          line-height: 1.9;
+          margin-bottom: 20px;
+        }
+
+        .about-founder-bio strong {
+          color: rgba(255,240,210,0.85);
+          font-weight: 500;
+        }
+
+        .about-founder-quote {
+          font-family: 'Playfair Display', serif;
+          font-style: italic;
+          font-size: 1rem;
+          color: rgba(245,158,11,0.55);
+          line-height: 1.8;
+          padding-left: 16px;
+          border-left: 2px solid rgba(217,119,6,0.3);
+          margin-top: 8px;
+        }
+
+        /* Feature cards */
+        .about-features {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1px;
+          background: rgba(245,158,11,0.08);
+          border: 1px solid rgba(245,158,11,0.08);
+          border-radius: 4px;
+          overflow: hidden;
+          margin-top: 64px;
+        }
+
+        .about-feature-card {
+          background: rgba(255,255,255,0.02);
+          padding: 32px 28px;
+          transition: background 0.3s ease;
+        }
+
+        .about-feature-card:hover {
+          background: rgba(217,119,6,0.06);
+        }
+
+        .about-feature-icon {
+          width: 42px; height: 42px;
+          border-radius: 3px;
+          background: rgba(217,119,6,0.1);
+          border: 1px solid rgba(217,119,6,0.15);
+          display: flex; align-items: center; justify-content: center;
+          margin-bottom: 18px;
+        }
+
+        .about-feature-title {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #fafaf0;
+          margin-bottom: 6px;
+        }
+
+        .about-feature-desc {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.78rem;
+          font-weight: 300;
+          color: rgba(255,240,210,0.4);
+          line-height: 1.6;
+        }
+
+        @media (max-width: 900px) {
+          .about-founder-grid { grid-template-columns: 1fr; }
+          .about-founder-img-side { min-height: 300px; }
+          .about-founder-text-side { padding: 36px 28px; }
+          .about-features { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 560px) {
+          .about-features { grid-template-columns: 1fr; }
+        }
+      `}</style>
+
+      {/* Background decorations */}
+      <div className="about-pattern" />
+      <div className="about-glow-1" />
+      <div className="about-glow-2" />
+
+      <div className="spice-container section" style={{ position: "relative", zIndex: 2 }}>
+
+        {/* Section header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          style={{ textAlign: "center", marginBottom: "64px" }}
+          style={{ textAlign: "center", marginBottom: "56px" }}
         >
-          <div style={{
-            display: "inline-flex", alignItems: "center", gap: "8px",
-            background: "rgba(217,119,6,0.08)", border: "1px solid rgba(217,119,6,0.2)",
-            padding: "6px 18px", borderRadius: "100px", marginBottom: "16px"
-          }}>
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#d97706", display: "inline-block" }} />
-            <span style={{ fontSize: "11px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#d97706", fontWeight: 600, fontFamily: "'DM Sans', sans-serif" }}>
-              Our Story
-            </span>
+          <div className="about-label">
+            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#f59e0b", display: "inline-block" }} />
+            Our Story
           </div>
-          <h2 className="section-title" style={{ color: "#111" }}>
-            About <span style={{ color: "#d97706" }}>LLK International</span>
-          </h2>
-          <p style={{ maxWidth: "520px", margin: "16px auto 0", color: "#6b7280", lineHeight: 1.8, fontFamily: "'DM Sans', sans-serif", fontSize: "1.05rem" }}>
-            Based in Unjha — India's spice capital — we bring authentic, farm-fresh spices to the world with uncompromising quality.
-          </p>
-        </motion.div>
-
-        {/* Founder Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          viewport={{ once: true }}
-          style={{
-            background: "#fff",
-            borderRadius: "20px",
-            border: "1px solid rgba(217,119,6,0.12)",
-            overflow: "hidden",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.06)",
-            marginBottom: "64px",
-          }}
-        >
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
-            {/* Image side */}
-            <div style={{
-              background: "linear-gradient(135deg, #fffbf0, #fef3c7)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              padding: "40px", minHeight: "400px"
-            }}>
-              <motion.img
-                src="/founder-transparent.webp"
-                alt="Anil Kumar Singhal — Founder, LLK International"
-                style={{ width: "100%", maxWidth: "340px", objectFit: "contain" }}
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.5 }}
-                loading="eager"
-              />
-            </div>
-
-            {/* Text side */}
-            <div style={{ padding: "48px 52px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "#d97706", marginBottom: "10px", fontFamily: "'DM Sans', sans-serif" }}>
-                Meet Our Founder
-              </p>
-              <h2 style={{ fontFamily: "'Syne', sans-serif", fontSize: "clamp(1.6rem, 3vw, 2.2rem)", fontWeight: 800, color: "#111", marginBottom: "4px", letterSpacing: "-0.02em" }}>
-                Mr. Anil Kumar Singhal
-              </h2>
-              <p style={{ color: "#d97706", fontWeight: 500, marginBottom: "20px", fontFamily: "'DM Sans', sans-serif" }}>Founder & Director</p>
-              <div style={{ width: "48px", height: "3px", background: "linear-gradient(90deg, #d97706, #b45309)", borderRadius: "2px", marginBottom: "28px" }} />
-
-              <p style={{ color: "#4b5563", lineHeight: 1.85, marginBottom: "16px", fontFamily: "'DM Sans', sans-serif", fontWeight: 300, fontSize: "1rem" }}>
-                With over <strong style={{ color: "#111", fontWeight: 500 }}>28 years of experience</strong> in the Indian spice industry, Anil Kumar Singhal built LLK International on a foundation of trust, purity, and direct farmer relationships.
-              </p>
-              <p style={{ color: "#4b5563", lineHeight: 1.85, marginBottom: "28px", fontFamily: "'DM Sans', sans-serif", fontWeight: 300, fontSize: "1rem", fontStyle: "italic" }}>
-                "Deliver spices valued not just for price, but for purity, consistency, and integrity."
-              </p>
-
-              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <div style={{ flex: 1, height: "1px", background: "linear-gradient(90deg, rgba(217,119,6,0.3), transparent)" }} />
-                <span style={{ fontSize: "13px", fontWeight: 600, color: "#d97706", fontFamily: "'DM Sans', sans-serif", whiteSpace: "nowrap" }}>28+ Years of Excellence</span>
-                <div style={{ flex: 1, height: "1px", background: "linear-gradient(270deg, rgba(217,119,6,0.3), transparent)" }} />
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Feature Cards */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px", maxWidth: "700px", margin: "0 auto" }}>
-          {features.map((f, i) => (
-            <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -6, boxShadow: "0 16px 40px rgba(217,119,6,0.15)" }}
-              style={{
-                background: "#fff",
-                border: "1px solid rgba(217,119,6,0.1)",
-                borderRadius: "14px",
-                padding: "28px 24px",
-                cursor: "default",
-                transition: "box-shadow 0.3s ease",
-              }}
-            >
-              <div style={{
-                width: "44px", height: "44px", borderRadius: "10px",
-                background: "rgba(217,119,6,0.08)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                marginBottom: "16px"
-              }}>
-                <f.icon size={22} color={f.color} />
-              </div>
-              <h3 style={{ fontFamily: "'Syne', sans-serif", fontSize: "1rem", fontWeight: 700, color: "#111", marginBottom: "6px" }}>
-                {f.title}
-              </h3>
-              <p style={{ fontSize: "0.85rem", color: "#6b7280", lineHeight: 1.6, fontFamily: "'DM Sans', sans-serif" }}>
-                {f.desc}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile responsive */}
-      <style>{`
-        @media (max-width: 768px) {
-          #about .grid-founder { grid-template-columns: 1fr !important; }
-          #about .founder-img  { min-height: 280px !important; }
-          #about .founder-text { padding: 32px 24px !important; }
-          #about .feat-grid    { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
-    </section>
-  );
-};
-
-export default About;
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize
