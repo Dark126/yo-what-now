@@ -13,7 +13,7 @@ const spices = [
   "Cinnamon", "Cloves",
 ];
 
-export const HeroSection = () => {
+const Hero = () => {
   const tickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -398,4 +398,4 @@ export const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default Hero;
