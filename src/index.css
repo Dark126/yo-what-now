@@ -62,11 +62,15 @@
 @layer base {
   * {
     @apply border-border;
+    -webkit-tap-highlight-color: transparent;
   }
 
   html {
     scroll-behavior: smooth;
     height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
@@ -74,6 +78,7 @@
     font-family: 'DM Sans', sans-serif;
     min-height: 100%;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -209,6 +214,7 @@
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.1;
+  margin-bottom: 16px;
 }
 
 /* =====================
