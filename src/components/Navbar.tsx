@@ -2,11 +2,15 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
+const LIGHT_BG_PAGES = ["/about"];
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isLightPage = LIGHT_BG_PAGES.includes(location.pathname);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -36,8 +40,8 @@ const Navbar = () => {
           transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
           padding: 20px 0;
         }
-        .llk-nav.scrolled {
-          background: rgba(255, 255, 255, 0.95);
+        .llk-nav.scrolled, .llk-nav.light-page {
+          background: rgba(255, 255, 255, 0.97);
           backdrop-filter: blur(16px);
           -webkit-backdrop-filter: blur(16px);
           box-shadow: 0 1px 0 rgba(0,0,0,0.06);
@@ -51,8 +55,8 @@ const Navbar = () => {
           text-decoration: none;
           transition: color 0.3s;
         }
-        .llk-nav.scrolled .llk-nav-logo { color: #1a1a1a; }
-        .llk-nav:not(.scrolled) .llk-nav-logo { color: #fff; }
+        .llk-nav.scrolled .llk-nav-logo, .llk-nav.light-page .llk-nav-logo { color: #1a1a1a; }
+        .llk-nav:not(.scrolled):not(.light-page) .llk-nav-logo { color: #fff; }
         .llk-nav-logo span { color: #d97706; }
 
         .llk-nav-link {
@@ -79,10 +83,10 @@ const Navbar = () => {
         }
         .llk-nav-link:hover::after { width: 100%; }
 
-        .llk-nav.scrolled .llk-nav-link { color: #374151; }
-        .llk-nav.scrolled .llk-nav-link:hover { color: #d97706; }
-        .llk-nav:not(.scrolled) .llk-nav-link { color: rgba(255,255,255,0.75); }
-        .llk-nav:not(.scrolled) .llk-nav-link:hover { color: #fff; }
+        .llk-nav.scrolled .llk-nav-link, .llk-nav.light-page .llk-nav-link { color: #374151; }
+        .llk-nav.scrolled .llk-nav-link:hover, .llk-nav.light-page .llk-nav-link:hover { color: #d97706; }
+        .llk-nav:not(.scrolled):not(.light-page) .llk-nav-link { color: rgba(255,255,255,0.75); }
+        .llk-nav:not(.scrolled):not(.light-page) .llk-nav-link:hover { color: #fff; }
 
         .llk-nav-cta {
           font-family: 'DM Sans', sans-serif;
@@ -113,8 +117,8 @@ const Navbar = () => {
           padding: 4px;
           transition: color 0.3s;
         }
-        .llk-nav.scrolled .llk-burger { color: #374151; }
-        .llk-nav:not(.scrolled) .llk-burger { color: #fff; }
+        .llk-nav.scrolled .llk-burger, .llk-nav.light-page .llk-burger { color: #374151; }
+        .llk-nav:not(.scrolled):not(.light-page) .llk-burger { color: #fff; }
 
         .llk-mobile-menu {
           display: none;
@@ -142,7 +146,7 @@ const Navbar = () => {
         .llk-mobile-link:hover { color: #f59e0b; }
       `}</style>
 
-      <nav className={`llk-nav ${scrolled ? "scrolled" : ""}`}>
+      <nav className={`llk-nav ${scrolled ? "scrolled" : ""} ${isLightPage ? "light-page" : ""}`}>
         <div className="spice-container flex justify-between items-center">
           <Link to="/" className="llk-nav-logo">
             LLK <span>International</span>
