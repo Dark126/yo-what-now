@@ -1,62 +1,88 @@
+import { useEffect, useRef } from "react";
 
-import { motion } from 'framer-motion';
+const PARTICLES = [
+  { size: 5, color: "#d97706", opacity: 0.4, duration: 18, delay: 0,  left: "8%",  shape: "circle" },
+  { size: 3, color: "#b45309", opacity: 0.3, duration: 22, delay: 3,  left: "18%", shape: "circle" },
+  { size: 6, color: "#f59e0b", opacity: 0.25,duration: 16, delay: 6,  left: "28%", shape: "square" },
+  { size: 4, color: "#78350f", opacity: 0.35,duration: 24, delay: 1,  left: "38%", shape: "circle" },
+  { size: 5, color: "#d97706", opacity: 0.3, duration: 20, delay: 8,  left: "48%", shape: "diamond" },
+  { size: 3, color: "#f59e0b", opacity: 0.4, duration: 19, delay: 4,  left: "58%", shape: "circle" },
+  { size: 7, color: "#b45309", opacity: 0.2, duration: 26, delay: 2,  left: "68%", shape: "circle" },
+  { size: 4, color: "#d97706", opacity: 0.35,duration: 21, delay: 9,  left: "78%", shape: "square" },
+  { size: 5, color: "#f59e0b", opacity: 0.3, duration: 17, delay: 5,  left: "88%", shape: "circle" },
+  { size: 3, color: "#78350f", opacity: 0.4, duration: 23, delay: 7,  left: "95%", shape: "circle" },
+  { size: 4, color: "#d97706", opacity: 0.25,duration: 25, delay: 11, left: "13%", shape: "diamond" },
+  { size: 6, color: "#f59e0b", opacity: 0.2, duration: 28, delay: 13, left: "73%", shape: "circle" },
+];
 
 const FloatingElements = () => {
-  // Create more vibrant colorful elements representing spices
-  const spiceColors = [
-    'bg-red-500', 'bg-orange-500', 'bg-amber-500', 
-    'bg-yellow-400', 'bg-green-500', 'bg-spice-400',
-    'bg-red-400', 'bg-orange-400', 'bg-yellow-300'
-  ];
-  
-  const elements = Array.from({ length: 10 }).map((_, i) => {
-    const size = Math.floor(Math.random() * 100) + 50;
-    const delay = Math.random() * 0.5;
-    const duration = Math.random() * 10 + 10;
-    const colorIndex = Math.floor(Math.random() * spiceColors.length);
-    
-    return {
-      id: i,
-      size,
-      initialX: `${Math.random() * 100}%`,
-      initialY: `${Math.random() * 100}%`,
-      delay,
-      duration,
-      opacity: (Math.random() * 0.35 + 0.15).toFixed(2), // Slightly increased opacity
-      color: spiceColors[colorIndex],
-    };
-  });
-
   return (
-    <div 
-      className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        pointerEvents: "none",
+        zIndex: 1,
+        overflow: "hidden",
+      }}
       aria-hidden="true"
     >
-      {elements.map((element) => (
-        <motion.div
-          key={element.id}
-          className={`absolute ${element.color} rounded-full blur-xl`}
+      <style>{`
+        @keyframes llk-float {
+          0%   { transform: translateY(105vh) rotate(0deg);   opacity: 0; }
+          8%   { opacity: var(--op); }
+          90%  { opacity: var(--op); }
+          100% { transform: translateY(-10vh) rotate(var(--rot)); opacity: 0; }
+        }
+        .llk-particle {
+          position: absolute;
+          bottom: -20px;
+          will-change: transform, opacity;
+          animation: llk-float var(--dur) var(--delay) linear infinite;
+          opacity: 0;
+        }
+      `}</style>
+
+      {PARTICLES.map((p, i) => (
+        <div
+          key={i}
+          className="llk-particle"
           style={{
-            width: element.size,
-            height: element.size,
-            left: element.initialX,
-            top: element.initialY,
-            opacity: element.opacity,
-          }}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ 
-            scale: [0, 1, 0.9, 1],
-            opacity: [0, parseFloat(element.opacity), parseFloat(element.opacity), 0]
-          }}
-          transition={{
-            duration: element.duration,
-            ease: "easeInOut",
-            delay: element.delay,
-            repeat: Infinity,
-            repeatType: "loop",
-            repeatDelay: Math.random() * 2,
-          }}
-        />
+            left: p.left,
+            "--dur": `${p.duration}s`,
+            "--delay": `${p.delay}s`,
+            "--op": p.opacity,
+            "--rot": `${120 + i * 30}deg`,
+          } as React.CSSProperties}
+        >
+          {p.shape === "circle" && (
+            <div style={{
+              width: p.size,
+              height: p.size,
+              borderRadius: "50%",
+              background: p.color,
+              opacity: p.opacity,
+            }} />
+          )}
+          {p.shape === "square" && (
+            <div style={{
+              width: p.size,
+              height: p.size,
+              borderRadius: "1px",
+              background: p.color,
+              opacity: p.opacity,
+            }} />
+          )}
+          {p.shape === "diamond" && (
+            <div style={{
+              width: p.size,
+              height: p.size,
+              background: p.color,
+              opacity: p.opacity,
+              transform: "rotate(45deg)",
+            }} />
+          )}
+        </div>
       ))}
     </div>
   );
