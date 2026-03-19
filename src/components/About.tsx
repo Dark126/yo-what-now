@@ -15,7 +15,6 @@ const About = () => {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
 
-        /* Dot grid pattern */
         .about-pattern {
           position: absolute;
           inset: 0;
@@ -25,7 +24,6 @@ const About = () => {
           pointer-events: none;
         }
 
-        /* Warm glow blobs */
         .about-glow-1 {
           position: absolute;
           top: -10%;
@@ -44,7 +42,6 @@ const About = () => {
           pointer-events: none;
         }
 
-        /* Section label pill */
         .about-label {
           display: inline-flex;
           align-items: center;
@@ -62,7 +59,6 @@ const About = () => {
           color: #f59e0b;
         }
 
-        /* Founder card */
         .about-founder-card {
           background: rgba(255,255,255,0.03);
           border: 1px solid rgba(245,158,11,0.12);
@@ -76,7 +72,6 @@ const About = () => {
           grid-template-columns: 1fr 1fr;
         }
 
-        /* Image side */
         .about-founder-img-side {
           position: relative;
           background: linear-gradient(135deg, #2d1200, #1a0a00);
@@ -91,11 +86,9 @@ const About = () => {
           content: '';
           position: absolute;
           inset: 0;
-          background:
-            radial-gradient(ellipse at 50% 100%, rgba(217,119,6,0.2) 0%, transparent 60%);
+          background: radial-gradient(ellipse at 50% 100%, rgba(217,119,6,0.2) 0%, transparent 60%);
         }
 
-        /* Decorative diagonal stripe */
         .about-founder-img-side::after {
           content: '';
           position: absolute;
@@ -114,7 +107,6 @@ const About = () => {
           filter: drop-shadow(0 -8px 32px rgba(217,119,6,0.15));
         }
 
-        /* Floating years badge */
         .about-years-badge {
           position: absolute;
           top: 28px;
@@ -146,7 +138,6 @@ const About = () => {
           margin-top: 4px;
         }
 
-        /* Text side */
         .about-founder-text-side {
           padding: 52px 48px;
           display: flex;
@@ -213,7 +204,6 @@ const About = () => {
           margin-top: 8px;
         }
 
-        /* Feature cards */
         .about-features {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -272,14 +262,12 @@ const About = () => {
         }
       `}</style>
 
-      {/* Background decorations */}
       <div className="about-pattern" />
       <div className="about-glow-1" />
       <div className="about-glow-2" />
 
       <div className="spice-container section" style={{ position: "relative", zIndex: 2 }}>
 
-        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -294,4 +282,98 @@ const About = () => {
           <h2
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize
+              fontSize: "clamp(2rem, 4vw, 3.2rem)",
+              fontWeight: 700,
+              color: "#fafaf0",
+              letterSpacing: "-0.01em",
+              lineHeight: 1.15,
+              margin: 0,
+            }}
+          >
+            About{" "}
+            <span style={{ color: "#d97706", fontStyle: "italic" }}>LLK International</span>
+          </h2>
+          <p style={{
+            maxWidth: "500px", margin: "16px auto 0",
+            color: "rgba(255,240,210,0.45)", lineHeight: 1.85,
+            fontFamily: "'DM Sans', sans-serif", fontSize: "0.95rem", fontWeight: 300,
+          }}>
+            Based in Unjha — India's spice capital — we bring authentic,
+            farm-fresh spices to the world with uncompromising quality.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="about-founder-card"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.75, delay: 0.1 }}
+          viewport={{ once: true }}
+        >
+          <div className="about-founder-grid">
+
+            <div className="about-founder-img-side">
+              <div className="about-years-badge">
+                <span className="about-years-num">28+</span>
+                <span className="about-years-text">Years</span>
+              </div>
+              <motion.img
+                src="/founder-transparent.webp"
+                alt="Anil Kumar Singhal — Founder, LLK International"
+                className="about-founder-img"
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.5 }}
+                loading="eager"
+              />
+            </div>
+
+            <div className="about-founder-text-side">
+              <p className="about-founder-role">Meet Our Founder</p>
+              <h2 className="about-founder-name">Mr. Anil Kumar Singhal</h2>
+              <p className="about-founder-title">Founder & Director</p>
+              <div className="about-divider" />
+              <p className="about-founder-bio">
+                With over <strong>28 years of experience</strong> in the Indian spice
+                industry, Anil Kumar Singhal built LLK International on a foundation
+                of trust, purity, and direct farmer relationships.
+              </p>
+              <p className="about-founder-quote">
+                "Deliver spices valued not just for price, but for purity,
+                consistency, and integrity."
+              </p>
+            </div>
+
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="about-features"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          viewport={{ once: true }}
+        >
+          {features.map((f, i) => (
+            <motion.div
+              key={f.title}
+              className="about-feature-card"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              viewport={{ once: true }}
+            >
+              <div className="about-feature-icon">
+                <f.icon size={20} color={f.color} />
+              </div>
+              <p className="about-feature-title">{f.title}</p>
+              <p className="about-feature-desc">{f.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+
+      </div>
+    </section>
+  );
+};
+
+export default About;
