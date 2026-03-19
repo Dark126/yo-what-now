@@ -155,60 +155,153 @@ export const products = [
 
 const Products = () => {
   return (
-    <motion.section
+    <section
       id="products"
-      className="section relative overflow-hidden"
-      style={{ background: "#fafaf8" }}
-      initial={{ opacity: 1 }}
-      animate={{ opacity: 1 }}
+      style={{ background: "#0d0500", position: "relative", overflow: "hidden" }}
     >
-      {/* Background elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,600&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+        .products-pattern {
+          position: absolute;
+          inset: 0;
+          opacity: 0.03;
+          background-image: radial-gradient(circle, #f59e0b 1px, transparent 1px);
+          background-size: 28px 28px;
+          pointer-events: none;
+        }
+
+        .products-glow-1 {
+          position: absolute;
+          top: 0; left: 50%;
+          transform: translateX(-50%);
+          width: 700px; height: 300px;
+          background: radial-gradient(ellipse, rgba(180,83,9,0.09) 0%, transparent 70%);
+          pointer-events: none;
+        }
+
+        .products-glow-2 {
+          position: absolute;
+          bottom: 0; left: 0;
+          width: 400px; height: 400px;
+          background: radial-gradient(circle, rgba(120,53,15,0.07) 0%, transparent 70%);
+          pointer-events: none;
+        }
+
+        .products-label {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(217,119,6,0.1);
+          border: 1px solid rgba(217,119,6,0.25);
+          padding: 6px 18px;
+          border-radius: 2px;
+          margin-bottom: 18px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #f59e0b;
+        }
+
+        /* Horizontal scroll line above grid */
+        .products-divider {
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(245,158,11,0.2), transparent);
+          margin-bottom: 48px;
+        }
+      `}</style>
+
+      <div className="products-pattern" />
+      <div className="products-glow-1" />
+      <div className="products-glow-2" />
+
+      <div className="spice-container section" style={{ position: "relative", zIndex: 2 }}>
+
+        {/* Header */}
         <motion.div
-          className="absolute top-[10%] right-[15%] w-40 h-40 rounded-full bg-amber-100 opacity-50 blur-3xl"
-          animate={{ y: [0, 20, 0], scale: [1, 1.05, 1] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          style={{ textAlign: "center", marginBottom: "56px" }}
+        >
+          <div className="products-label">
+            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#f59e0b", display: "inline-block" }} />
+            Our Products
+          </div>
+
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "clamp(2rem, 4vw, 3.2rem)",
+              fontWeight: 700,
+              color: "#fafaf0",
+              letterSpacing: "-0.01em",
+              lineHeight: 1.15,
+              margin: "0 0 16px",
+            }}
+          >
+            LLK International{" "}
+            <span style={{ color: "#d97706", fontStyle: "italic" }}>
+              Premium Spices
+            </span>
+          </h2>
+
+          <p
+            style={{
+              maxWidth: "520px",
+              margin: "0 auto",
+              color: "rgba(255,240,210,0.4)",
+              lineHeight: 1.85,
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: "0.95rem",
+              fontWeight: 300,
+            }}
+          >
+            Each spice is carefully sourced from sustainable farms and processed
+            to preserve its natural flavors and aromatic properties.
+          </p>
+        </motion.div>
+
+        <div className="products-divider" />
+
+        {/* Cards grid — staggered entrance */}
         <motion.div
-          className="absolute bottom-[20%] left-[10%] w-60 h-60 rounded-full bg-orange-100 opacity-50 blur-3xl"
-          animate={{ y: [0, -30, 0], scale: [1, 1.1, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
-      </div>
-
-      <div className="spice-container relative z-10">
-        <motion.h2
-          className="section-title text-center mb-6"
-          style={{ color: "#111" }}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.05 }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
         >
-          LLK International{" "}
-          <span style={{ color: "#d97706" }}>Premium Spices</span>
-        </motion.h2>
-
-        <motion.p
-          className="text-lg text-gray-600 max-w-3xl mb-12 text-center mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          Each of LLK International's spices is carefully sourced from
-          sustainable farms and processed to preserve their natural flavors and
-          aromatic properties. Click on any product to see detailed information
-          and packaging options.
-        </motion.p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product) => (
-            <OptimizedProductCard key={product.id} {...product} />
+            <motion.div
+              key={product.id}
+              variants={{
+                hidden: { opacity: 0, y: 32 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
+            >
+              <OptimizedProductCard {...product} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
+
       </div>
-    </motion.section>
+    </section>
   );
 };
 
